@@ -1,8 +1,8 @@
 
-#' runs the zalpha function
+#' runs the Zalpha function
 #'
-#' @return zalpha
+#' @return Zalpha
 
-zalpha <- function() {
+Zalpha <- function() {
   print("Zalpha function")
 }
