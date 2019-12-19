@@ -2,6 +2,9 @@
 #' Runs the Zalpha function
 #'
 #' Returns a Zalpha value for each SNP location supplied to the function.
+#' For more information about the Zalpha statistic please see Jacobs (2016).
+#'
+#' @importFrom stats cor
 #'
 #' @param pos A numeric vector of SNP locations
 #' @param x A matrix of SNP values. Columns represent chromosomes, rows are SNP locations. Hence, the number of rows should equal the length of the `pos` vector. SNPs should all be biallelic.
@@ -10,7 +13,7 @@
 #' @param minRL Minimum value for the product of the set sizes for R and L. Default is 25.
 #' @param X Optional. Specify a region of the chromosome to calculate Zalpha for in the format `c(startposition, endposition)`. The start position and the end position should be within the extremes of the positions given in the `pos` vector. If not supplied, the function will calculate Zalpha for every SNP in the `pos` vector.
 #'
-#' @return A dataframe containing the positions and the Zalpha values
+#' @return A data frame containing the SNP positions and the Zalpha values for those SNPs
 #' @export
 
 Zalpha <- function(pos, x, ws, minRandL = 4, minRL = 25, X = NULL) {
