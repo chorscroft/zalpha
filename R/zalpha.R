@@ -69,7 +69,7 @@ Zalpha <- function(pos, x, ws, minRandL = 4, minRL = 25, X = NULL) {
 
   #Change matrix x to numeric if it isn't already
   if (is.numeric(x)==FALSE){
-    x1<-matrix(as.numeric(factor(x)),nrow=dim(x)[1])
+    x<-matrix(as.numeric(factor(x)),nrow=dim(x)[1])
   }
 
   # Set up output data frame
