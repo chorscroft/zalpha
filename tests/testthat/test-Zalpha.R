@@ -208,3 +208,11 @@ test_that("Zalpha fails when a SNP has more than two alleles", {
   expect_error(Zalpha(pos = df1$POS, x = as.matrix(df1[,3:7]), ws  = 3000, minRandL = 4, minRL = 25, X = NULL),
                "SNPs must all be biallelic")
 })
+
+## Test the warning that all values returned are NA by increasing minRL
+
+test_that("Zalpha warns about all NAs", {
+
+  expect_warning(Zalpha(pos = df$POS, x = as.matrix(df[,3:7]), ws  = 3000, minRandL = 4, minRL = 50, X = NULL),
+               "No Zalpha values were calculated, try reducing minRandL and minRL or increasing the window size")
+})

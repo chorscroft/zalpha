@@ -96,5 +96,8 @@ Zalpha <- function(pos, x, ws, minRandL = 4, minRL = 25, X = NULL) {
       outputDF$Zalpha[i]<-(LrsqSum/choose(noL,2)+RrsqSum/choose(noR,2))/2
     }
   }
+  if (sum(is.na(outputDF$Zalpha))==nrow(outputDF)){
+    warning("No Zalpha values were calculated, try reducing minRandL and minRL or increasing the window size")#,immediate. = TRUE)
+  }
   return(outputDF)
 }
