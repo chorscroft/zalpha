@@ -1,19 +1,23 @@
 
 #' Runs the Zbeta function
 #'
-#' Returns a Zbeta value for each SNP location supplied to the function.
-#' For more information about the Zbeta statistic please see Jacobs (2016).
+#' Returns a \eqn{Z_{\beta}}{Zbeta} value for each SNP location supplied to the function.
+#' For more information about the \eqn{Z_{\beta}}{Zbeta} statistic please see Jacobs (2016).
+#' The \eqn{Z_{\beta}}{Zbeta} statistic is defined as:
+#' \deqn{Z_{\beta}=\frac{\sum_{i \in L,j \in R}r^2_{i,j}}{|L||R|}}
+#' where \code{|L|} and \code{|R|} are the number of SNPs to the left and right of the current locus within the given window \code{ws}, and \eqn{r^2}{r^2} is equal to the squared correlation between a pair of SNPs
 #'
 #' @importFrom stats cor
 #'
 #' @param pos A numeric vector of SNP locations
-#' @param x A matrix of SNP values. Columns represent chromosomes, rows are SNP locations. Hence, the number of rows should equal the length of the `pos` vector. SNPs should all be biallelic.
-#' @param ws The window size which the `Zbeta` statistic will be calculated over. This should be on the same scale as the `pos` vector.
+#' @param x A matrix of SNP values. Columns represent chromosomes, rows are SNP locations. Hence, the number of rows should equal the length of the \code{pos} vector. SNPs should all be biallelic.
+#' @param ws The window size which the \eqn{Z_{\beta}}{Zbeta} statistic will be calculated over. This should be on the same scale as the \code{pos} vector.
 #' @param minRandL Minimum number of SNPs in each set R and L for the statistic to be calculated. Default is 4.
 #' @param minRL Minimum value for the product of the set sizes for R and L. Default is 25.
-#' @param X Optional. Specify a region of the chromosome to calculate Zbeta for in the format `c(startposition, endposition)`. The start position and the end position should be within the extremes of the positions given in the `pos` vector. If not supplied, the function will calculate Zbeta for every SNP in the `pos` vector.
+#' @param X Optional. Specify a region of the chromosome to calculate \eqn{Z_{\beta}}{Zbeta} for in the format \code{c(startposition, endposition)}. The start position and the end position should be within the extremes of the positions given in the \code{pos} vector. If not supplied, the function will calculate \eqn{Z_{\beta}}{Zbeta} for every SNP in the \code{pos} vector.
 #'
-#' @return A data frame containing the SNP positions and the Zbeta values for those SNPs
+#' @return A data frame containing the SNP positions and the \eqn{Z_{\beta}}{Zbeta} values for those SNPs
+#' @references Jacobs, G.S., T.J. Sluckin, and T. Kivisild, \emph{Refining the Use of Linkage Disequilibrium as a Robust Signature of Selective Sweeps.} Genetics, 2016. \strong{203}(4): p. 1807
 #' @export
 
 Zbeta <- function(pos, x, ws, minRandL = 4, minRL = 25, X = NULL) {

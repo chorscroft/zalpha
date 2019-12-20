@@ -1,15 +1,16 @@
 
 #' Runs the LR function
 #'
-#' Returns the |L||R| value for each SNP location supplied to the function.
-#' For more information about the |L||R| diveristy statistic please see Jacobs (2016).
+#' Returns the \code{|L||R|} value for each SNP location supplied to the function.
+#' For more information about the \code{|L||R|} diversity statistic please see Jacobs (2016).
 #'
 #' @param pos A numeric vector of SNP locations
-#' @param x A matrix of SNP values. Columns represent chromosomes, rows are SNP locations. Hence, the number of rows should equal the length of the `pos` vector. SNPs should all be biallelic.
-#' @param ws The window size which the `LR` statistic will be calculated over. This should be on the same scale as the `pos` vector.
-#' @param X Optional. Specify a region of the chromosome to calculate LR for in the format `c(startposition, endposition)`. The start position and the end position should be within the extremes of the positions given in the `pos` vector. If not supplied, the function will calculate LR for every SNP in the `pos` vector.
+#' @param x A matrix of SNP values. Columns represent chromosomes, rows are SNP locations. Hence, the number of rows should equal the length of the \code{pos} vector. SNPs should all be biallelic.
+#' @param ws The window size which the \code{LR} statistic will be calculated over. This should be on the same scale as the \code{pos} vector.
+#' @param X Optional. Specify a region of the chromosome to calculate LR for in the format \code{c(startposition, endposition)}. The start position and the end position should be within the extremes of the positions given in the \code{pos} vector. If not supplied, the function will calculate LR for every SNP in the \code{pos} vector.
 #'
 #' @return A data frame containing the SNP positions and the LR values for those SNPs
+#' @references Jacobs, G.S., T.J. Sluckin, and T. Kivisild, \emph{Refining the Use of Linkage Disequilibrium as a Robust Signature of Selective Sweeps.} Genetics, 2016. \strong{203}(4): p. 1807
 #' @export
 
 LR <- function(pos, x, ws, X = NULL) {

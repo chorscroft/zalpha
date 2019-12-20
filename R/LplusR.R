@@ -1,16 +1,18 @@
 
 #' Runs the LplusR function
 #'
-#' Returns the (|L| choose 2) + (|R| choose 2) value for each SNP location supplied to the function.
-#' For more information about the LplusR diveristy statistic please see Jacobs (2016).
+#' Returns the \eqn{{|L| \choose 2} + {|R| \choose 2}}{(|L| choose 2) + (|R| choose 2)} value for each SNP location supplied to the function.
+#' For more information about the LplusR diversity statistic please see Jacobs (2016).
+#'
 #'
 #'
 #' @param pos A numeric vector of SNP locations
-#' @param x A matrix of SNP values. Columns represent chromosomes, rows are SNP locations. Hence, the number of rows should equal the length of the `pos` vector. SNPs should all be biallelic.
-#' @param ws The window size which the `LplusR` statistic will be calculated over. This should be on the same scale as the `pos` vector.
-#' @param X Optional. Specify a region of the chromosome to calculate LplusR for in the format `c(startposition, endposition)`. The start position and the end position should be within the extremes of the positions given in the `pos` vector. If not supplied, the function will calculate LplusR for every SNP in the `pos` vector.
+#' @param x A matrix of SNP values. Columns represent chromosomes, rows are SNP locations. Hence, the number of rows should equal the length of the \code{pos} vector. SNPs should all be biallelic.
+#' @param ws The window size which the \code{LplusR} statistic will be calculated over. This should be on the same scale as the \code{pos} vector.
+#' @param X Optional. Specify a region of the chromosome to calculate LplusR for in the format \code{c(startposition, endposition)}. The start position and the end position should be within the extremes of the positions given in the \code{pos} vector. If not supplied, the function will calculate LplusR for every SNP in the \code{pos} vector.
 #'
 #' @return A data frame containing the SNP positions and the LplusR values for those SNPs
+#' @references Jacobs, G.S., T.J. Sluckin, and T. Kivisild, \emph{Refining the Use of Linkage Disequilibrium as a Robust Signature of Selective Sweeps.} Genetics, 2016. \strong{203}(4): p. 1807
 #' @export
 
 LplusR <- function(pos, x, ws, X = NULL) {
