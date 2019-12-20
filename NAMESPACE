@@ -3,4 +3,5 @@
 export(LR)
 export(LplusR)
 export(Zalpha)
+export(Zbeta)
 importFrom(stats,cor)
