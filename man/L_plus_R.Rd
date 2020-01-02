@@ -13,10 +13,10 @@ L_plus_R(pos, x, ws, X = NULL)
 
 \item{ws}{The window size which the \code{L_plus_R} statistic will be calculated over. This should be on the same scale as the \code{pos} vector.}
 
-\item{X}{Optional. Specify a region of the chromosome to calculate L_plus_R for in the format \code{c(startposition, endposition)}. The start position and the end position should be within the extremes of the positions given in the \code{pos} vector. If not supplied, the function will calculate L_plus_R for every SNP in the \code{pos} vector.}
+\item{X}{Optional. Specify a region of the chromosome to calculate \code{L_plus_R} for in the format \code{c(startposition, endposition)}. The start position and the end position should be within the extremes of the positions given in the \code{pos} vector. If not supplied, the function will calculate L_plus_R for every SNP in the \code{pos} vector.}
 }
 \value{
-A data frame containing the SNP positions and the L_plus_R values for those SNPs
+A list containing the SNP positions and the \code{L_plus_R }values for those SNPs
 }
 \description{
 Returns the \eqn{{|L| \choose 2} + {|R| \choose 2}}{(|L| choose 2) + (|R| choose 2)} value for each SNP location supplied to the function.

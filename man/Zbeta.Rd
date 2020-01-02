@@ -20,7 +20,7 @@ Zbeta(pos, x, ws, minRandL = 4, minRL = 25, X = NULL)
 \item{X}{Optional. Specify a region of the chromosome to calculate \eqn{Z_{\beta}}{Zbeta} for in the format \code{c(startposition, endposition)}. The start position and the end position should be within the extremes of the positions given in the \code{pos} vector. If not supplied, the function will calculate \eqn{Z_{\beta}}{Zbeta} for every SNP in the \code{pos} vector.}
 }
 \value{
-A data frame containing the SNP positions and the \eqn{Z_{\beta}}{Zbeta} values for those SNPs
+A list containing the SNP positions and the \eqn{Z_{\beta}}{Zbeta} values for those SNPs
 }
 \description{
 Returns a \eqn{Z_{\beta}}{Zbeta} value for each SNP location supplied to the function.

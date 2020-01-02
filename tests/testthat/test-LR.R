@@ -15,8 +15,8 @@ df<-data.frame(
 test_that("LR calcualtes LR statistic correctly", {
 
   expect_equal(LR(pos = df$POS, x = as.matrix(df[,3:7]), ws  = 3000, X = NULL),
-               data.frame(
-                 POS=c(100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500),
+               list(
+                 position=c(100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500),
                  LR=c(0,13,24,33,40,45,48,49,48,45,40,33,24,13,0)
                ))
 })
@@ -26,8 +26,8 @@ test_that("LR calcualtes LR statistic correctly", {
 test_that("LR calcualtes LR statistic correctly with a different window size", {
 
   expect_equal(LR(pos = df$POS, x = as.matrix(df[,3:7]), ws  = 1100, X = NULL),
-               data.frame(
-                 POS=c(100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500),
+               list(
+                 position=c(100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500),
                  LR=c(0,5,10,15,20,25,25,25,25,25,20,15,10,5,0)
               ))
 })
@@ -40,8 +40,8 @@ test_that("LR calcualtes LR statistic correctly with character matrix", {
   df1[df1==1]<-"A"
   df1[df1==2]<-"B"
   expect_equal(LR(pos = df1$POS, x = as.matrix(df1[,3:7]), ws  = 3000, X = NULL),
-               data.frame(
-                 POS=c(100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500),
+               list(
+                 position=c(100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500),
                  LR=c(0,13,24,33,40,45,48,49,48,45,40,33,24,13,0)
                ))
 })
@@ -51,8 +51,8 @@ test_that("LR calcualtes LR statistic correctly with character matrix", {
 test_that("LR calcualtes LR statistic correctly with X supplied", {
 
   expect_equal(LR(pos = df$POS, x = as.matrix(df[,3:7]), ws  = 3000, X = c(700,900)),
-               data.frame(
-                 POS=c(700,800,900),
+               list(
+                 position=c(700,800,900),
                  LR=c(48,49,48)
                ))
 })

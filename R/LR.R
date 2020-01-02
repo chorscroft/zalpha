@@ -9,7 +9,7 @@
 #' @param ws The window size which the \code{LR} statistic will be calculated over. This should be on the same scale as the \code{pos} vector.
 #' @param X Optional. Specify a region of the chromosome to calculate LR for in the format \code{c(startposition, endposition)}. The start position and the end position should be within the extremes of the positions given in the \code{pos} vector. If not supplied, the function will calculate LR for every SNP in the \code{pos} vector.
 #'
-#' @return A data frame containing the SNP positions and the LR values for those SNPs
+#' @return A list containing the SNP positions and the \code{LR} values for those SNPs
 #' @references Jacobs, G.S., T.J. Sluckin, and T. Kivisild, \emph{Refining the Use of Linkage Disequilibrium as a Robust Signature of Selective Sweeps.} Genetics, 2016. \strong{203}(4): p. 1807
 #' @export
 
@@ -61,20 +61,20 @@ LR <- function(pos, x, ws, X = NULL) {
     x<-matrix(as.numeric(factor(x)),nrow=dim(x)[1])
   }
 
-  # Set up output data frame
-  outputDF<-data.frame(POS=pos[pos>=X[1] & pos <= X[2]],LR=NA)
+  # Set up output list
+  outputLength<-length(pos[pos>=X[1] & pos <= X[2]])
+  outputList<-list(position=pos[pos>=X[1] & pos <= X[2]],LR=rep(NA,outputLength))
 
-
-  # Loop over each position in the output data frame and calculate LR
-  for (i in 1:nrow(outputDF)){
+  # Loop over each position in the output list and calculate LR
+  for (i in 1:outputLength){
 
     # Current physical position in chromosome
-    currentPos<-outputDF$POS[i]
+    currentPos<-outputList$position[i]
 
     ## get L, R and LR
     noL <- length(pos[pos>=currentPos-ws/2 & pos < currentPos]) ## Number of SNPs to the left of the current SNP
     noR <- length(pos[pos<=currentPos+ws/2 & pos > currentPos]) ## Number of SNPs to the right of the current SNP
-    outputDF$LR[i]<-noL*noR
+    outputList$LR[i]<-noL*noR
   }
-  return(outputDF)
+  return(outputList)
 }

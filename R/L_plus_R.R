@@ -9,9 +9,9 @@
 #' @param pos A numeric vector of SNP locations
 #' @param x A matrix of SNP values. Columns represent chromosomes, rows are SNP locations. Hence, the number of rows should equal the length of the \code{pos} vector. SNPs should all be biallelic.
 #' @param ws The window size which the \code{L_plus_R} statistic will be calculated over. This should be on the same scale as the \code{pos} vector.
-#' @param X Optional. Specify a region of the chromosome to calculate L_plus_R for in the format \code{c(startposition, endposition)}. The start position and the end position should be within the extremes of the positions given in the \code{pos} vector. If not supplied, the function will calculate L_plus_R for every SNP in the \code{pos} vector.
+#' @param X Optional. Specify a region of the chromosome to calculate \code{L_plus_R} for in the format \code{c(startposition, endposition)}. The start position and the end position should be within the extremes of the positions given in the \code{pos} vector. If not supplied, the function will calculate L_plus_R for every SNP in the \code{pos} vector.
 #'
-#' @return A data frame containing the SNP positions and the L_plus_R values for those SNPs
+#' @return A list containing the SNP positions and the \code{L_plus_R }values for those SNPs
 #' @references Jacobs, G.S., T.J. Sluckin, and T. Kivisild, \emph{Refining the Use of Linkage Disequilibrium as a Robust Signature of Selective Sweeps.} Genetics, 2016. \strong{203}(4): p. 1807
 #' @export
 
@@ -58,29 +58,29 @@ L_plus_R <- function(pos, x, ws, X = NULL) {
     X<-c(pos[1],pos[length(pos)])
   }
 
-  #Change matrix x to numeric if it isn't aL_plus_Ready
+  #Change matrix x to numeric if it isn't already
   if (is.numeric(x)==FALSE){
     x<-matrix(as.numeric(factor(x)),nrow=dim(x)[1])
   }
 
-  # Set up output data frame
-  outputDF<-data.frame(POS=pos[pos>=X[1] & pos <= X[2]],L_plus_R=NA)
+  # Set up output list
+  outputLength<-length(pos[pos>=X[1] & pos <= X[2]])
+  outputList<-list(position=pos[pos>=X[1] & pos <= X[2]],L_plus_R=rep(NA,outputLength))
 
-
-  # Loop over each position in the output data frame and calculate L_plus_R
-  for (i in 1:nrow(outputDF)){
+  # Loop over each position in the output list and calculate L_plus_R
+  for (i in 1:outputLength){
 
     # Current physical position in chromosome
-    currentPos<-outputDF$POS[i]
+    currentPos<-outputList$position[i]
 
     ## get L, R and L_plus_R
     noL <- length(pos[pos>=currentPos-ws/2 & pos < currentPos]) ## Number of SNPs to the left of the current SNP
     noR <- length(pos[pos<=currentPos+ws/2 & pos > currentPos]) ## Number of SNPs to the right of the current SNP
     if(noL < 2 || noR < 2){  #Must be at least 2 to calculate n choose 2
-      outputDF$L_plus_R[i]<-NA
+      outputList$L_plus_R[i]<-NA
     } else {
-      outputDF$L_plus_R[i]<-choose(noL,2)+choose(noR,2)
+      outputList$L_plus_R[i]<-choose(noL,2)+choose(noR,2)
     }
   }
-  return(outputDF)
+  return(outputList)
 }

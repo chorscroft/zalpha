@@ -16,7 +16,7 @@
 #' @param minRL Minimum value for the product of the set sizes for R and L. Default is 25.
 #' @param X Optional. Specify a region of the chromosome to calculate \eqn{Z_{\beta}}{Zbeta} for in the format \code{c(startposition, endposition)}. The start position and the end position should be within the extremes of the positions given in the \code{pos} vector. If not supplied, the function will calculate \eqn{Z_{\beta}}{Zbeta} for every SNP in the \code{pos} vector.
 #'
-#' @return A data frame containing the SNP positions and the \eqn{Z_{\beta}}{Zbeta} values for those SNPs
+#' @return A list containing the SNP positions and the \eqn{Z_{\beta}}{Zbeta} values for those SNPs
 #' @references Jacobs, G.S., T.J. Sluckin, and T. Kivisild, \emph{Refining the Use of Linkage Disequilibrium as a Robust Signature of Selective Sweeps.} Genetics, 2016. \strong{203}(4): p. 1807
 #' @export
 
@@ -76,29 +76,29 @@ Zbeta <- function(pos, x, ws, minRandL = 4, minRL = 25, X = NULL) {
     x<-matrix(as.numeric(factor(x)),nrow=dim(x)[1])
   }
 
-  # Set up output data frame
-  outputDF<-data.frame(POS=pos[pos>=X[1] & pos <= X[2]],Zbeta=NA)
-
+  # Set up output list
+  outputLength<-length(pos[pos>=X[1] & pos <= X[2]])
+  outputList<-list(position=pos[pos>=X[1] & pos <= X[2]],Zbeta=rep(NA,outputLength))
 
   # Loop over each position in the output data frame and calculate Zbeta
-  for (i in 1:nrow(outputDF)){
+  for (i in 1:outputLength){
 
     # Current physical position in chromosome
-    currentPos<-outputDF$POS[i]
+    currentPos<-outputList$position[i]
 
     ## check L, R and LR
     noL <- length(pos[pos>=currentPos-ws/2 & pos < currentPos]) ## Number of SNPs to the left of the current SNP
     noR <- length(pos[pos<=currentPos+ws/2 & pos > currentPos]) ## Number of SNPs to the right of the current SNP
     if  (noL < minRandL || noR < minRandL || noL*noR < minRL){
       #NA
-      outputDF$Zbeta[i]<-NA
+      outputList$Zbeta[i]<-NA
     } else {
       rsqSum<-sum((cor(t(x[pos>=currentPos-ws/2 & pos<=currentPos+ws/2,]))^2)[1:noL,(noL+2):(noL+noR+1)])
-      outputDF$Zbeta[i]<-rsqSum/(noL*noR)
+      outputList$Zbeta[i]<-rsqSum/(noL*noR)
     }
   }
-  if (sum(is.na(outputDF$Zbeta))==nrow(outputDF)){
+  if (sum(is.na(outputList$Zbeta))==outputLength){
     warning("No Zbeta values were calculated, try reducing minRandL and minRL or increasing the window size")
   }
-  return(outputDF)
+  return(outputList)
 }

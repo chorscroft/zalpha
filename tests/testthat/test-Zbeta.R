@@ -16,8 +16,8 @@ df<-data.frame(
 test_that("Zbeta calcualtes Zbeta statistic correctly", {
 
   expect_equal(Zbeta(pos = df$POS, x = as.matrix(df[,3:7]), ws  = 3000, minRandL = 4, minRL = 25, X = NULL),
-               data.frame(
-                 POS=c(100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500),
+               list(
+                 position=c(100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500),
                  Zbeta=c(NA,NA,NA,NA,
                           (10+5/18)/40,
                           (10+35/36)/45,
@@ -35,8 +35,8 @@ test_that("Zbeta calcualtes Zbeta statistic correctly", {
 test_that("Zbeta calcualtes Zbeta statistic correctly with a different window size", {
 
   expect_equal(Zbeta(pos = df$POS, x = as.matrix(df[,3:7]), ws  = 1100, minRandL = 4, minRL = 25, X = NULL),
-               data.frame(
-                 POS=c(100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500),
+               list(
+                 position=c(100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500),
                  Zbeta=c(NA,NA,NA,NA,NA,
                           (7+11/72)/25,
                           (5+5/9)/25,
@@ -55,8 +55,8 @@ test_that("Zbeta calcualtes Zbeta statistic correctly with character matrix", {
   df1[df1==1]<-"A"
   df1[df1==2]<-"B"
   expect_equal(Zbeta(pos = df1$POS, x = as.matrix(df1[,3:7]), ws  = 3000, minRandL = 4, minRL = 25, X = NULL),
-               data.frame(
-                 POS=c(100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500),
+               list(
+                 position=c(100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500),
                  Zbeta=c(NA,NA,NA,NA,
                          (10+5/18)/40,
                          (10+35/36)/45,
@@ -74,8 +74,8 @@ test_that("Zbeta calcualtes Zbeta statistic correctly with character matrix", {
 test_that("Zbeta calcualtes Zbeta statistic correctly with X supplied", {
 
   expect_equal(Zbeta(pos = df$POS, x = as.matrix(df[,3:7]), ws  = 3000, minRandL = 4, minRL = 25, X = c(700,900)),
-               data.frame(
-                 POS=c(700,800,900),
+               list(
+                 position=c(700,800,900),
                  Zbeta=c((11+103/144)/48,
                          (12+73/144)/49,
                          (11+83/144)/48)

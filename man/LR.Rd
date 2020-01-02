@@ -16,7 +16,7 @@ LR(pos, x, ws, X = NULL)
 \item{X}{Optional. Specify a region of the chromosome to calculate LR for in the format \code{c(startposition, endposition)}. The start position and the end position should be within the extremes of the positions given in the \code{pos} vector. If not supplied, the function will calculate LR for every SNP in the \code{pos} vector.}
 }
 \value{
-A data frame containing the SNP positions and the LR values for those SNPs
+A list containing the SNP positions and the \code{LR} values for those SNPs
 }
 \description{
 Returns the \code{|L||R|} value for each SNP location supplied to the function.

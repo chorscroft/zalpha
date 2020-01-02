@@ -16,8 +16,8 @@ df<-data.frame(
 test_that("Zalpha calcualtes Zalpha statistic correctly", {
 
   expect_equal(Zalpha(pos = df$POS, x = as.matrix(df[,3:7]), ws  = 3000, minRandL = 4, minRL = 25, X = NULL),
-               data.frame(
-                 POS=c(100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500),
+               list(
+                 position=c(100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500),
                  Zalpha=c(NA,NA,NA,NA,
                           ((3+1/2)/6+(11+41/144)/45)/2,
                           ((6+1/4)/10+(9+41/48)/36)/2,
@@ -35,8 +35,8 @@ test_that("Zalpha calcualtes Zalpha statistic correctly", {
 test_that("Zalpha calcualtes Zalpha statistic correctly with a different window size", {
 
   expect_equal(Zalpha(pos = df$POS, x = as.matrix(df[,3:7]), ws  = 1100, minRandL = 4, minRL = 25, X = NULL),
-               data.frame(
-                 POS=c(100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500),
+               list(
+                 position=c(100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500),
                  Zalpha=c(NA,NA,NA,NA,NA,
                           ((6+1/4)/10+(2+19/48)/10)/2,
                           ((5+5/18)/10+(2+19/48)/10)/2,
@@ -55,8 +55,8 @@ test_that("Zalpha calcualtes Zalpha statistic correctly with character matrix", 
   df1[df1==1]<-"A"
   df1[df1==2]<-"B"
   expect_equal(Zalpha(pos = df1$POS, x = as.matrix(df1[,3:7]), ws  = 3000, minRandL = 4, minRL = 25, X = NULL),
-               data.frame(
-                 POS=c(100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500),
+               list(
+                 position=c(100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500),
                  Zalpha=c(NA,NA,NA,NA,
                           ((3+1/2)/6+(11+41/144)/45)/2,
                           ((6+1/4)/10+(9+41/48)/36)/2,
@@ -74,8 +74,8 @@ test_that("Zalpha calcualtes Zalpha statistic correctly with character matrix", 
 test_that("Zalpha calcualtes Zalpha statistic correctly with X supplied", {
 
   expect_equal(Zalpha(pos = df$POS, x = as.matrix(df[,3:7]), ws  = 3000, minRandL = 4, minRL = 25, X = c(700,900)),
-               data.frame(
-                 POS=c(700,800,900),
+               list(
+                 position=c(700,800,900),
                  Zalpha=c(((7+31/72)/15+(7+13/48)/28)/2,
                           ((8+17/144)/21+(4+7/16)/21)/2,
                           ((9+131/144)/28+(2+13/16)/15)/2)
