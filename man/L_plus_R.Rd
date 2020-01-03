@@ -20,7 +20,7 @@ A list containing the SNP positions and the \code{L_plus_R }values for those SNP
 }
 \description{
 Returns the \eqn{{|L| \choose 2} + {|R| \choose 2}}{(|L| choose 2) + (|R| choose 2)} value for each SNP location supplied to the function.
-For more information about the L_plus_R diversity statistic please see Jacobs (2016).
+For more information about the \code{L_plus_R} diversity statistic please see Jacobs (2016).
 }
 \references{
 Jacobs, G.S., T.J. Sluckin, and T. Kivisild, \emph{Refining the Use of Linkage Disequilibrium as a Robust Signature of Selective Sweeps.} Genetics, 2016. \strong{203}(4): p. 1807
