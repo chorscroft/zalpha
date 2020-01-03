@@ -95,9 +95,9 @@ Zalpha <- function(pos, x, ws, minRandL = 4, minRL = 25, X = NULL) {
       outputList$Zalpha[i]<-NA
     } else {
       ##Left
-      LrsqSum<-(sum((cor(t(x[pos>=currentPos-ws/2 & pos < currentPos,]))^2))-noL)/2
+      LrsqSum<- sum(lower_triangle(cor(t(x[pos>=currentPos-ws/2 & pos < currentPos,]))^2))
       ##Right
-      RrsqSum<-(sum((cor(t(x[pos<=currentPos+ws/2 & pos > currentPos,]))^2))-noR)/2
+      RrsqSum<-sum(lower_triangle(cor(t(x[pos<=currentPos+ws/2 & pos > currentPos,]))^2))
       outputList$Zalpha[i]<-(LrsqSum/choose(noL,2)+RrsqSum/choose(noR,2))/2
     }
   }
