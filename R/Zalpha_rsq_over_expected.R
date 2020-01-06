@@ -6,7 +6,7 @@
 #' the expected \eqn{r^2} values given an LD profile and cM distances.
 #' For more information about the \eqn{Z_{\alpha}^{r^2/E[r^2]}}{Zalpha} statistic please see Jacobs (2016).
 #' The \eqn{Z_{\alpha}^{r^2/E[r^2]}}{Zalpha} statistic is defined as:
-#' \deqn{{Z_{\alpha}^{r^2/E[r^2]}}=\frac{{|L| \choose 2}^{-1}\sum_{i,j \in L}r^2_{i,j}/E[r^2_{i,j}] + {|R| \choose 2}^{-1}\sum_{i,j \in L}r^2_{i,j}/E[r^2_{i,j}]}{2}}
+#' \deqn{{Z_{\alpha}^{r^2/E[r^2]}}=\frac{{|L| \choose 2}^{-1}\sum_{i,j \in L}r^2_{i,j}/E[r^2_{i,j}] + {|R| \choose 2}^{-1}\sum_{i,j \in R}r^2_{i,j}/E[r^2_{i,j}]}{2}}
 #' where \code{|L|} and \code{|R|} are the number of SNPs to the left and right of the current locus within the given window \code{ws}, \eqn{r^2}{r^2} is equal to
 #' the squared correlation between a pair of SNPs, and \eqn{E[r^2]}{E[r^2]} is equal to the expected squared correlation between a pair of SNPs, given an LD profile.
 #'
