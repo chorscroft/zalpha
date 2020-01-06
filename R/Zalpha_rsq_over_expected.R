@@ -2,7 +2,7 @@
 
 #' Runs the Zalpha function on the r squared values over the expected r squared values for the region
 #'
-#'#' Returns a \eqn{Z_{\alpha}^{r^2/E[r^2]}}{Zalpha} value for each SNP location supplied to the function, based on
+#' Returns a \eqn{Z_{\alpha}^{r^2/E[r^2]}}{Zalpha} value for each SNP location supplied to the function, based on
 #' the expected \eqn{r^2} values given an LD profile and cM distances.
 #' For more information about the \eqn{Z_{\alpha}^{r^2/E[r^2]}}{Zalpha} statistic please see Jacobs (2016).
 #' The \eqn{Z_{\alpha}^{r^2/E[r^2]}}{Zalpha} statistic is defined as:
