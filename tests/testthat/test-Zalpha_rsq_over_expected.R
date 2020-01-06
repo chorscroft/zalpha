@@ -63,7 +63,7 @@ test_that("Zalpha_rsq_over_expected calcualtes Zalpha_rsq_over_expected statisti
   df1<-df
   df1[df1==1]<-"A"
   df1[df1==2]<-"B"
-  expect_equal(Zalpha_rsq_over_expected(pos = df$POS, x = as.matrix(df[,3:7]), cM = df$CM, ws  = 3000, LDprofile_cM_bins = LDprofile$cM_bin, LDprofile_rsq = LDprofile$rsq, minRandL = 4, minRL = 25, X = NULL),
+  expect_equal(Zalpha_rsq_over_expected(pos = df$POS, x = as.matrix(df1[,3:7]), cM = df$CM, ws  = 3000, LDprofile_cM_bins = LDprofile$cM_bin, LDprofile_rsq = LDprofile$rsq, minRandL = 4, minRL = 25, X = NULL),
                list(
                  position=c(100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500),
                  Zalpha_rsq_over_expected=c(NA,NA,NA,NA,
