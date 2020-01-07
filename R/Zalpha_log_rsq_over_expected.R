@@ -1,6 +1,6 @@
 
 
-#' Runs the Zalpha function on the r squared values over the expected r squared values for the region
+#' Runs the Zalpha function on the log of the r squared values over the expected r squared values for the region
 #'
 #' Returns a \eqn{Z_{\alpha}^{log_{10}(r^2/E[r^2])}}{Zalpha} value for each SNP location supplied to the function, based on
 #' the expected \eqn{r^2} values given an LD profile and cM distances.
