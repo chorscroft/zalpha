@@ -38,7 +38,7 @@ For more information about the \eqn{Z_{\alpha}^{Zscore}}{Zalpha} statistic pleas
 The \eqn{Z_{\alpha}^{Zscore}}{Zalpha} statistic is defined as:
 \deqn{{Z_{\alpha}^{Zscore}}=\frac{{|L| \choose 2}^{-1}\sum_{i,j \in L}\frac{r^2_{i,j}-E[r^2_{i,j}]}{\sigma[r^2_{i,j}]} + {|R| \choose 2}^{-1}\sum_{i,j \in R}\frac{r^2_{i,j}-E[r^2_{i,j}]}{\sigma[r^2_{i,j}]}}{2}}
 where \code{|L|} and \code{|R|} are the number of SNPs to the left and right of the current locus within the given window \code{ws}, \eqn{r^2}{r^2} is equal to
-the squared correlation between a pair of SNPs, and \eqn{E[r^2]}{E[r^2]} is equal to the expected squared correlation between a pair of SNPs, given an LD profile.
+the squared correlation between a pair of SNPs, \eqn{E[r^2]}{E[r^2]} is equal to the expected squared correlation between a pair of SNPs, given an LD profile, and \eqn{\sigma[r^2]}{\sigma[r^2]} is the standard deviation.
 }
 \details{
 The LD profile describes the expected correlation between SNPs at a given genetic distance, generated using simulations or
