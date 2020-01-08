@@ -6,10 +6,10 @@ df<-data.frame(
   C3=c(2,1,2,2,2,1,1,2,2,1,2,2,1,1,2),
   C4=c(1,1,2,1,2,2,1,1,1,1,1,2,2,2,2),
   C5=c(1,1,2,1,2,1,2,1,1,1,1,1,2,1,1),
-  CM=c(0,0.00101,0.00123,0.00207,0.00218,0.00223,0.00235,0.00251,0.00272,0.00289,0.00304,0.00316,0.00335,0.00345,0.00374)
+  dist=c(0,0.00101,0.00123,0.00207,0.00218,0.00223,0.00235,0.00251,0.00272,0.00289,0.00304,0.00316,0.00335,0.00345,0.00374)
 )
 LDprofile<-data.frame(
-  cM_bin=seq(0,0.0049,0.0001),
+  bin=seq(0,0.0049,0.0001),
   rsq=c(0.495714059385946,0.411014233619574,0.395532914859378,0.44354526861954,0.435550945945946,
         0.419534577303153,0.383410708498866,0.402439897670834,0.395945237932081,0.380436909495495,
         0.384229510773621,0.379494011054621,0.368118044626627,0.358753523652643,0.362330915047976,
@@ -35,7 +35,7 @@ LDprofile<-data.frame(
 
 test_that("Zalpha_Zscore calcualtes Zalpha_Zscore statistic correctly", {
 
-  expect_equal(Zalpha_Zscore(pos = df$POS, x = as.matrix(df[,3:7]), cM = df$CM, ws  = 3000, LDprofile_cM_bins = LDprofile$cM_bin, LDprofile_rsq = LDprofile$rsq, LDprofile_sd = LDprofile$sd, minRandL = 4, minRL = 25, X = NULL),
+  expect_equal(Zalpha_Zscore(pos = df$POS, x = as.matrix(df[,3:7]), dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, LDprofile_sd = LDprofile$sd, minRandL = 4, minRL = 25, X = NULL),
                list(
                  position=c(100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500),
                  Zalpha_Zscore=c(NA,NA,NA,NA,
@@ -54,7 +54,7 @@ test_that("Zalpha_Zscore calcualtes Zalpha_Zscore statistic correctly", {
 
 test_that("Zalpha_Zscore calcualtes Zalpha_Zscore statistic correctly with a different window size", {
 
-  expect_equal(Zalpha_Zscore(pos = df$POS, x = as.matrix(df[,3:7]), cM = df$CM, ws  = 1100, LDprofile_cM_bins = LDprofile$cM_bin, LDprofile_rsq = LDprofile$rsq, LDprofile_sd = LDprofile$sd, minRandL = 4, minRL = 25, X = NULL),
+  expect_equal(Zalpha_Zscore(pos = df$POS, x = as.matrix(df[,3:7]), dist = df$dist, ws  = 1100, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, LDprofile_sd = LDprofile$sd, minRandL = 4, minRL = 25, X = NULL),
                list(
                  position=c(100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500),
                  Zalpha_Zscore=c(NA,NA,NA,NA,NA,
@@ -73,7 +73,7 @@ test_that("Zalpha_Zscore calcualtes Zalpha_Zscore statistic correctly with chara
   df1<-df
   df1[df1==1]<-"A"
   df1[df1==2]<-"B"
-  expect_equal(Zalpha_Zscore(pos = df$POS, x = as.matrix(df1[,3:7]), cM = df$CM, ws  = 3000, LDprofile_cM_bins = LDprofile$cM_bin, LDprofile_rsq = LDprofile$rsq, LDprofile_sd = LDprofile$sd, minRandL = 4, minRL = 25, X = NULL),
+  expect_equal(Zalpha_Zscore(pos = df$POS, x = as.matrix(df1[,3:7]), dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, LDprofile_sd = LDprofile$sd, minRandL = 4, minRL = 25, X = NULL),
                list(
                  position=c(100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500),
                  Zalpha_Zscore=c(NA,NA,NA,NA,
@@ -92,7 +92,7 @@ test_that("Zalpha_Zscore calcualtes Zalpha_Zscore statistic correctly with chara
 
 test_that("Zalpha_Zscore calcualtes Zalpha_Zscore statistic correctly with X supplied", {
 
-  expect_equal(Zalpha_Zscore(pos = df$POS, x = as.matrix(df[,3:7]), cM = df$CM, ws  = 3000, LDprofile_cM_bins = LDprofile$cM_bin, LDprofile_rsq = LDprofile$rsq, LDprofile_sd = LDprofile$sd, minRandL = 4, minRL = 25, X = c(700,900)),
+  expect_equal(Zalpha_Zscore(pos = df$POS, x = as.matrix(df[,3:7]), dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, LDprofile_sd = LDprofile$sd, minRandL = 4, minRL = 25, X = c(700,900)),
                list(
                  position=c(700,800,900),
                  Zalpha_Zscore=c(-0.038223960672508,
@@ -105,7 +105,7 @@ test_that("Zalpha_Zscore calcualtes Zalpha_Zscore statistic correctly with X sup
 
 test_that("Zalpha_Zscore fails with an X supplied outside of the region defined in pos", {
 
-  expect_error(Zalpha_Zscore(pos = df$POS, x = as.matrix(df[,3:7]), cM = df$CM, ws  = 3000, LDprofile_cM_bins = LDprofile$cM_bin, LDprofile_rsq = LDprofile$rsq, LDprofile_sd = LDprofile$sd, minRandL = 4, minRL = 25, X = c(7000,9000)),
+  expect_error(Zalpha_Zscore(pos = df$POS, x = as.matrix(df[,3:7]), dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, LDprofile_sd = LDprofile$sd, minRandL = 4, minRL = 25, X = c(7000,9000)),
                "The region specified by X is outside the region contained in the pos vector")
 })
 
@@ -113,7 +113,7 @@ test_that("Zalpha_Zscore fails with an X supplied outside of the region defined 
 
 test_that("Zalpha_Zscore fails with an X supplied as a character", {
 
-  expect_error(Zalpha_Zscore(pos = df$POS, x = as.matrix(df[,3:7]), cM = df$CM, ws  = 3000, LDprofile_cM_bins = LDprofile$cM_bin, LDprofile_rsq = LDprofile$rsq, LDprofile_sd = LDprofile$sd, minRandL = 4, minRL = 25, X = c("700bp","900bp")),
+  expect_error(Zalpha_Zscore(pos = df$POS, x = as.matrix(df[,3:7]), dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, LDprofile_sd = LDprofile$sd, minRandL = 4, minRL = 25, X = c("700bp","900bp")),
                "X should be a numeric vector of length 2 e.g. c(100,200)",
                fixed=TRUE)
 })
@@ -122,7 +122,7 @@ test_that("Zalpha_Zscore fails with an X supplied as a character", {
 
 test_that("Zalpha_Zscore fails with an X supplied as only one number", {
 
-  expect_error(Zalpha_Zscore(pos = df$POS, x = as.matrix(df[,3:7]), cM = df$CM, ws  = 3000, LDprofile_cM_bins = LDprofile$cM_bin, LDprofile_rsq = LDprofile$rsq, LDprofile_sd = LDprofile$sd, minRandL = 4, minRL = 25, X = 700),
+  expect_error(Zalpha_Zscore(pos = df$POS, x = as.matrix(df[,3:7]), dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, LDprofile_sd = LDprofile$sd, minRandL = 4, minRL = 25, X = 700),
                "X should be a numeric vector of length 2 e.g. c(100,200)",
                fixed=TRUE)
 })
@@ -131,7 +131,7 @@ test_that("Zalpha_Zscore fails with an X supplied as only one number", {
 
 test_that("Zalpha_Zscore fails with an X supplied with too many numbers", {
 
-  expect_error(Zalpha_Zscore(pos = df$POS, x = as.matrix(df[,3:7]), cM = df$CM, ws  = 3000, LDprofile_cM_bins = LDprofile$cM_bin, LDprofile_rsq = LDprofile$rsq, LDprofile_sd = LDprofile$sd, minRandL = 4, minRL = 25, X = c(700,900,1100)),
+  expect_error(Zalpha_Zscore(pos = df$POS, x = as.matrix(df[,3:7]), dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, LDprofile_sd = LDprofile$sd, minRandL = 4, minRL = 25, X = c(700,900,1100)),
                "X should be a numeric vector of length 2 e.g. c(100,200)",
                fixed=TRUE)
 })
@@ -140,7 +140,7 @@ test_that("Zalpha_Zscore fails with an X supplied with too many numbers", {
 
 test_that("Zalpha_Zscore fails when ws is non-numeric", {
 
-  expect_error(Zalpha_Zscore(pos = df$POS, x = as.matrix(df[,3:7]), cM = df$CM, ws  = "3000bp", LDprofile_cM_bins = LDprofile$cM_bin, LDprofile_rsq = LDprofile$rsq, LDprofile_sd = LDprofile$sd, minRandL = 4, minRL = 25, X = NULL),
+  expect_error(Zalpha_Zscore(pos = df$POS, x = as.matrix(df[,3:7]), dist = df$dist, ws  = "3000bp", LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, LDprofile_sd = LDprofile$sd, minRandL = 4, minRL = 25, X = NULL),
                "ws must be a number greater than 0")
 })
 
@@ -148,7 +148,7 @@ test_that("Zalpha_Zscore fails when ws is non-numeric", {
 
 test_that("Zalpha_Zscore fails when ws is zero", {
 
-  expect_error(Zalpha_Zscore(pos = df$POS, x = as.matrix(df[,3:7]), cM = df$CM, ws  = 0, LDprofile_cM_bins = LDprofile$cM_bin, LDprofile_rsq = LDprofile$rsq, LDprofile_sd = LDprofile$sd, minRandL = 4, minRL = 25, X = NULL),
+  expect_error(Zalpha_Zscore(pos = df$POS, x = as.matrix(df[,3:7]), dist = df$dist, ws  = 0, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, LDprofile_sd = LDprofile$sd, minRandL = 4, minRL = 25, X = NULL),
                "ws must be a number greater than 0")
 })
 
@@ -156,7 +156,7 @@ test_that("Zalpha_Zscore fails when ws is zero", {
 
 test_that("Zalpha_Zscore fails when pos is non-numeric", {
 
-  expect_error(Zalpha_Zscore(pos = paste0(df$POS,"bp"), x = as.matrix(df[,3:7]), cM = df$CM, ws  = 3000, LDprofile_cM_bins = LDprofile$cM_bin, LDprofile_rsq = LDprofile$rsq, LDprofile_sd = LDprofile$sd, minRandL = 4, minRL = 25, X = NULL),
+  expect_error(Zalpha_Zscore(pos = paste0(df$POS,"bp"), x = as.matrix(df[,3:7]), dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, LDprofile_sd = LDprofile$sd, minRandL = 4, minRL = 25, X = NULL),
                "pos must be a numeric vector")
 })
 
@@ -164,7 +164,7 @@ test_that("Zalpha_Zscore fails when pos is non-numeric", {
 
 test_that("Zalpha_Zscore fails when minLandR is non-numeric", {
 
-  expect_error(Zalpha_Zscore(pos = df$POS, x = as.matrix(df[,3:7]), cM = df$CM, ws  = 3000, LDprofile_cM_bins = LDprofile$cM_bin, LDprofile_rsq = LDprofile$rsq, LDprofile_sd = LDprofile$sd, minRandL = "4snps", minRL = 25, X = NULL),
+  expect_error(Zalpha_Zscore(pos = df$POS, x = as.matrix(df[,3:7]), dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, LDprofile_sd = LDprofile$sd, minRandL = "4snps", minRL = 25, X = NULL),
                "minRandL must be a number greater than or equal to 0")
 })
 
@@ -172,7 +172,7 @@ test_that("Zalpha_Zscore fails when minLandR is non-numeric", {
 
 test_that("Zalpha_Zscore fails when minLandR is negative", {
 
-  expect_error(Zalpha_Zscore(pos = df$POS, x = as.matrix(df[,3:7]), cM = df$CM, ws  = 3000, LDprofile_cM_bins = LDprofile$cM_bin, LDprofile_rsq = LDprofile$rsq, LDprofile_sd = LDprofile$sd, minRandL = -1, minRL = 25, X = NULL),
+  expect_error(Zalpha_Zscore(pos = df$POS, x = as.matrix(df[,3:7]), dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, LDprofile_sd = LDprofile$sd, minRandL = -1, minRL = 25, X = NULL),
                "minRandL must be a number greater than or equal to 0")
 })
 
@@ -180,7 +180,7 @@ test_that("Zalpha_Zscore fails when minLandR is negative", {
 
 test_that("Zalpha_Zscore fails when minLR is non-numeric", {
 
-  expect_error(Zalpha_Zscore(pos = df$POS, x = as.matrix(df[,3:7]), cM = df$CM, ws  = 3000, LDprofile_cM_bins = LDprofile$cM_bin, LDprofile_rsq = LDprofile$rsq, LDprofile_sd = LDprofile$sd, minRandL = 4, minRL = "25b", X = NULL),
+  expect_error(Zalpha_Zscore(pos = df$POS, x = as.matrix(df[,3:7]), dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, LDprofile_sd = LDprofile$sd, minRandL = 4, minRL = "25b", X = NULL),
                "minRL must be a number greater than or equal to 0")
 })
 
@@ -188,7 +188,7 @@ test_that("Zalpha_Zscore fails when minLR is non-numeric", {
 
 test_that("Zalpha_Zscore fails when minLR is negative", {
 
-  expect_error(Zalpha_Zscore(pos = df$POS, x = as.matrix(df[,3:7]), cM = df$CM, ws  = 3000, LDprofile_cM_bins = LDprofile$cM_bin, LDprofile_rsq = LDprofile$rsq, LDprofile_sd = LDprofile$sd, minRandL = 4, minRL = -25, X = NULL),
+  expect_error(Zalpha_Zscore(pos = df$POS, x = as.matrix(df[,3:7]), dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, LDprofile_sd = LDprofile$sd, minRandL = 4, minRL = -25, X = NULL),
                "minRL must be a number greater than or equal to 0")
 })
 
@@ -196,37 +196,37 @@ test_that("Zalpha_Zscore fails when minLR is negative", {
 
 test_that("Zalpha_Zscore warns about all NAs", {
 
-  expect_warning(Zalpha_Zscore(pos = df$POS, x = as.matrix(df[,3:7]), cM = df$CM, ws  = 3000, LDprofile_cM_bins = LDprofile$cM_bin, LDprofile_rsq = LDprofile$rsq, LDprofile_sd = LDprofile$sd, minRandL = 4, minRL = 50, X = NULL),
+  expect_warning(Zalpha_Zscore(pos = df$POS, x = as.matrix(df[,3:7]), dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, LDprofile_sd = LDprofile$sd, minRandL = 4, minRL = 50, X = NULL),
                  "No Zalpha_Zscore values were calculated, try reducing minRandL and minRL or increasing the window size")
 })
 
-## Test the function with cMs non-numeric
+## Test the function with dists non-numeric
 
-test_that("Zalpha_Zscore fails when cM is non-numeric", {
+test_that("Zalpha_Zscore fails when dist is non-numeric", {
 
-  expect_error(Zalpha_Zscore(pos = df$POS, x = as.matrix(df[,3:7]), cM = paste0(df$CM,"cM"), ws  = 3000, LDprofile_cM_bins = LDprofile$cM_bin, LDprofile_rsq = LDprofile$rsq, LDprofile_sd = LDprofile$sd, minRandL = 4, minRL = 25, X = NULL),
-               "cM must be a numeric vector")
+  expect_error(Zalpha_Zscore(pos = df$POS, x = as.matrix(df[,3:7]), dist = paste0(df$dist,"dist"), ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, LDprofile_sd = LDprofile$sd, minRandL = 4, minRL = 25, X = NULL),
+               "dist must be a numeric vector")
 })
 
-## Test the function with cMs a different length to pos
+## Test the function with dists a different length to pos
 
-test_that("Zalpha_Zscore fails when cM is a different length to pos", {
+test_that("Zalpha_Zscore fails when dist is a different length to pos", {
 
-  expect_error(Zalpha_Zscore(pos = df$POS, x = as.matrix(df[,3:7]), cM = c(df$CM,1), ws  = 3000, LDprofile_cM_bins = LDprofile$cM_bin, LDprofile_rsq = LDprofile$rsq, LDprofile_sd = LDprofile$sd, minRandL = 4, minRL = 25, X = NULL),
-               "The number of values in cM must equal the number of SNP locations given in pos")
+  expect_error(Zalpha_Zscore(pos = df$POS, x = as.matrix(df[,3:7]), dist = c(df$dist,1), ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, LDprofile_sd = LDprofile$sd, minRandL = 4, minRL = 25, X = NULL),
+               "The number of values in dist must equal the number of SNP locations given in pos")
 })
 
-## Test the function with LDprofile_cM_bins non-numeric
+## Test the function with LDprofile_bins non-numeric
 
-test_that("Zalpha_Zscore fails when LDprofile_cM_bins is non-numeric", {
+test_that("Zalpha_Zscore fails when LDprofile_bins is non-numeric", {
 
-  expect_error(Zalpha_Zscore(pos = df$POS, x = as.matrix(df[,3:7]), cM = df$CM, ws  = 3000, LDprofile_cM_bins = paste0(LDprofile$cM_bin,"cM"), LDprofile_rsq = LDprofile$rsq, LDprofile_sd = LDprofile$sd, minRandL = 4, minRL = 25, X = NULL),
-               "LDprofile_cM_bins must be a numeric vector")
+  expect_error(Zalpha_Zscore(pos = df$POS, x = as.matrix(df[,3:7]), dist = df$dist, ws  = 3000, LDprofile_bins = paste0(LDprofile$bin,"dist"), LDprofile_rsq = LDprofile$rsq, LDprofile_sd = LDprofile$sd, minRandL = 4, minRL = 25, X = NULL),
+               "LDprofile_bins must be a numeric vector")
 })
 
-## Test the function with LDprofile_cM_bins not of equal size
+## Test the function with LDprofile_bins not of equal size
 tempLDprofile<-data.frame(
-  cM_bin=c(seq(0,0.0048,0.0001),3),
+  bin=c(seq(0,0.0048,0.0001),3),
   rsq=c(0.495714059385946,0.411014233619574,0.395532914859378,0.44354526861954,0.435550945945946,
         0.419534577303153,0.383410708498866,0.402439897670834,0.395945237932081,0.380436909495495,
         0.384229510773621,0.379494011054621,0.368118044626627,0.358753523652643,0.362330915047976,
@@ -238,23 +238,23 @@ tempLDprofile<-data.frame(
         0.286701832971995,0.297894654636997,0.283984127549023,0.283253709389766,0.281330372503553,
         0.289052362087009,0.272730959781483,0.277399161038311,0.285764741944136,0.271195118636169)
 )
-test_that("Zalpha_Zscore fails when LDprofile_cM_bins are not of equal size", {
+test_that("Zalpha_Zscore fails when LDprofile_bins are not of equal size", {
 
-  expect_error(Zalpha_Zscore(pos = df$POS, x = as.matrix(df[,3:7]), cM = df$CM, ws  = 3000, LDprofile_cM_bins = tempLDprofile$cM_bin, LDprofile_rsq = LDprofile$rsq, LDprofile_sd = LDprofile$sd, minRandL = 4, minRL = 25, X = NULL),
-               "LDprofile_cM_bins must be of equal size")
+  expect_error(Zalpha_Zscore(pos = df$POS, x = as.matrix(df[,3:7]), dist = df$dist, ws  = 3000, LDprofile_bins = tempLDprofile$bin, LDprofile_rsq = LDprofile$rsq, LDprofile_sd = LDprofile$sd, minRandL = 4, minRL = 25, X = NULL),
+               "LDprofile_bins must be of equal size")
 })
 
 ## Test the function with LDprofile_rsq non-numeric
 
 test_that("Zalpha_Zscore fails when LDprofile_rsq is non-numeric", {
 
-  expect_error(Zalpha_Zscore(pos = df$POS, x = as.matrix(df[,3:7]), cM = df$CM, ws  = 3000, LDprofile_cM_bins = LDprofile$cM_bin, LDprofile_rsq = paste0(LDprofile$rsq,"r"), LDprofile_sd = LDprofile$sd, minRandL = 4, minRL = 25, X = NULL),
+  expect_error(Zalpha_Zscore(pos = df$POS, x = as.matrix(df[,3:7]), dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_rsq = paste0(LDprofile$rsq,"r"), LDprofile_sd = LDprofile$sd, minRandL = 4, minRL = 25, X = NULL),
                "LDprofile_rsq must be a numeric vector")
 })
 
 ## Test the function with LDprofile_rsq having values outside (0,1)
 tempLDprofile<-data.frame(
-  cM_bin=seq(0,0.0049,0.0001),
+  bin=seq(0,0.0049,0.0001),
   rsq=c(3,0.411014233619574,0.395532914859378,0.44354526861954,0.435550945945946,
         0.419534577303153,0.383410708498866,0.402439897670834,0.395945237932081,0.380436909495495,
         0.384229510773621,0.379494011054621,0.368118044626627,0.358753523652643,0.362330915047976,
@@ -268,7 +268,7 @@ tempLDprofile<-data.frame(
 )
 test_that("Zalpha_Zscore fails when LDprofile_rsq contains values not between 0 and 1", {
 
-  expect_error(Zalpha_Zscore(pos = df$POS, x = as.matrix(df[,3:7]), cM = df$CM, ws  = 3000, LDprofile_cM_bins = LDprofile$cM_bin, LDprofile_rsq = tempLDprofile$rsq, LDprofile_sd = LDprofile$sd, minRandL = 4, minRL = 25, X = NULL),
+  expect_error(Zalpha_Zscore(pos = df$POS, x = as.matrix(df[,3:7]), dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_rsq = tempLDprofile$rsq, LDprofile_sd = LDprofile$sd, minRandL = 4, minRL = 25, X = NULL),
                "Values stored in LDprofile_rsq must be between 0 and 1")
 })
 
@@ -276,7 +276,7 @@ test_that("Zalpha_Zscore fails when LDprofile_rsq contains values not between 0 
 
 test_that("Zalpha_Zscore fails when LDprofile_sd is non-numeric", {
 
-  expect_error(Zalpha_Zscore(pos = df$POS, x = as.matrix(df[,3:7]), cM = df$CM, ws  = 3000, LDprofile_cM_bins = LDprofile$cM_bin, LDprofile_rsq = LDprofile$rsq, LDprofile_sd = paste0(LDprofile$sd,"sd"), minRandL = 4, minRL = 25, X = NULL),
+  expect_error(Zalpha_Zscore(pos = df$POS, x = as.matrix(df[,3:7]), dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, LDprofile_sd = paste0(LDprofile$sd,"sd"), minRandL = 4, minRL = 25, X = NULL),
                "LDprofile_sd must be a numeric vector")
 })
 
@@ -284,7 +284,7 @@ test_that("Zalpha_Zscore fails when LDprofile_sd is non-numeric", {
 
 test_that("Zalpha_Zscore fails when x is not a matrix", {
 
-  expect_error(Zalpha_Zscore(pos = df$POS, x = df[,3:7], cM = df$CM, ws  = 3000, LDprofile_cM_bins = LDprofile$cM_bin, LDprofile_rsq = LDprofile$rsq, LDprofile_sd = LDprofile$sd, minRandL = 4, minRL = 25, X = NULL),
+  expect_error(Zalpha_Zscore(pos = df$POS, x = df[,3:7], dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, LDprofile_sd = LDprofile$sd, minRandL = 4, minRL = 25, X = NULL),
                "x must be a matrix")
 })
 
@@ -292,7 +292,7 @@ test_that("Zalpha_Zscore fails when x is not a matrix", {
 
 test_that("Zalpha_Zscore fails when the number of rows in x is not equal to the length of pos", {
 
-  expect_error(Zalpha_Zscore(pos = df$POS, x = t(as.matrix(df[,3:7])), cM = df$CM, ws  = 3000, LDprofile_cM_bins = LDprofile$cM_bin, LDprofile_rsq = LDprofile$rsq, LDprofile_sd = LDprofile$sd, minRandL = 4, minRL = 25, X = NULL),
+  expect_error(Zalpha_Zscore(pos = df$POS, x = t(as.matrix(df[,3:7])), dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, LDprofile_sd = LDprofile$sd, minRandL = 4, minRL = 25, X = NULL),
                "The number of rows in x must equal the number of SNP locations given in pos")
 })
 
@@ -302,7 +302,7 @@ test_that("Zalpha_Zscore fails when a SNP has only one allele", {
 
   df1<-df
   df1[1,3:7]<-1
-  expect_error(Zalpha_Zscore(pos = df1$POS, x = as.matrix(df1[,3:7]), cM = df$CM, ws  = 3000, LDprofile_cM_bins = LDprofile$cM_bin, LDprofile_rsq = LDprofile$rsq, LDprofile_sd = LDprofile$sd, minRandL = 4, minRL = 25, X = NULL),
+  expect_error(Zalpha_Zscore(pos = df1$POS, x = as.matrix(df1[,3:7]), dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, LDprofile_sd = LDprofile$sd, minRandL = 4, minRL = 25, X = NULL),
                "SNPs must all be biallelic")
 })
 
@@ -312,24 +312,24 @@ test_that("Zalpha_Zscore fails when a SNP has more than two alleles", {
 
   df1<-df
   df1[1,7]<-3
-  expect_error(Zalpha_Zscore(pos = df1$POS, x = as.matrix(df1[,3:7]), cM = df$CM, ws  = 3000, LDprofile_cM_bins = LDprofile$cM_bin, LDprofile_rsq = LDprofile$rsq, LDprofile_sd = LDprofile$sd, minRandL = 4, minRL = 25, X = NULL),
+  expect_error(Zalpha_Zscore(pos = df1$POS, x = as.matrix(df1[,3:7]), dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, LDprofile_sd = LDprofile$sd, minRandL = 4, minRL = 25, X = NULL),
                "SNPs must all be biallelic")
 })
 
-## Test the function with LDprofile_cM_bins is a different length to LDprofile_rsq
+## Test the function with LDprofile_bins is a different length to LDprofile_rsq
 
-test_that("Zalpha_Zscore fails when LDprofile_cM_bins and LDprofile_rsq are different lengths", {
+test_that("Zalpha_Zscore fails when LDprofile_bins and LDprofile_rsq are different lengths", {
 
-  expect_error(Zalpha_Zscore(pos = df$POS, x = as.matrix(df[,3:7]), cM = df$CM, ws  = 3000, LDprofile_cM_bins = LDprofile$cM_bin, LDprofile_rsq = c(LDprofile$rsq,1), LDprofile_sd = LDprofile$sd, minRandL = 4, minRL = 25, X = NULL),
-               "LDprofile_rsq must contain the same number of values as there are bins given in LDprofile_cM_bins")
+  expect_error(Zalpha_Zscore(pos = df$POS, x = as.matrix(df[,3:7]), dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_rsq = c(LDprofile$rsq,1), LDprofile_sd = LDprofile$sd, minRandL = 4, minRL = 25, X = NULL),
+               "LDprofile_rsq must contain the same number of values as there are bins given in LDprofile_bins")
 })
 
-## Test the function with LDprofile_cM_bins as a different length to LDprofile_sd
+## Test the function with LDprofile_bins as a different length to LDprofile_sd
 
-test_that("Zalpha_Zscore fails when LDprofile_cM_bins and LDprofile_sd are different lengths", {
+test_that("Zalpha_Zscore fails when LDprofile_bins and LDprofile_sd are different lengths", {
 
-  expect_error(Zalpha_Zscore(pos = df$POS, x = as.matrix(df[,3:7]), cM = df$CM, ws  = 3000, LDprofile_cM_bins = LDprofile$cM_bin, LDprofile_rsq = LDprofile$rsq, LDprofile_sd = c(LDprofile$sd,1), minRandL = 4, minRL = 25, X = NULL),
-               "LDprofile_sd must contain the same number of values as there are bins given in LDprofile_cM_bins")
+  expect_error(Zalpha_Zscore(pos = df$POS, x = as.matrix(df[,3:7]), dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, LDprofile_sd = c(LDprofile$sd,1), minRandL = 4, minRL = 25, X = NULL),
+               "LDprofile_sd must contain the same number of values as there are bins given in LDprofile_bins")
 })
 
 

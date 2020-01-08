@@ -4,7 +4,7 @@
 \alias{Zalpha_rsq_over_expected}
 \title{Runs the Zalpha function on the r squared values over the expected r squared values for the region}
 \usage{
-Zalpha_rsq_over_expected(pos, x, cM, ws, LDprofile_cM_bins, LDprofile_rsq,
+Zalpha_rsq_over_expected(pos, x, dist, ws, LDprofile_bins, LDprofile_rsq,
   minRandL = 4, minRL = 25, X = NULL)
 }
 \arguments{
@@ -12,11 +12,11 @@ Zalpha_rsq_over_expected(pos, x, cM, ws, LDprofile_cM_bins, LDprofile_rsq,
 
 \item{x}{A matrix of SNP values. Columns represent chromosomes, rows are SNP locations. Hence, the number of rows should equal the length of the \code{pos} vector. SNPs should all be biallelic.}
 
-\item{cM}{A mnumeric vector of cM distances. This should be the same length as \code{pos}.}
+\item{dist}{A mnumeric vector of genetic distances (e.g. cM, LDU). This should be the same length as \code{pos}.}
 
 \item{ws}{The window size which the \eqn{Z_{\alpha}^{r^2/E[r^2]}}{Zalpha} statistic will be calculated over. This should be on the same scale as the \code{pos} vector.}
 
-\item{LDprofile_cM_bins}{A numeric vector containing the lower bound of the bins used in the LD profile. These should be of equal size.}
+\item{LDprofile_bins}{A numeric vector containing the lower bound of the bins used in the LD profile. These should be of equal size.}
 
 \item{LDprofile_rsq}{A numeric vector containing the expected \eqn{r^2}{r^2} values for the corresponding bin in the LD profile. Must be between 0 and 1.}
 
@@ -31,7 +31,7 @@ A list containing the SNP positions and the \eqn{Z_{\alpha}^{E[r^2]}}{Zalpha} va
 }
 \description{
 Returns a \eqn{Z_{\alpha}^{r^2/E[r^2]}}{Zalpha} value for each SNP location supplied to the function, based on
-the expected \eqn{r^2} values given an LD profile and cM distances.
+the expected \eqn{r^2} values given an LD profile and genetic distances.
 For more information about the \eqn{Z_{\alpha}^{r^2/E[r^2]}}{Zalpha} statistic please see Jacobs (2016).
 The \eqn{Z_{\alpha}^{r^2/E[r^2]}}{Zalpha} statistic is defined as:
 \deqn{{Z_{\alpha}^{r^2/E[r^2]}}=\frac{{|L| \choose 2}^{-1}\sum_{i,j \in L}r^2_{i,j}/E[r^2_{i,j}] + {|R| \choose 2}^{-1}\sum_{i,j \in R}r^2_{i,j}/E[r^2_{i,j}]}{2}}
@@ -39,7 +39,7 @@ where \code{|L|} and \code{|R|} are the number of SNPs to the left and right of 
 the squared correlation between a pair of SNPs, and \eqn{E[r^2]}{E[r^2]} is equal to the expected squared correlation between a pair of SNPs, given an LD profile.
 }
 \details{
-The LD profile describes the expected correlation between SNPs at a given cM distance, generated using simulations or
+The LD profile describes the expected correlation between SNPs at a given genetic distance, generated using simulations or
 real data. Care should be taken to utilise an LD profile which is representative of the population in question. The LD
 profile should consist of evenly-sized bins of distances (for example 0.00001 cM per bin), where the value given is the (inclusive) lower
 bound of the bin.
