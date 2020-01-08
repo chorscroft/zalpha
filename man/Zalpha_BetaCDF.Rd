@@ -2,7 +2,7 @@
 % Please edit documentation in R/Zalpha_BetaCDF.R
 \name{Zalpha_BetaCDF}
 \alias{Zalpha_BetaCDF}
-\title{Runs the Zalpha function on the r squared values over the expected r squared values for the region}
+\title{Runs the Zalpha function using a cumulative beta distribution function on the r squared values for the region}
 \usage{
 Zalpha_BetaCDF(pos, x, dist, ws, LDprofile_bins, LDprofile_Beta_a,
   LDprofile_Beta_b, minRandL = 4, minRL = 25, X = NULL)
