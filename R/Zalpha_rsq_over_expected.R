@@ -15,6 +15,8 @@
 #' profile should consist of evenly-sized bins of distances (for example 0.00001 cM per bin), where the value given is the (inclusive) lower
 #' bound of the bin.
 #'
+#' @importFrom stats cor
+#'
 #' @param pos A numeric vector of SNP locations
 #' @param x A matrix of SNP values. Columns represent chromosomes, rows are SNP locations. Hence, the number of rows should equal the length of the \code{pos} vector. SNPs should all be biallelic.
 #' @param cM A mnumeric vector of cM distances. This should be the same length as \code{pos}.
