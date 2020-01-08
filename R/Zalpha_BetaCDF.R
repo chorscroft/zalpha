@@ -20,7 +20,7 @@
 #'
 #' @param pos A numeric vector of SNP locations
 #' @param x A matrix of SNP values. Columns represent chromosomes, rows are SNP locations. Hence, the number of rows should equal the length of the \code{pos} vector. SNPs should all be biallelic.
-#' @param dist A mnumeric vector of genetic distances (e.g. cM, LDU). This should be the same length as \code{pos}.
+#' @param dist A numeric vector of genetic distances (e.g. cM, LDU). This should be the same length as \code{pos}.
 #' @param ws The window size which the \eqn{Z_{\alpha}^{BetaCDF}}{Zalpha} statistic will be calculated over. This should be on the same scale as the \code{pos} vector.
 #' @param LDprofile_bins A numeric vector containing the lower bound of the bins used in the LD profile. These should be of equal size.
 #' @param LDprofile_Beta_a A numeric vector containing the first estimated Beta parameter for the corresponding bin in the LD profile.
@@ -29,7 +29,7 @@
 #' @param minRL Minimum value for the product of the set sizes for R and L. Default is 25.
 #' @param X Optional. Specify a region of the chromosome to calculate \eqn{Z_{\alpha}^{BetaCDF}}{Zalpha} for in the format \code{c(startposition, endposition)}. The start position and the end position should be within the extremes of the positions given in the \code{pos} vector. If not supplied, the function will calculate \eqn{Z_{\alpha}^{BetaCDF}}{Zalpha} for every SNP in the \code{pos} vector.
 #'
-#' @return A list containing the SNP positions and the \eqn{Z_{\alpha}^{E[r^2]}}{Zalpha} values for those SNPs
+#' @return A list containing the SNP positions and the \eqn{Z_{\alpha}^{BetaCDF}}{Zalpha} values for those SNPs
 #' @references Jacobs, G.S., T.J. Sluckin, and T. Kivisild, \emph{Refining the Use of Linkage Disequilibrium as a Robust Signature of Selective Sweeps.} Genetics, 2016. \strong{203}(4): p. 1807
 #' @export
 Zalpha_BetaCDF<-function(pos, x, dist, ws, LDprofile_bins, LDprofile_Beta_a, LDprofile_Beta_b, minRandL = 4, minRL = 25, X = NULL){

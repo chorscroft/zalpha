@@ -16,7 +16,7 @@
 #' bound of the bin.
 #'
 #' @param pos A numeric vector of SNP locations
-#' @param dist A mnumeric vector of genetic distances (e.g. cM, LDU). This should be the same length as \code{pos}.
+#' @param dist A numeric vector of genetic distances (e.g. cM, LDU). This should be the same length as \code{pos}.
 #' @param ws The window size which the \eqn{Z_{\alpha}^{E[r^2]}}{Zalpha} statistic will be calculated over. This should be on the same scale as the \code{pos} vector.
 #' @param LDprofile_bins A numeric vector containing the lower bound of the bins used in the LD profile. These should be of equal size.
 #' @param LDprofile_rsq A numeric vector containing the expected \eqn{r^2}{r^2} values for the corresponding bin in the LD profile. Must be between 0 and 1.

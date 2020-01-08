@@ -12,7 +12,7 @@ Zalpha_rsq_over_expected(pos, x, dist, ws, LDprofile_bins, LDprofile_rsq,
 
 \item{x}{A matrix of SNP values. Columns represent chromosomes, rows are SNP locations. Hence, the number of rows should equal the length of the \code{pos} vector. SNPs should all be biallelic.}
 
-\item{dist}{A mnumeric vector of genetic distances (e.g. cM, LDU). This should be the same length as \code{pos}.}
+\item{dist}{A numeric vector of genetic distances (e.g. cM, LDU). This should be the same length as \code{pos}.}
 
 \item{ws}{The window size which the \eqn{Z_{\alpha}^{r^2/E[r^2]}}{Zalpha} statistic will be calculated over. This should be on the same scale as the \code{pos} vector.}
 
@@ -27,7 +27,7 @@ Zalpha_rsq_over_expected(pos, x, dist, ws, LDprofile_bins, LDprofile_rsq,
 \item{X}{Optional. Specify a region of the chromosome to calculate \eqn{Z_{\alpha}^{r^2/E[r^2]}}{Zalpha} for in the format \code{c(startposition, endposition)}. The start position and the end position should be within the extremes of the positions given in the \code{pos} vector. If not supplied, the function will calculate \eqn{Z_{\alpha}^{r^2/E[r^2]}}{Zalpha} for every SNP in the \code{pos} vector.}
 }
 \value{
-A list containing the SNP positions and the \eqn{Z_{\alpha}^{E[r^2]}}{Zalpha} values for those SNPs
+A list containing the SNP positions and the \eqn{Z_{\alpha}^{r^2/E[r^2]}}{Zalpha} values for those SNPs
 }
 \description{
 Returns a \eqn{Z_{\alpha}^{r^2/E[r^2]}}{Zalpha} value for each SNP location supplied to the function, based on

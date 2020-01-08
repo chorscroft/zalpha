@@ -10,7 +10,7 @@ Zalpha_expected(pos, dist, ws, LDprofile_bins, LDprofile_rsq,
 \arguments{
 \item{pos}{A numeric vector of SNP locations}
 
-\item{dist}{A mnumeric vector of genetic distances (e.g. cM, LDU). This should be the same length as \code{pos}.}
+\item{dist}{A numeric vector of genetic distances (e.g. cM, LDU). This should be the same length as \code{pos}.}
 
 \item{ws}{The window size which the \eqn{Z_{\alpha}^{E[r^2]}}{Zalpha} statistic will be calculated over. This should be on the same scale as the \code{pos} vector.}
 
