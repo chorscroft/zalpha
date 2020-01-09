@@ -1,6 +1,6 @@
 
 
-#' Runs the Zalpha function using a cumulative beta distribution function on the r squared values for the region
+#' Runs the Zalpha function using a cumulative beta distribution function on the r-squared values for the region
 #'
 #' Returns a \eqn{Z_{\alpha}^{BetaCDF}}{Zalpha} value for each SNP location supplied to the function, based on
 #' the expected \eqn{r^2} values given an LD profile and genetic distances.

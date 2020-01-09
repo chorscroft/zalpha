@@ -2,7 +2,7 @@
 % Please edit documentation in R/Zalpha_Zscore.R
 \name{Zalpha_Zscore}
 \alias{Zalpha_Zscore}
-\title{Runs the Zalpha function using the Z score of the r squared values for the region}
+\title{Runs the Zalpha function using the Z score of the r-squared values for the region}
 \usage{
 Zalpha_Zscore(pos, x, dist, ws, LDprofile_bins, LDprofile_rsq,
   LDprofile_sd, minRandL = 4, minRL = 25, X = NULL)

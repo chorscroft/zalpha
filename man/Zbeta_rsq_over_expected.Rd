@@ -2,7 +2,7 @@
 % Please edit documentation in R/Zbeta_rsq_over_expected.R
 \name{Zbeta_rsq_over_expected}
 \alias{Zbeta_rsq_over_expected}
-\title{Runs the Zbeta function on the r squared values over the expected r squared values for the region}
+\title{Runs the Zbeta function on the r-squared values over the expected r-squared values for the region}
 \usage{
 Zbeta_rsq_over_expected(pos, x, dist, ws, LDprofile_bins, LDprofile_rsq,
   minRandL = 4, minRL = 25, X = NULL)

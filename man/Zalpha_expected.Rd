@@ -2,7 +2,7 @@
 % Please edit documentation in R/Zalpha_expected.R
 \name{Zalpha_expected}
 \alias{Zalpha_expected}
-\title{Runs the Zalpha function on the expected r squared values for the region}
+\title{Runs the Zalpha function on the expected r-squared values for the region}
 \usage{
 Zalpha_expected(pos, dist, ws, LDprofile_bins, LDprofile_rsq,
   minRandL = 4, minRL = 25, X = NULL)

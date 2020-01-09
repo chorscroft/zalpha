@@ -2,7 +2,7 @@
 % Please edit documentation in R/Zbeta_expected.R
 \name{Zbeta_expected}
 \alias{Zbeta_expected}
-\title{Runs the Zbeta function on the expected r squared values for the region}
+\title{Runs the Zbeta function on the expected r-squared values for the region}
 \usage{
 Zbeta_expected(pos, dist, ws, LDprofile_bins, LDprofile_rsq,
   minRandL = 4, minRL = 25, X = NULL)

@@ -1,6 +1,6 @@
 
 
-#' Runs the Zbeta function on the expected r squared values for the region
+#' Runs the Zbeta function on the expected r-squared values for the region
 #'
 #' Returns a \eqn{Z_{\beta}^{E[r^2]}}{Zbeta} value for each SNP location supplied to the function, based on
 #' the expected \eqn{r^2} values given an LD profile and genetic distances.
