@@ -7,7 +7,6 @@
 #'
 #'
 #' @param pos A numeric vector of SNP locations
-#' @param x A matrix of SNP values. Columns represent chromosomes, rows are SNP locations. Hence, the number of rows should equal the length of the \code{pos} vector. SNPs should all be biallelic.
 #' @param ws The window size which the \code{L_plus_R} statistic will be calculated over. This should be on the same scale as the \code{pos} vector.
 #' @param X Optional. Specify a region of the chromosome to calculate \code{L_plus_R} for in the format \code{c(startposition, endposition)}. The start position and the end position should be within the extremes of the positions given in the \code{pos} vector. If not supplied, the function will calculate L_plus_R for every SNP in the \code{pos} vector.
 #'
@@ -15,24 +14,12 @@
 #' @references Jacobs, G.S., T.J. Sluckin, and T. Kivisild, \emph{Refining the Use of Linkage Disequilibrium as a Robust Signature of Selective Sweeps.} Genetics, 2016. \strong{203}(4): p. 1807
 #' @export
 
-L_plus_R <- function(pos, x, ws, X = NULL) {
+L_plus_R <- function(pos, ws, X = NULL) {
   #Check things are in the correct format
 
   #Check pos is a numeric vector
   if (is.numeric(pos) ==FALSE || is.vector(pos)==FALSE){
     stop("pos must be a numeric vector")
-  }
-  #Check x is a matrix
-  if (is.matrix(x)==FALSE){
-    stop("x must be a matrix")
-  }
-  #Check x has rows equal to the length of pos
-  if (length(pos) != nrow(x)){
-    stop("The number of rows in x must equal the number of SNP locations given in pos")
-  }
-  #Check SNPs are all biallelic
-  if(sum(apply(x,1,function(x){length(unique(x))}) != 2)>0){
-    stop("SNPs must all be biallelic")
   }
   #Check windowsize is a number greater than 0
   if(is.numeric(ws) ==FALSE || ws <= 0){
@@ -56,11 +43,6 @@ L_plus_R <- function(pos, x, ws, X = NULL) {
   } else {
     # Set X equal to the extremes of pos
     X<-c(pos[1],pos[length(pos)])
-  }
-
-  #Change matrix x to numeric if it isn't already
-  if (is.numeric(x)==FALSE){
-    x<-matrix(as.numeric(factor(x)),nrow=dim(x)[1])
   }
 
   # Set up output list

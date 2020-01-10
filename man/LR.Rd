@@ -4,12 +4,10 @@
 \alias{LR}
 \title{Runs the LR function}
 \usage{
-LR(pos, x, ws, X = NULL)
+LR(pos, ws, X = NULL)
 }
 \arguments{
 \item{pos}{A numeric vector of SNP locations}
-
-\item{x}{A matrix of SNP values. Columns represent chromosomes, rows are SNP locations. Hence, the number of rows should equal the length of the \code{pos} vector. SNPs should all be biallelic.}
 
 \item{ws}{The window size which the \code{LR} statistic will be calculated over. This should be on the same scale as the \code{pos} vector.}
 

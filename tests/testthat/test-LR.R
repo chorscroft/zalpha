@@ -2,19 +2,14 @@
 
 df<-data.frame(
   SNP=c("SNP1","SNP2","SNP3","SNP4","SNP5","SNP6","SNP7","SNP8","SNP9","SNP10","SNP11","SNP12","SNP13","SNP14","SNP15"),
-  POS=c(100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500),
-  C1=c(1,1,2,1,2,1,1,2,1,2,1,2,1,1,1),
-  C2=c(2,2,1,2,1,2,1,2,2,2,1,2,1,1,2),
-  C3=c(2,1,2,2,2,1,1,2,2,1,2,2,1,1,2),
-  C4=c(1,1,2,1,2,2,1,1,1,1,1,2,2,2,2),
-  C5=c(1,1,2,1,2,1,2,1,1,1,1,1,2,1,1)
+  POS=c(100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500)
 )
 
 ## test that LR is calculated correctly
 
 test_that("LR calcualtes LR statistic correctly", {
 
-  expect_equal(LR(pos = df$POS, x = as.matrix(df[,3:7]), ws  = 3000, X = NULL),
+  expect_equal(LR(pos = df$POS, ws  = 3000, X = NULL),
                list(
                  position=c(100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500),
                  LR=c(0,13,24,33,40,45,48,49,48,45,40,33,24,13,0)
@@ -25,46 +20,29 @@ test_that("LR calcualtes LR statistic correctly", {
 
 test_that("LR calcualtes LR statistic correctly with a different window size", {
 
-  expect_equal(LR(pos = df$POS, x = as.matrix(df[,3:7]), ws  = 1100, X = NULL),
+  expect_equal(LR(pos = df$POS, ws  = 1100, X = NULL),
                list(
                  position=c(100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500),
                  LR=c(0,5,10,15,20,25,25,25,25,25,20,15,10,5,0)
               ))
 })
 
-## Test the function with a character matrix as x
-
-test_that("LR calcualtes LR statistic correctly with character matrix", {
-
-  df1<-df
-  df1[df1==1]<-"A"
-  df1[df1==2]<-"B"
-  expect_equal(LR(pos = df1$POS, x = as.matrix(df1[,3:7]), ws  = 3000, X = NULL),
-               list(
-                 position=c(100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500),
-                 LR=c(0,13,24,33,40,45,48,49,48,45,40,33,24,13,0)
-               ))
-})
-
 ## Test the function with X supplied as a parameter
 
 test_that("LR calcualtes LR statistic correctly with X supplied", {
 
-  expect_equal(LR(pos = df$POS, x = as.matrix(df[,3:7]), ws  = 3000, X = c(700,900)),
+  expect_equal(LR(pos = df$POS, ws  = 3000, X = c(700,900)),
                list(
                  position=c(700,800,900),
                  LR=c(48,49,48)
                ))
 })
 
-
-################################################
-
 ## Test the function with X supplied as a parameter outside of the region defined in pos
 
 test_that("LR fails with an X supplied outside of the region defined in pos", {
 
-  expect_error(LR(pos = df$POS, x = as.matrix(df[,3:7]), ws  = 3000, X = c(7000,9000)),
+  expect_error(LR(pos = df$POS, ws  = 3000, X = c(7000,9000)),
                "The region specified by X is outside the region contained in the pos vector")
 })
 
@@ -72,7 +50,7 @@ test_that("LR fails with an X supplied outside of the region defined in pos", {
 
 test_that("LR fails with an X supplied as a character", {
 
-  expect_error(LR(pos = df$POS, x = as.matrix(df[,3:7]), ws  = 3000, X = c("700bp","900bp")),
+  expect_error(LR(pos = df$POS, ws  = 3000, X = c("700bp","900bp")),
                "X should be a numeric vector of length 2 e.g. c(100,200)",
                fixed=TRUE)
 })
@@ -81,7 +59,7 @@ test_that("LR fails with an X supplied as a character", {
 
 test_that("LR fails with an X supplied as only one number", {
 
-  expect_error(LR(pos = df$POS, x = as.matrix(df[,3:7]), ws  = 3000, X = 700),
+  expect_error(LR(pos = df$POS, ws  = 3000, X = 700),
                "X should be a numeric vector of length 2 e.g. c(100,200)",
                fixed=TRUE)
 })
@@ -90,7 +68,7 @@ test_that("LR fails with an X supplied as only one number", {
 
 test_that("LR fails with an X supplied with too many numbers", {
 
-  expect_error(LR(pos = df$POS, x = as.matrix(df[,3:7]), ws  = 3000, X = c(700,900,1100)),
+  expect_error(LR(pos = df$POS, ws  = 3000, X = c(700,900,1100)),
                "X should be a numeric vector of length 2 e.g. c(100,200)",
                fixed=TRUE)
 })
@@ -99,7 +77,7 @@ test_that("LR fails with an X supplied with too many numbers", {
 
 test_that("LR fails when ws is non-numeric", {
 
-  expect_error(LR(pos = df$POS, x = as.matrix(df[,3:7]), ws  = "3000bp", X = NULL),
+  expect_error(LR(pos = df$POS, ws  = "3000bp", X = NULL),
                "ws must be a number greater than 0")
 })
 
@@ -107,7 +85,7 @@ test_that("LR fails when ws is non-numeric", {
 
 test_that("LR fails when ws is zero", {
 
-  expect_error(LR(pos = df$POS, x = as.matrix(df[,3:7]), ws  = 0, X = NULL),
+  expect_error(LR(pos = df$POS, ws  = 0, X = NULL),
                "ws must be a number greater than 0")
 })
 
@@ -115,43 +93,6 @@ test_that("LR fails when ws is zero", {
 
 test_that("LR fails when pos is non-numeric", {
 
-  expect_error(LR(pos = paste0(df$POS,"bp"), x = as.matrix(df[,3:7]), ws  = 3000, X = NULL),
+  expect_error(LR(pos = paste0(df$POS,"bp"), ws  = 3000, X = NULL),
                "pos must be a numeric vector")
 })
-
-## Test the function with x not a matrix
-
-test_that("LR fails when x is not a matrix", {
-
-  expect_error(LR(pos = df$POS, x = df[,3:7], ws  = 3000, X = NULL),
-               "x must be a matrix")
-})
-
-## Test the function with x not having the correct amount of rows
-
-test_that("LR fails when the number of rows in x is not equal to the length of pos", {
-
-  expect_error(LR(pos = df$POS, x = t(as.matrix(df[,3:7])), ws  = 3000, X = NULL),
-               "The number of rows in x must equal the number of SNP locations given in pos")
-})
-
-## Test the function with a SNP having only one allele
-
-test_that("LR fails when a SNP has only one allele", {
-
-  df1<-df
-  df1[1,3:7]<-1
-  expect_error(LR(pos = df1$POS, x = as.matrix(df1[,3:7]), ws  = 3000, X = NULL),
-               "SNPs must all be biallelic")
-})
-
-## Test the function with a SNP having more than two alleles
-
-test_that("LR fails when a SNP has more than two alleles", {
-
-  df1<-df
-  df1[1,7]<-3
-  expect_error(LR(pos = df1$POS, x = as.matrix(df1[,3:7]), ws  = 3000, X = NULL),
-               "SNPs must all be biallelic")
-})
-
