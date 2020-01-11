@@ -13,7 +13,7 @@ df<-data.frame(
 
 ## test that Zalpha is calculated correctly
 
-test_that("Zalpha calcualtes Zalpha statistic correctly", {
+test_that("Zalpha calculates Zalpha statistic correctly", {
 
   expect_equal(Zalpha(pos = df$POS, x = as.matrix(df[,3:7]), ws  = 3000, minRandL = 4, minRL = 25, X = NULL),
                list(
@@ -32,7 +32,7 @@ test_that("Zalpha calcualtes Zalpha statistic correctly", {
 
 ## Test the function with a different window size
 
-test_that("Zalpha calcualtes Zalpha statistic correctly with a different window size", {
+test_that("Zalpha calculates Zalpha statistic correctly with a different window size", {
 
   expect_equal(Zalpha(pos = df$POS, x = as.matrix(df[,3:7]), ws  = 1100, minRandL = 4, minRL = 25, X = NULL),
                list(
@@ -49,7 +49,7 @@ test_that("Zalpha calcualtes Zalpha statistic correctly with a different window 
 
 ## Test the function with a character matrix as x
 
-test_that("Zalpha calcualtes Zalpha statistic correctly with character matrix", {
+test_that("Zalpha calculates Zalpha statistic correctly with character matrix", {
 
   df1<-df
   df1[df1==1]<-"A"
@@ -71,7 +71,7 @@ test_that("Zalpha calcualtes Zalpha statistic correctly with character matrix", 
 
 ## Test the function with X supplied as a parameter
 
-test_that("Zalpha calcualtes Zalpha statistic correctly with X supplied", {
+test_that("Zalpha calculates Zalpha statistic correctly with X supplied", {
 
   expect_equal(Zalpha(pos = df$POS, x = as.matrix(df[,3:7]), ws  = 3000, minRandL = 4, minRL = 25, X = c(700,900)),
                list(

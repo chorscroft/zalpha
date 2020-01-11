@@ -23,7 +23,7 @@ LDprofile<-data.frame(
 )
 ## test that Zalpha_log_rsq_over_expected is calculated correctly
 
-test_that("Zalpha_log_rsq_over_expected calcualtes Zalpha_log_rsq_over_expected statistic correctly", {
+test_that("Zalpha_log_rsq_over_expected calculates Zalpha_log_rsq_over_expected statistic correctly", {
 
   expect_equal(Zalpha_log_rsq_over_expected(pos = df$POS, x = as.matrix(df[,3:7]), dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, minRandL = 4, minRL = 25, X = NULL),
                list(
@@ -42,7 +42,7 @@ test_that("Zalpha_log_rsq_over_expected calcualtes Zalpha_log_rsq_over_expected 
 
 ## Test the function with a different window size
 
-test_that("Zalpha_log_rsq_over_expected calcualtes Zalpha_log_rsq_over_expected statistic correctly with a different window size", {
+test_that("Zalpha_log_rsq_over_expected calculates Zalpha_log_rsq_over_expected statistic correctly with a different window size", {
 
   expect_equal(Zalpha_log_rsq_over_expected(pos = df$POS, x = as.matrix(df[,3:7]), dist = df$dist, ws  = 1100, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, minRandL = 4, minRL = 25, X = NULL),
                list(
@@ -58,7 +58,7 @@ test_that("Zalpha_log_rsq_over_expected calcualtes Zalpha_log_rsq_over_expected 
 })
 ## Test the function with a character matrix as x
 
-test_that("Zalpha_log_rsq_over_expected calcualtes Zalpha_log_rsq_over_expected statistic correctly with character matrix", {
+test_that("Zalpha_log_rsq_over_expected calculates Zalpha_log_rsq_over_expected statistic correctly with character matrix", {
 
   df1<-df
   df1[df1==1]<-"A"
@@ -80,7 +80,7 @@ test_that("Zalpha_log_rsq_over_expected calcualtes Zalpha_log_rsq_over_expected 
 
 ## Test the function with X supplied as a parameter
 
-test_that("Zalpha_log_rsq_over_expected calcualtes Zalpha_log_rsq_over_expected statistic correctly with X supplied", {
+test_that("Zalpha_log_rsq_over_expected calculates Zalpha_log_rsq_over_expected statistic correctly with X supplied", {
 
   expect_equal(Zalpha_log_rsq_over_expected(pos = df$POS, x = as.matrix(df[,3:7]), dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, minRandL = 4, minRL = 25, X = c(700,900)),
                list(

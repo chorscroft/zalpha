@@ -7,7 +7,7 @@ df<-data.frame(
 
 ## test that LR is calculated correctly
 
-test_that("LR calcualtes LR statistic correctly", {
+test_that("LR calculates LR statistic correctly", {
 
   expect_equal(LR(pos = df$POS, ws  = 3000, X = NULL),
                list(
@@ -18,7 +18,7 @@ test_that("LR calcualtes LR statistic correctly", {
 
 ## Test the function with a different window size
 
-test_that("LR calcualtes LR statistic correctly with a different window size", {
+test_that("LR calculates LR statistic correctly with a different window size", {
 
   expect_equal(LR(pos = df$POS, ws  = 1100, X = NULL),
                list(
@@ -29,7 +29,7 @@ test_that("LR calcualtes LR statistic correctly with a different window size", {
 
 ## Test the function with X supplied as a parameter
 
-test_that("LR calcualtes LR statistic correctly with X supplied", {
+test_that("LR calculates LR statistic correctly with X supplied", {
 
   expect_equal(LR(pos = df$POS, ws  = 3000, X = c(700,900)),
                list(

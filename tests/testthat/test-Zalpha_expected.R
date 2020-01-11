@@ -22,7 +22,7 @@ LDprofile<-data.frame(
 
 ## test that Zalpha_expected is calculated correctly
 
-test_that("Zalpha_expected calcualtes Zalpha_expected statistic correctly", {
+test_that("Zalpha_expected calculates Zalpha_expected statistic correctly", {
 
   expect_equal(Zalpha_expected(pos = df$POS, dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, minRandL = 4, minRL = 25, X = NULL),
                list(
@@ -41,7 +41,7 @@ test_that("Zalpha_expected calcualtes Zalpha_expected statistic correctly", {
 
 ## Test the function with a different window size
 
-test_that("Zalpha_expected calcualtes Zalpha_expected statistic correctly with a different window size", {
+test_that("Zalpha_expected calculates Zalpha_expected statistic correctly with a different window size", {
 
   expect_equal(Zalpha_expected(pos = df$POS, dist = df$dist, ws  = 1100, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, minRandL = 4, minRL = 25, X = NULL),
                list(
@@ -58,7 +58,7 @@ test_that("Zalpha_expected calcualtes Zalpha_expected statistic correctly with a
 
 ## Test the function with X supplied as a parameter
 
-test_that("Zalpha_expected calcualtes Zalpha_expected statistic correctly with X supplied", {
+test_that("Zalpha_expected calculates Zalpha_expected statistic correctly with X supplied", {
 
   expect_equal(Zalpha_expected(pos = df$POS, dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, minRandL = 4, minRL = 25, X = c(700,900)),
                list(

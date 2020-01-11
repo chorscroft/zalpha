@@ -34,7 +34,7 @@ LDprofile<-data.frame(
 
 ## test that Zalpha_BetaCDF is calculated correctly
 
-test_that("Zalpha_BetaCDF calcualtes Zalpha_BetaCDF statistic correctly", {
+test_that("Zalpha_BetaCDF calculates Zalpha_BetaCDF statistic correctly", {
 
   expect_equal(Zalpha_BetaCDF(pos = df$POS, x = as.matrix(df[,3:7]), dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_Beta_a = LDprofile$Beta_a, LDprofile_Beta_b = LDprofile$Beta_b, minRandL = 4, minRL = 25, X = NULL),
                list(
@@ -53,7 +53,7 @@ test_that("Zalpha_BetaCDF calcualtes Zalpha_BetaCDF statistic correctly", {
 
 ## Test the function with a different window size
 
-test_that("Zalpha_BetaCDF calcualtes Zalpha_BetaCDF statistic correctly with a different window size", {
+test_that("Zalpha_BetaCDF calculates Zalpha_BetaCDF statistic correctly with a different window size", {
 
   expect_equal(Zalpha_BetaCDF(pos = df$POS, x = as.matrix(df[,3:7]), dist = df$dist, ws  = 1100, LDprofile_bins = LDprofile$bin, LDprofile_Beta_a = LDprofile$Beta_a, LDprofile_Beta_b = LDprofile$Beta_b, minRandL = 4, minRL = 25, X = NULL),
                list(
@@ -69,7 +69,7 @@ test_that("Zalpha_BetaCDF calcualtes Zalpha_BetaCDF statistic correctly with a d
 })
 ## Test the function with a character matrix as x
 
-test_that("Zalpha_BetaCDF calcualtes Zalpha_BetaCDF statistic correctly with character matrix", {
+test_that("Zalpha_BetaCDF calculates Zalpha_BetaCDF statistic correctly with character matrix", {
 
   df1<-df
   df1[df1==1]<-"A"
@@ -91,7 +91,7 @@ test_that("Zalpha_BetaCDF calcualtes Zalpha_BetaCDF statistic correctly with cha
 
 ## Test the function with X supplied as a parameter
 
-test_that("Zalpha_BetaCDF calcualtes Zalpha_BetaCDF statistic correctly with X supplied", {
+test_that("Zalpha_BetaCDF calculates Zalpha_BetaCDF statistic correctly with X supplied", {
 
   expect_equal(Zalpha_BetaCDF(pos = df$POS, x = as.matrix(df[,3:7]), dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_Beta_a = LDprofile$Beta_a, LDprofile_Beta_b = LDprofile$Beta_b, minRandL = 4, minRL = 25, X = c(700,900)),
                list(

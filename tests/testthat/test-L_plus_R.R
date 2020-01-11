@@ -7,7 +7,7 @@ df<-data.frame(
 
 ## test that L_plus_R is calculated correctly
 
-test_that("L_plus_R calcualtes L_plus_R statistic correctly", {
+test_that("L_plus_R calculates L_plus_R statistic correctly", {
 
   expect_equal(L_plus_R(pos = df$POS, ws  = 3000, X = NULL),
                list(
@@ -18,7 +18,7 @@ test_that("L_plus_R calcualtes L_plus_R statistic correctly", {
 
 ## Test the function with a different window size
 
-test_that("L_plus_R calcualtes L_plus_R statistic correctly with a different window size", {
+test_that("L_plus_R calculates L_plus_R statistic correctly with a different window size", {
 
   expect_equal(L_plus_R(pos = df$POS, ws  = 1100, X = NULL),
                list(
@@ -29,7 +29,7 @@ test_that("L_plus_R calcualtes L_plus_R statistic correctly with a different win
 
 ## Test the function with X supplied as a parameter
 
-test_that("L_plus_R calcualtes L_plus_R statistic correctly with X supplied", {
+test_that("L_plus_R calculates L_plus_R statistic correctly with X supplied", {
 
   expect_equal(L_plus_R(pos = df$POS, ws  = 3000, X = c(700,900)),
                list(
