@@ -4,16 +4,16 @@
 \alias{Zalpha_all}
 \title{Runs all the statistics in the zalpha package}
 \usage{
-Zalpha_all(pos, ws, x = NULL, dist = NULL, LDprofile_bins = NULL,
+Zalpha_all(pos, x = NULL, ws, dist = NULL, LDprofile_bins = NULL,
   LDprofile_rsq = NULL, LDprofile_sd = NULL, LDprofile_Beta_a = NULL,
   LDprofile_Beta_b = NULL, minRandL = 4, minRL = 25, X = NULL)
 }
 \arguments{
 \item{pos}{A numeric vector of SNP locations}
 
-\item{ws}{The window size which the statistics will be calculated over. This should be on the same scale as the \code{pos} vector.}
-
 \item{x}{Optional. A matrix of SNP values. Columns represent chromosomes, rows are SNP locations. Hence, the number of rows should equal the length of the \code{pos} vector. SNPs should all be biallelic.}
+
+\item{ws}{The window size which the statistics will be calculated over. This should be on the same scale as the \code{pos} vector.}
 
 \item{dist}{Optional. A numeric vector of genetic distances (e.g. cM, LDU). This should be the same length as \code{pos}.}
 
