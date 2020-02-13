@@ -118,6 +118,9 @@ Zalpha_BetaCDF<-function(pos, x, dist, ws, LDprofile_bins, LDprofile_Beta_a, LDp
     X<-c(pos[1],pos[length(pos)])
   }
 
+  # Force the R code to print decimals in full rather than in scientific format
+  options(scipen=999)
+
   #Change matrix x to numeric if it isn't already
   if (is.numeric(x)==FALSE){
     x<-matrix(as.numeric(factor(x)),nrow=dim(x)[1])
@@ -145,12 +148,12 @@ Zalpha_BetaCDF<-function(pos, x, dist, ws, LDprofile_bins, LDprofile_Beta_a, LDp
       # Find distances between each SNP in L and round to bin size
       bins<-sapply(lower_triangle(outer(dist[pos>=currentPos-ws/2 & pos < currentPos],dist[pos>=currentPos-ws/2 & pos < currentPos],"-")),assign_bins,bin_size=bin_size)
       Lrsq<- lower_triangle(cor(t(x[pos>=currentPos-ws/2 & pos < currentPos,]))^2)
-      LrsqExp<-merge(data.frame(bins,Lrsq),data.frame(LDprofile_bins,LDprofile_Beta_a,LDprofile_Beta_b),by.x="bins",by.y="LDprofile_bins",all.x=TRUE,sort=FALSE)
+      LrsqExp<-merge(data.frame(bins=as.character(bins),Lrsq),data.frame(LDprofile_bins=as.character(LDprofile_bins),LDprofile_Beta_a,LDprofile_Beta_b),by.x="bins",by.y="LDprofile_bins",all.x=TRUE,sort=FALSE)
       LrsqSum<-sum(pbeta(LrsqExp$Lrsq,LrsqExp$LDprofile_Beta_a,LrsqExp$LDprofile_Beta_b))
       ##Right
       bins<-sapply(lower_triangle(outer(dist[pos<=currentPos+ws/2 & pos > currentPos],dist[pos<=currentPos+ws/2 & pos > currentPos],"-")),assign_bins,bin_size=bin_size)
       Rrsq<-lower_triangle(cor(t(x[pos<=currentPos+ws/2 & pos > currentPos,]))^2)
-      RrsqExp<-merge(data.frame(bins,Rrsq),data.frame(LDprofile_bins,LDprofile_Beta_a,LDprofile_Beta_b),by.x="bins",by.y="LDprofile_bins",all.x=TRUE,sort=FALSE)
+      RrsqExp<-merge(data.frame(bins=as.character(bins),Rrsq),data.frame(LDprofile_bins=as.character(LDprofile_bins),LDprofile_Beta_a,LDprofile_Beta_b),by.x="bins",by.y="LDprofile_bins",all.x=TRUE,sort=FALSE)
       RrsqSum<-sum(pbeta(RrsqExp$Rrsq,RrsqExp$LDprofile_Beta_a,RrsqExp$LDprofile_Beta_b))
 
       outputList$Zalpha_BetaCDF[i]<-(LrsqSum/choose(noL,2)+RrsqSum/choose(noR,2))/2

@@ -118,6 +118,9 @@ Zbeta_BetaCDF<-function(pos, x, dist, ws, LDprofile_bins, LDprofile_Beta_a, LDpr
     X<-c(pos[1],pos[length(pos)])
   }
 
+  # Force the R code to print decimals in full rather than in scientific format
+  options(scipen=999)
+
   #Change matrix x to numeric if it isn't already
   if (is.numeric(x)==FALSE){
     x<-matrix(as.numeric(factor(x)),nrow=dim(x)[1])
@@ -145,7 +148,7 @@ Zbeta_BetaCDF<-function(pos, x, dist, ws, LDprofile_bins, LDprofile_Beta_a, LDpr
       # Find distances between each SNP in L and round to bin size
       bins<-sapply(outer(dist[pos<=currentPos+ws/2 & pos > currentPos],dist[pos>=currentPos-ws/2 & pos < currentPos],"-"),assign_bins,bin_size=bin_size)
       rsq<-as.vector(t((cor(t(x[pos>=currentPos-ws/2 & pos<=currentPos+ws/2,]))^2)[1:noL,(noL+2):(noL+noR+1)]))
-      rsqExp<-merge(data.frame(bins,rsq),data.frame(LDprofile_bins,LDprofile_Beta_a,LDprofile_Beta_b),by.x="bins",by.y="LDprofile_bins",all.x=TRUE,sort=FALSE)
+      rsqExp<-merge(data.frame(bins=as.character(bins),rsq),data.frame(LDprofile_bins=as.character(LDprofile_bins),LDprofile_Beta_a,LDprofile_Beta_b),by.x="bins",by.y="LDprofile_bins",all.x=TRUE,sort=FALSE)
       rsqSum<-sum(pbeta(rsqExp$rsq,rsqExp$LDprofile_Beta_a,rsqExp$LDprofile_Beta_b))
 
       outputList$Zbeta_BetaCDF[i]<-rsqSum/(noL*noR)

@@ -97,6 +97,8 @@ Zbeta_expected<-function(pos, dist, ws, LDprofile_bins, LDprofile_rsq, minRandL 
     X<-c(pos[1],pos[length(pos)])
   }
 
+  # Force the R code to print decimals in full rather than in scientific format
+  options(scipen=999)
 
   # Set up output list
   outputLength<-length(pos[pos>=X[1] & pos <= X[2]])
@@ -119,7 +121,7 @@ Zbeta_expected<-function(pos, dist, ws, LDprofile_bins, LDprofile_rsq, minRandL 
 
       # Find the distances between each SNP in the over region and round to bin size
       bins<-sapply(outer(dist[pos<=currentPos+ws/2 & pos > currentPos],dist[pos>=currentPos-ws/2 & pos < currentPos],"-"),assign_bins,bin_size=bin_size)
-      rsqSum<-sum(merge(data.frame(bins),data.frame(LDprofile_bins,LDprofile_rsq),by.x="bins",by.y="LDprofile_bins",all.x=TRUE)[,2])
+      rsqSum<-sum(merge(data.frame(bins=as.character(bins)),data.frame(LDprofile_bins=as.character(LDprofile_bins),LDprofile_rsq),by.x="bins",by.y="LDprofile_bins",all.x=TRUE)[,2])
       outputList$Zbeta_expected[i]<-rsqSum/(noL*noR)
 
     }

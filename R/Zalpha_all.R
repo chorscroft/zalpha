@@ -155,6 +155,9 @@ Zalpha_all <- function(pos, x=NULL, ws, dist=NULL, LDprofile_bins=NULL, LDprofil
     X<-c(pos[1],pos[length(pos)])
   }
 
+  # Force the R code to print decimals in full rather than in scientific format
+  options(scipen=999)
+
   # Set up output list
   outputLength<-length(pos[pos>=X[1] & pos <= X[2]])
   outputList<-list(position=pos[pos>=X[1] & pos <= X[2]],LR=rep(NA,outputLength),L_plus_R=rep(NA,outputLength))
@@ -212,13 +215,13 @@ Zalpha_all <- function(pos, x=NULL, ws, dist=NULL, LDprofile_bins=NULL, LDprofil
       if (is.null(dist)==FALSE & is.null(LDprofile_bins)==FALSE & is.null(LDprofile_rsq)==FALSE){
         #Left
         bins<-sapply(lower_triangle(outer(dist[pos>=currentPos-ws/2 & pos < currentPos],dist[pos>=currentPos-ws/2 & pos < currentPos],"-")),assign_bins,bin_size=bin_size)
-        LrsqExp<-merge(data.frame(bins,Lrsq),data.frame(LDprofile_bins,LDprofile_rsq),by.x="bins",by.y="LDprofile_bins",all.x=TRUE,sort=FALSE)
+        LrsqExp<-merge(data.frame(bins=as.character(bins),Lrsq),data.frame(LDprofile_bins=as.character(LDprofile_bins),LDprofile_rsq),by.x="bins",by.y="LDprofile_bins",all.x=TRUE,sort=FALSE)
         #Right
         bins<-sapply(lower_triangle(outer(dist[pos<=currentPos+ws/2 & pos > currentPos],dist[pos<=currentPos+ws/2 & pos > currentPos],"-")),assign_bins,bin_size=bin_size)
-        RrsqExp<-merge(data.frame(bins,Rrsq),data.frame(LDprofile_bins,LDprofile_rsq),by.x="bins",by.y="LDprofile_bins",all.x=TRUE,sort=FALSE)
+        RrsqExp<-merge(data.frame(bins=as.character(bins),Rrsq),data.frame(LDprofile_bins=as.character(LDprofile_bins),LDprofile_rsq),by.x="bins",by.y="LDprofile_bins",all.x=TRUE,sort=FALSE)
         #Over
         bins<-sapply(outer(dist[pos<=currentPos+ws/2 & pos > currentPos],dist[pos>=currentPos-ws/2 & pos < currentPos],"-"),assign_bins,bin_size=bin_size)
-        rsqExp<-merge(data.frame(bins,rsq),data.frame(LDprofile_bins,LDprofile_rsq),by.x="bins",by.y="LDprofile_bins",all.x=TRUE,sort=FALSE)
+        rsqExp<-merge(data.frame(bins=as.character(bins),rsq),data.frame(LDprofile_bins=as.character(LDprofile_bins),LDprofile_rsq),by.x="bins",by.y="LDprofile_bins",all.x=TRUE,sort=FALSE)
 
         outputList$Zalpha_expected[i]<-(sum(LrsqExp$LDprofile_rsq)/choose(noL,2)+sum(RrsqExp$LDprofile_rsq)/choose(noR,2))/2
         outputList$Zbeta_expected[i]<-sum(rsqExp$LDprofile_rsq)/(noL*noR)
@@ -229,16 +232,16 @@ Zalpha_all <- function(pos, x=NULL, ws, dist=NULL, LDprofile_bins=NULL, LDprofil
           outputList$Zbeta_log_rsq_over_expected[i]<-sum(log10(rsqExp$rsq/rsqExp$LDprofile_rsq))/(noL*noR)
 
           if (is.null(LDprofile_sd)==FALSE){
-            LrsqExp<-merge(LrsqExp,data.frame(LDprofile_bins,LDprofile_sd),by.x="bins",by.y="LDprofile_bins",all.x=TRUE,sort=FALSE)
-            RrsqExp<-merge(RrsqExp,data.frame(LDprofile_bins,LDprofile_sd),by.x="bins",by.y="LDprofile_bins",all.x=TRUE,sort=FALSE)
-            rsqExp<-merge(rsqExp,data.frame(LDprofile_bins,LDprofile_sd),by.x="bins",by.y="LDprofile_bins",all.x=TRUE,sort=FALSE)
+            LrsqExp<-merge(LrsqExp,data.frame(LDprofile_bins=as.character(LDprofile_bins),LDprofile_sd),by.x="bins",by.y="LDprofile_bins",all.x=TRUE,sort=FALSE)
+            RrsqExp<-merge(RrsqExp,data.frame(LDprofile_bins=as.character(LDprofile_bins),LDprofile_sd),by.x="bins",by.y="LDprofile_bins",all.x=TRUE,sort=FALSE)
+            rsqExp<-merge(rsqExp,data.frame(LDprofile_bins=as.character(LDprofile_bins),LDprofile_sd),by.x="bins",by.y="LDprofile_bins",all.x=TRUE,sort=FALSE)
             outputList$Zalpha_Zscore[i]<-(sum((LrsqExp$Lrsq-LrsqExp$LDprofile_rsq)/LrsqExp$LDprofile_sd)/choose(noL,2)+sum((RrsqExp$Rrsq-RrsqExp$LDprofile_rsq)/RrsqExp$LDprofile_sd)/choose(noR,2))/2
             outputList$Zbeta_Zscore[i]<-sum((rsqExp$rsq-rsqExp$LDprofile_rsq)/rsqExp$LDprofile_sd)/(noL*noR)
           }
           if (is.null(LDprofile_Beta_a)==FALSE & is.null(LDprofile_Beta_b)==FALSE){
-            LrsqExp<-merge(LrsqExp,data.frame(LDprofile_bins,LDprofile_Beta_a,LDprofile_Beta_b),by.x="bins",by.y="LDprofile_bins",all.x=TRUE,sort=FALSE)
-            RrsqExp<-merge(RrsqExp,data.frame(LDprofile_bins,LDprofile_Beta_a,LDprofile_Beta_b),by.x="bins",by.y="LDprofile_bins",all.x=TRUE,sort=FALSE)
-            rsqExp<-merge(rsqExp,data.frame(LDprofile_bins,LDprofile_Beta_a,LDprofile_Beta_b),by.x="bins",by.y="LDprofile_bins",all.x=TRUE,sort=FALSE)
+            LrsqExp<-merge(LrsqExp,data.frame(LDprofile_bins=as.character(LDprofile_bins),LDprofile_Beta_a,LDprofile_Beta_b),by.x="bins",by.y="LDprofile_bins",all.x=TRUE,sort=FALSE)
+            RrsqExp<-merge(RrsqExp,data.frame(LDprofile_bins=as.character(LDprofile_bins),LDprofile_Beta_a,LDprofile_Beta_b),by.x="bins",by.y="LDprofile_bins",all.x=TRUE,sort=FALSE)
+            rsqExp<-merge(rsqExp,data.frame(LDprofile_bins=as.character(LDprofile_bins),LDprofile_Beta_a,LDprofile_Beta_b),by.x="bins",by.y="LDprofile_bins",all.x=TRUE,sort=FALSE)
             outputList$Zalpha_BetaCDF[i]<-(sum(pbeta(LrsqExp$Lrsq,LrsqExp$LDprofile_Beta_a,LrsqExp$LDprofile_Beta_b))/choose(noL,2)+sum(pbeta(RrsqExp$Rrsq,RrsqExp$LDprofile_Beta_a,RrsqExp$LDprofile_Beta_b))/choose(noR,2))/2
             outputList$Zbeta_BetaCDF[i]<-sum(pbeta(rsqExp$rsq,rsqExp$LDprofile_Beta_a,rsqExp$LDprofile_Beta_b))/(noL*noR)
           }
