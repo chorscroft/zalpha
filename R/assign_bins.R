@@ -1,8 +1,8 @@
 
-## Calculates the bin a cM distance falls into
+## Calculates the bin a distance falls into
 ##
 ## Due to floating point errors, the floor function cannot be relied upon to
-## round down a cM distance between two SNPs to the nearest bin. Thus it is
+## round down a distance between two SNPs to the nearest bin. Thus it is
 ## necessary to first test the ceiling to see if it is in fact equal, before
 ## then using the floor function.
 ##
