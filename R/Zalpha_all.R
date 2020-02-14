@@ -228,8 +228,15 @@ Zalpha_all <- function(pos, x=NULL, ws, dist=NULL, LDprofile_bins=NULL, LDprofil
         if (is.null(x)==FALSE){
           outputList$Zalpha_rsq_over_expected[i]<-(sum(LrsqExp$Lrsq/LrsqExp$LDprofile_rsq)/choose(noL,2)+sum(RrsqExp$Rrsq/RrsqExp$LDprofile_rsq)/choose(noR,2))/2
           outputList$Zbeta_rsq_over_expected[i]<-sum(rsqExp$rsq/rsqExp$LDprofile_rsq)/(noL*noR)
-          outputList$Zalpha_log_rsq_over_expected[i]<-(sum(log10(LrsqExp$Lrsq/LrsqExp$LDprofile_rsq))/choose(noL,2)+sum(log10(RrsqExp$Rrsq/RrsqExp$LDprofile_rsq))/choose(noR,2))/2
-          outputList$Zbeta_log_rsq_over_expected[i]<-sum(log10(rsqExp$rsq/rsqExp$LDprofile_rsq))/(noL*noR)
+          #removes zeros by replacing with lowest correlation greater than zero, for logging
+          LrsqExplog <- LrsqExp
+          RrsqExplog <- RrsqExp
+          rsqExplog <- rsqExp
+          LrsqExplog$Lrsq[LrsqExplog$Lrsq==0]<-min(LrsqExplog$Lrsq[LrsqExplog$Lrsq>0])
+          RrsqExplog$Rrsq[RrsqExplog$Rrsq==0]<-min(RrsqExplog$Rrsq[RrsqExplog$Rrsq>0])
+          rsqExplog$rsq[rsqExplog$rsq==0]<-min(rsqExplog$rsq[rsqExplog$rsq>0])
+          outputList$Zalpha_log_rsq_over_expected[i]<-(sum(log10(LrsqExplog$Lrsq/LrsqExp$LDprofile_rsq))/choose(noL,2)+sum(log10(RrsqExplog$Rrsq/RrsqExp$LDprofile_rsq))/choose(noR,2))/2
+          outputList$Zbeta_log_rsq_over_expected[i]<-sum(log10(rsqExplog$rsq/rsqExp$LDprofile_rsq))/(noL*noR)
 
           if (is.null(LDprofile_sd)==FALSE){
             LrsqExp<-merge(LrsqExp,data.frame(LDprofile_bins=as.character(LDprofile_bins),LDprofile_sd),by.x="bins",by.y="LDprofile_bins",all.x=TRUE,sort=FALSE)

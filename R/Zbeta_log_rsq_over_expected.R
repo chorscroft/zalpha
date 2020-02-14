@@ -142,6 +142,7 @@ Zbeta_log_rsq_over_expected<-function(pos, x, dist, ws, LDprofile_bins, LDprofil
       # Find distances between each SNP in L and round to bin size
       bins<-sapply(outer(dist[pos<=currentPos+ws/2 & pos > currentPos],dist[pos>=currentPos-ws/2 & pos < currentPos],"-"),assign_bins,bin_size=bin_size)
       rsq<-as.vector(t((cor(t(x[pos>=currentPos-ws/2 & pos<=currentPos+ws/2,]))^2)[1:noL,(noL+2):(noL+noR+1)]))
+      rsq[rsq==0]<-min(rsq[rsq>0])  #removes zeros by replacing with lowest correlation greater than zero
       rsqExp<-merge(data.frame(bins=as.character(bins),rsq),data.frame(LDprofile_bins=as.character(LDprofile_bins),LDprofile_rsq),by.x="bins",by.y="LDprofile_bins",all.x=TRUE,sort=FALSE)
       rsqSum<-sum(log10(rsqExp$rsq/rsqExp$LDprofile_rsq))
       outputList$Zbeta_log_rsq_over_expected[i]<-rsqSum/(noL*noR)
