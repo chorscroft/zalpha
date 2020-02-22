@@ -50,6 +50,21 @@ This includes the statistics: \code{\link{Zalpha_expected}}, \code{\link{Zalpha_
 }
 For more information about the statistics please see Jacobs (2016).
 }
+\examples{
+## load the snps and LDprofile example datasets
+data(snps)
+data(LDprofile)
+## run Zalpha_all over all the SNPs with a window size of 3000 bp
+## will return all 15 statistics
+Zalpha_all(snps$positions,as.matrix(snps[,3:12]),3000,snps$distances,
+ LDprofile$bin,LDprofile$rsq,LDprofile$sd,LDprofile$Beta_a,LDprofile$Beta_b)
+## only return results for SNPs between locations 600 and 1500 bp
+Zalpha_all(snps$positions,as.matrix(snps[,3:12]),3000,snps$distances,
+ LDprofile$bin,LDprofile$rsq,LDprofile$sd,LDprofile$Beta_a,LDprofile$Beta_b,X=c(600,1500))
+## will only return statistics not requiring an LD profile
+Zalpha_all(snps$positions,as.matrix(snps[,3:12]),3000)
+
+}
 \references{
 Jacobs, G.S., T.J. Sluckin, and T. Kivisild, \emph{Refining the Use of Linkage Disequilibrium as a Robust Signature of Selective Sweeps.} Genetics, 2016. \strong{203}(4): p. 1807
 }

@@ -18,6 +18,14 @@
 #'
 #' @return A list containing the SNP positions and the \eqn{Z_{\beta}}{Zbeta} values for those SNPs
 #' @references Jacobs, G.S., T.J. Sluckin, and T. Kivisild, \emph{Refining the Use of Linkage Disequilibrium as a Robust Signature of Selective Sweeps.} Genetics, 2016. \strong{203}(4): p. 1807
+#' @examples
+#' ## load the snps example dataset
+#' data(snps)
+#' ## run Zbeta over all the SNPs with a window size of 3000 bp
+#' Zbeta(snps$positions,as.matrix(snps[,3:12]),3000)
+#' ## only return results for SNPs between locations 600 and 1500 bp
+#' Zbeta(snps$positions,as.matrix(snps[,3:12]),3000,X=c(600,1500))
+#'
 #' @export
 
 Zbeta <- function(pos, x, ws, minRandL = 4, minRL = 25, X = NULL) {

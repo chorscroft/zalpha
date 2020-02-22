@@ -26,6 +26,15 @@
 #'
 #' @return A list containing the SNP positions and the \eqn{Z_{\beta}^{E[r^2]}}{Zbeta} values for those SNPs
 #' @references Jacobs, G.S., T.J. Sluckin, and T. Kivisild, \emph{Refining the Use of Linkage Disequilibrium as a Robust Signature of Selective Sweeps.} Genetics, 2016. \strong{203}(4): p. 1807
+#' @examples
+#' ## load the snps and LDprofile example datasets
+#' data(snps)
+#' data(LDprofile)
+#' ## run Zbeta_expected over all the SNPs with a window size of 3000 bp
+#' Zbeta_expected(snps$positions,snps$distances,3000,LDprofile$bin,LDprofile$rsq)
+#' ## only return results for SNPs between locations 600 and 1500 bp
+#' Zbeta_expected(snps$positions,snps$distances,3000,LDprofile$bin,LDprofile$rsq,X=c(600,1500))
+#'
 #' @export
 #'
 Zbeta_expected<-function(pos, dist, ws, LDprofile_bins, LDprofile_rsq, minRandL = 4, minRL = 25, X = NULL) {

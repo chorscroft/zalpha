@@ -3,7 +3,7 @@
 \docType{data}
 \name{LDprofile}
 \alias{LDprofile}
-\title{An example LD profile}
+\title{Dataset containing an example LD profile}
 \format{A data frame with 50 rows and 5 variables:
 \describe{
   \item{bin}{the lower bound of each bin}

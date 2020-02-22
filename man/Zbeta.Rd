@@ -29,6 +29,15 @@ The \eqn{Z_{\beta}}{Zbeta} statistic is defined as:
 \deqn{Z_{\beta}=\frac{\sum_{i \in L,j \in R}r^2_{i,j}}{|L||R|}}
 where \code{|L|} and \code{|R|} are the number of SNPs to the left and right of the current locus within the given window \code{ws}, and \eqn{r^2}{r^2} is equal to the squared correlation between a pair of SNPs
 }
+\examples{
+## load the snps example dataset
+data(snps)
+## run Zbeta over all the SNPs with a window size of 3000 bp
+Zbeta(snps$positions,as.matrix(snps[,3:12]),3000)
+## only return results for SNPs between locations 600 and 1500 bp
+Zbeta(snps$positions,as.matrix(snps[,3:12]),3000,X=c(600,1500))
+
+}
 \references{
 Jacobs, G.S., T.J. Sluckin, and T. Kivisild, \emph{Refining the Use of Linkage Disequilibrium as a Robust Signature of Selective Sweeps.} Genetics, 2016. \strong{203}(4): p. 1807
 }

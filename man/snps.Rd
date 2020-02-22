@@ -3,7 +3,7 @@
 \docType{data}
 \name{snps}
 \alias{snps}
-\title{Details about some simulated SNPs}
+\title{Dataset containing details on simulated SNPs}
 \format{A data frame with 20 rows and 12 variables:
 \describe{
   \item{positions}{location of the SNP on the chromosome}

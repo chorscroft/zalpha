@@ -30,6 +30,17 @@
 #'
 #' @return A list containing the SNP positions and the \eqn{Z_{\alpha}^{Zscore}}{Zalpha} values for those SNPs
 #' @references Jacobs, G.S., T.J. Sluckin, and T. Kivisild, \emph{Refining the Use of Linkage Disequilibrium as a Robust Signature of Selective Sweeps.} Genetics, 2016. \strong{203}(4): p. 1807
+#' @examples
+#' ## load the snps and LDprofile example datasets
+#' data(snps)
+#' data(LDprofile)
+#' ## run Zalpha_Zscore over all the SNPs with a window size of 3000 bp
+#' Zalpha_Zscore(snps$positions,as.matrix(snps[,3:12]),snps$distances,3000,
+#'  LDprofile$bin,LDprofile$rsq,LDprofile$sd)
+#' ## only return results for SNPs between locations 600 and 1500 bp
+#' Zalpha_Zscore(snps$positions,as.matrix(snps[,3:12]),snps$distances,3000,
+#'  LDprofile$bin,LDprofile$rsq,LDprofile$sd,X=c(600,1500))
+#'
 #' @export
 Zalpha_Zscore<-function(pos, x, dist, ws, LDprofile_bins, LDprofile_rsq, LDprofile_sd, minRandL = 4, minRL = 25, X = NULL){
 

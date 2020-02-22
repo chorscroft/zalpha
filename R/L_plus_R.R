@@ -12,6 +12,14 @@
 #'
 #' @return A list containing the SNP positions and the \code{L_plus_R }values for those SNPs
 #' @references Jacobs, G.S., T.J. Sluckin, and T. Kivisild, \emph{Refining the Use of Linkage Disequilibrium as a Robust Signature of Selective Sweeps.} Genetics, 2016. \strong{203}(4): p. 1807
+#' @examples
+#' ## load the snps example dataset
+#' data(snps)
+#' ## run L_plus_R over all the SNPs with a window size of 3000 bp
+#' L_plus_R(snps$positions,3000)
+#' ## only return results for SNPs between locations 600 and 1500 bp
+#' L_plus_R(snps$positions,3000,X=c(600,1500))
+#'
 #' @export
 
 L_plus_R <- function(pos, ws, X = NULL) {

@@ -20,6 +20,15 @@ A list containing the SNP positions and the \code{LR} values for those SNPs
 Returns the \code{|L||R|} value for each SNP location supplied to the function.
 For more information about the \code{|L||R|} diversity statistic please see Jacobs (2016).
 }
+\examples{
+## load the snps example dataset
+data(snps)
+## run LR over all the SNPs with a window size of 3000 bp
+LR(snps$positions,3000)
+## only return results for SNPs between locations 600 and 1500 bp
+LR(snps$positions,3000,X=c(600,1500))
+
+}
 \references{
 Jacobs, G.S., T.J. Sluckin, and T. Kivisild, \emph{Refining the Use of Linkage Disequilibrium as a Robust Signature of Selective Sweeps.} Genetics, 2016. \strong{203}(4): p. 1807
 }

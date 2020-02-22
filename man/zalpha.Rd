@@ -29,6 +29,15 @@ The \eqn{Z_{\alpha}}{Zalpha} statistic is defined as:
 \deqn{Z_{\alpha}=\frac{{|L| \choose 2}^{-1}\sum_{i,j \in L}r^2_{i,j} + {|R| \choose 2}^{-1}\sum_{i,j \in L}r^2_{i,j}}{2}}
 where \code{|L|} and \code{|R|} are the number of SNPs to the left and right of the current locus within the given window \code{ws}, and \eqn{r^2}{r^2} is equal to the squared correlation between a pair of SNPs
 }
+\examples{
+## load the snps example dataset
+data(snps)
+## run Zalpha over all the SNPs with a window size of 3000 bp
+Zalpha(snps$positions,as.matrix(snps[,3:12]),3000)
+## only return results for SNPs between locations 600 and 1500 bp
+Zalpha(snps$positions,as.matrix(snps[,3:12]),3000,X=c(600,1500))
+
+}
 \references{
 Jacobs, G.S., T.J. Sluckin, and T. Kivisild, \emph{Refining the Use of Linkage Disequilibrium as a Robust Signature of Selective Sweeps.} Genetics, 2016. \strong{203}(4): p. 1807
 }

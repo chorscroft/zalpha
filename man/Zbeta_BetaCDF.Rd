@@ -47,6 +47,18 @@ real data. Care should be taken to utilise an LD profile which is representative
 profile should consist of evenly-sized bins of distances (for example 0.00001 cM per bin), where the value given is the (inclusive) lower
 bound of the bin.
 }
+\examples{
+## load the snps and LDprofile example datasets
+data(snps)
+data(LDprofile)
+## run Zbeta_BetaCDF over all the SNPs with a window size of 3000 bp
+Zbeta_BetaCDF(snps$positions,as.matrix(snps[,3:12]),snps$distances,3000,
+ LDprofile$bin,LDprofile$Beta_a,LDprofile$Beta_b)
+## only return results for SNPs between locations 600 and 1500 bp
+Zbeta_BetaCDF(snps$positions,as.matrix(snps[,3:12]),snps$distances,3000,
+ LDprofile$bin,LDprofile$Beta_a,LDprofile$Beta_b,X=c(600,1500))
+
+}
 \references{
 Jacobs, G.S., T.J. Sluckin, and T. Kivisild, \emph{Refining the Use of Linkage Disequilibrium as a Robust Signature of Selective Sweeps.} Genetics, 2016. \strong{203}(4): p. 1807
 }

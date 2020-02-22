@@ -1,4 +1,4 @@
-#' An example LD profile
+#' Dataset containing an example LD profile
 #'
 #' A simulated LD profile, containing example LD statisics for
 #' genetic distances of 0 to 0.0049, in bins of size 0.0001.

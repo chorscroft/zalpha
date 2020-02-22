@@ -1,4 +1,4 @@
-#' Details about some simulated SNPs
+#' Dataset containing details on simulated SNPs
 #'
 #' A dataset containing the positions, genetic distances and
 #' alleles for 20 SNPs, across 10 simulated chromosomes.
