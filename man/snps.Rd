@@ -20,10 +20,13 @@
   \item{chrom_10}{allele of the SNP on the tenth example chromosome}
 }}
 \usage{
-data(snps)
+snps
 }
 \description{
 A dataset containing the positions, genetic distances and
 alleles for 20 SNPs, across 10 simulated chromosomes.
+}
+\examples{
+snps
 }
 \keyword{datasets}

@@ -3,10 +3,6 @@
 #' A dataset containing the positions, genetic distances and
 #' alleles for 20 SNPs, across 10 simulated chromosomes.
 #'
-#' @docType data
-#'
-#' @usage data(snps)
-#'
 #' @format A data frame with 20 rows and 12 variables:
 #' \describe{
 #'   \item{positions}{location of the SNP on the chromosome}
@@ -22,4 +18,6 @@
 #'   \item{chrom_9}{allele of the SNP on the ninth example chromosome}
 #'   \item{chrom_10}{allele of the SNP on the tenth example chromosome}
 #' }
+#' @examples
+#' snps
 "snps"
