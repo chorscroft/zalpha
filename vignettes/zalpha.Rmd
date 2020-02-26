@@ -15,11 +15,11 @@ knitr::opts_chunk$set(
 library(zalpha)
 ```
 
-The zalpha package contains statistics for identifying areas of the genome which have undergone a selective sweep. The idea behind these statistics is to find areas of the genome which are highly correlated, as this can be a sign that a sweep has occured recently in the vicinity. For more information on the statistics please see the paper by Jacobs et al. (2016) referenced below.
+The zalpha package contains statistics for identifying areas of the genome that have undergone a selective sweep. The idea behind these statistics is to find areas of the genome that are highly correlated, as this can be a sign that a sweep has occurred recently in the vicinity. For more information on the statistics, please see the paper by Jacobs et al. (2016) referenced below.
 
 ## Data
 
-The data used in this vignette is a very small simple dataset containing 20 SNPs and a population of 10 chromosomes. Realistically, a much bigger dataset would be used. It is highly recommended that only SNPs with a minor allele frequency of over 5% are used, as it is hard to find correlations between rare alleles.
+The data used in this vignette is a very small simple dataset containing 20 SNPs and a population of 10 chromosomes. Realistically, the dataset would be much bigger. It is highly recommended to use only SNPs with a minor allele frequency of over 5%, as it is hard to find correlations between rare alleles.
 
 The dataset "snps" is included with this package and can be loaded using the code
 
@@ -29,11 +29,11 @@ data(snps)
 ## This is what the dataset looks like:
 snps
 ```
-This data set contains information about each of the SNPs. The first column gives the physical location of the SNP along the chromosome, in whatever units is useful to the user (usually bp or Kb). In this example the positions are assumed to be in base pairs (bp).
+This data set contains information about each of the SNPs. The first column gives the physical location of the SNP along the chromosome, in whatever units is useful to the user (usually bp or Kb). In this example, the positions are assumed to be in base pairs (bp).
 
-The next column is the genetic distance of the SNP from the start of the chromosome. This could be in centimorgans (cM), Linkage Disequilibrium units (LDU) or any other way of measuring genetic distance, as long as it is additive (i.e. the distance between SNP A and SNP C is equal to the distance between SNP A and SNP B plus SNP B and SNP C). This data is only required if the user is interested in adjusting for recombination and also supplies an LDprofile.
+The next column is the genetic distance of the SNP from the start of the chromosome. This could be in centimorgans (cM), Linkage Disequilibrium units (LDU) or any other way of measuring genetic distance, as long as it is additive (i.e. the distance between SNP A and SNP C is equal to the distance between SNP A and SNP B plus SNP B and SNP C). This data is only required if the user is interested in adjusting for recombination and supplies an LDprofile.
 
-The final columns are the SNP alleles for each of the chromosomes in the popualtion. Each SNP must be biallelic, but can contain any value, for example 0s and 1s, or A/G/C/Ts.
+The final columns are the SNP alleles for each of the chromosomes in the population. Each SNP must be biallelic, but can contain any value, for example 0s and 1s, or A/G/C/Ts.
 
 ## Zalpha
 
@@ -43,7 +43,7 @@ To test for selection, the user can use the Zalpha function. This function takes
 
 * A matrix of the SNP alleles across each chromosome in the sample. The number of rows should be equal to the number of SNPs, and the columns are each of the chromosomes.
 
-* The window size. This is set to 3000 for this small example but realistically a window size of around 200 Kb is appropriate. The window is centred around the target locus, and considers SNPs that are within ws/2 to the left and ws/2 to the right of the target SNP.
+* The window size. This is set to 3000 for this small example but realistically a window size of around 200 Kb is appropriate. The window is centred on the target locus, and considers SNPs that are within ws/2 to the left and ws/2 to the right of the target SNP.
 
 ```{r}
 results<-Zalpha(snps$positions,as.matrix(snps[,3:12]),3000)
@@ -51,9 +51,9 @@ results
 plot(results$position,results$Zalpha)
 ```
 
-The output shows the positions of each of the SNPs and the Zalpha value which has been calculated for each SNP. The NAs are due to the parameters minRandL and minRL which have defaults 4 and 25 respectively. minRandL specifies the minimum number of SNPs which must be to the left and right of the target SNP within the window. minRL is the product of these numbers.
+The output shows the positions of each of the SNPs and the Zalpha value calculated for each SNP. The NAs are due to the parameters minRandL and minRL, which have defaults 4 and 25 respectively. minRandL specifies the minimum number of SNPs that must be to the left and right of the target SNP within the window. minRL is the product of these numbers.
 
-Say the user is only interested in the output of Zalpha for a particular region of the chromosome, this is achieved by setting the "X" parameter to the lower and upper bounds of the region.
+Say the user is only interested in the output of Zalpha for a particular region of the chromosome; this is achieved by setting the "X" parameter to the lower and upper bounds of the region.
 
 ```{r}
 Zalpha(snps$positions,as.matrix(snps[,3:12]),3000,X=c(500,1000))
@@ -66,9 +66,9 @@ Using an LD profile allows the user to adjust for variable recombination rates a
 LDprofile
 ```
 
-The LD (linkage disequilibrium) profile contains data about the expected correlation between SNPs given the genetic distance between them. This could be generated using a simulated chromosome where the genetic distances are known, and then the statistics can be calculated. The columns are:
+The LD (linkage disequilibrium) profile contains data about the expected correlation between SNPs given the genetic distance between them. This could be generated using a simulated chromosome where the genetic distances are known, after which the statistics can be calculated. The columns are:
 
-* bin: this is the lower bound of the bin i.e. row 1 would include any SNPs greater than or equal to 0 but less than 0.0001 centimorgans apart (or whatever measure of genetic distance applicable for the user).
+* bin: this is the lower bound of the bin. In this example, row 1 would include any SNPs greater than or equal to 0 but less than 0.0001 centimorgans apart (or whatever measure of genetic distance applicable for the user).
 
 * rsq: the expected r^2^ value for SNPs whose genetic distance between them falls within the bin.
 
@@ -80,25 +80,27 @@ The LD (linkage disequilibrium) profile contains data about the expected correla
 
 For example, if we assume the bins are in centimorgans, and we know two SNPs are 0.00015 cM apart, the LDprofile tells us that we expect the r^2^ value to be 0.093, with a standard deviation of 0.22 and fits the distribution Beta(0.27,2.03).
 
+For real world data, Jacobs et al. (2006) recommend using distances up to 2 cM assigned to 20,000 bins.
+
 ## Zalpha_expected
 
-The expected Zalpha value can be calculated for a chromosome given an LD profile and the genetic distances between each SNP in the chromosome. Instead of calculating the r^2^ values between SNPs, the function works out the genetic distance between them, finds the bin in the LD profile which that genetic distance falls into, and reads out the expected r^2^ value. The function then calculates Zalpha as normal.
+The expected Zalpha value can be calculated for a chromosome given an LD profile and the genetic distances between each SNP in the chromosome. Instead of calculating the r^2^ values between SNPs, the function works out the genetic distance between them, finds the bin in the LD profile that the genetic distance falls into, and reads out the expected r^2^ value. The function then calculates Zalpha as normal.
 
 ```{r}
 Zalpha_expected(snps$positions, snps$distances, 3000, LDprofile$bin, LDprofile$rsq)
 ```
 Once Zalpha_expected has been calculated, it can be combined with the Zalpha results to adjust for recombination, for example by computing Zalpha - Zalpha_expected or Zalpha/Zalpha_expected.
 
-Other functions which take into account variable recombination rates are Zalpha_rsq_over_expected, Zalpha_log_rsq_over_expected, Zalpha_Zscore, and Zalpha_BetaCDF.
+Other functions that take into account variable recombination rates are Zalpha_rsq_over_expected, Zalpha_log_rsq_over_expected, Zalpha_Zscore, and Zalpha_BetaCDF.
 
 
 ## Zbeta
-The Zbeta function works in exactly the same way as the Zalpha function, but evaluates correlations between SNPs on either side of the target locus, rather than each side seperately. It is useful to use the Zbeta statistic in conjunction with the Zalpha statistic, as they behave differently depending on how close to fixation the sweep is. For example, while a sweep is in progress both Zalpha and Zbeta would be higher than other areas of the chromosome without a sweep present. However, when a sweep reaches near-fixation, Zbeta would decrease whereas Zalpha would remain high. Combining Zalpha and Zbeta into new statistics such as Zalpha/Zbeta is one way of analysing this.
+The Zbeta function works in exactly the same way as the Zalpha function, but evaluates correlations between SNPs on either side of the target locus, rather than each side separately. It is useful to use the Zbeta statistic in conjunction with the Zalpha statistic, as they behave differently depending on how close to fixation the sweep is. For example, while a sweep is in progress both Zalpha and Zbeta would be higher than other areas of the chromosome without a sweep present. However, when a sweep reaches near-fixation, Zbeta would decrease whereas Zalpha would remain high. Combining Zalpha and Zbeta into new statistics such as Zalpha/Zbeta is one way of analysing this.
 
 ## Zalpha_all
 Zalpha_all is the recommended function for using this package. It will run all the statistics included in the package (Zalpha and Zbeta variations), so the user does not have to run multiple functions to achieve all the statistics they want. The function will only calculate the statistics it has been given the appropriate inputs for, so it is flexible.
 
-For example, this code will only return Zalpha, Zbeta and the two diversity statistics LR and L_plus_R as an LDprofile was not supplied:
+For example, this code will only return Zalpha, Zbeta and the two diversity statistics LR and L_plus_R, as an LDprofile was not supplied:
 
 ```{r}
 Zalpha_all(snps$positions,as.matrix(snps[,3:12]),3000)
