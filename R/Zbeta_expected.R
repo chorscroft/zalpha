@@ -4,15 +4,15 @@
 #'
 #' Returns a \eqn{Z_{\beta}^{E[r^2]}}{Zbeta} value for each SNP location supplied to the function, based on
 #' the expected \eqn{r^2} values given an LD profile and genetic distances.
-#' For more information about the \eqn{Z_{\beta}^{E[r^2]}}{Zbeta} statistic please see Jacobs (2016).
+#' For more information about the \eqn{Z_{\beta}^{E[r^2]}}{Zbeta} statistic, please see Jacobs (2016).
 #' The \eqn{Z_{\beta}^{E[r^2]}}{Zbeta} statistic is defined as:
 #' \deqn{Z_{\beta}^{E[r^2]}=\frac{\sum_{i \in L,j \in R}E[r^2_{i,j}]}{|L||R|}}
 #' where \code{|L|} and \code{|R|} are the number of SNPs to the left and right of the current locus within the given window \code{ws},
 #' and \eqn{E[r^2]}{E[r^2]} is equal to the expected squared correlation between a pair of SNPs, given an LD profile.
 #'
 #' The LD profile describes the expected correlation between SNPs at a given genetic distance, generated using simulations or
-#' real data. Care should be taken to utilise an LD profile which is representative of the population in question. The LD
-#' profile should consist of evenly-sized bins of distances (for example 0.00001 cM per bin), where the value given is the (inclusive) lower
+#' real data. Care should be taken to utilise an LD profile that is representative of the population in question. The LD
+#' profile should consist of evenly sized bins of distances (for example 0.00001 cM per bin), where the value given is the (inclusive) lower
 #' bound of the bin.
 #'
 #' @param pos A numeric vector of SNP locations

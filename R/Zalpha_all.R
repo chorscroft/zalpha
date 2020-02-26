@@ -11,12 +11,12 @@
 #'   \item For \code{\link{Zalpha_Zscore}} and \code{\link{Zbeta_Zscore}} to be calculated, the parameter \code{LDprofile_sd} must also be supplied.
 #'   \item For \code{\link{Zalpha_BetaCDF}} and \code{\link{Zbeta_BetaCDF}} to be calculated, the parameters \code{LDprofile_Beta_a} and \code{LDprofile_Beta_b} must also be supplied.
 #' }
-#' For more information about the statistics please see Jacobs (2016).
+#' For more information about the statistics, please see Jacobs (2016).
 #'
 #' @importFrom stats cor pbeta
 #'
 #' @param pos A numeric vector of SNP locations
-#' @param x Optional. A matrix of SNP values. Columns represent chromosomes, rows are SNP locations. Hence, the number of rows should equal the length of the \code{pos} vector. SNPs should all be biallelic.
+#' @param x Optional. A matrix of SNP values. Columns represent chromosomes; rows are SNP locations. Hence, the number of rows should equal the length of the \code{pos} vector. SNPs should all be biallelic.
 #' @param ws The window size which the statistics will be calculated over. This should be on the same scale as the \code{pos} vector.
 #' @param dist Optional. A numeric vector of genetic distances (e.g. cM, LDU). This should be the same length as \code{pos}.
 #' @param LDprofile_bins Optional. A numeric vector containing the lower bound of the bins used in the LD profile. These should be of equal size.

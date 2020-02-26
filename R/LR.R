@@ -2,7 +2,7 @@
 #' Runs the LR function
 #'
 #' Returns the \code{|L||R|} value for each SNP location supplied to the function.
-#' For more information about the \code{|L||R|} diversity statistic please see Jacobs (2016).
+#' For more information about the \code{|L||R|} diversity statistic, please see Jacobs (2016).
 #'
 #' @param pos A numeric vector of SNP locations
 #' @param ws The window size which the \code{LR} statistic will be calculated over. This should be on the same scale as the \code{pos} vector.

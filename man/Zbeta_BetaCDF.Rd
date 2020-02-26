@@ -10,7 +10,7 @@ Zbeta_BetaCDF(pos, x, dist, ws, LDprofile_bins, LDprofile_Beta_a,
 \arguments{
 \item{pos}{A numeric vector of SNP locations}
 
-\item{x}{A matrix of SNP values. Columns represent chromosomes, rows are SNP locations. Hence, the number of rows should equal the length of the \code{pos} vector. SNPs should all be biallelic.}
+\item{x}{A matrix of SNP values. Columns represent chromosomes; rows are SNP locations. Hence, the number of rows should equal the length of the \code{pos} vector. SNPs should all be biallelic.}
 
 \item{dist}{A numeric vector of genetic distances (e.g. cM, LDU). This should be the same length as \code{pos}.}
 
@@ -34,7 +34,7 @@ A list containing the SNP positions and the \eqn{Z_{\beta}^{BetaCDF}}{Zbeta} val
 \description{
 Returns a \eqn{Z_{\beta}^{BetaCDF}}{Zbeta} value for each SNP location supplied to the function, based on
 the expected \eqn{r^2} values given an LD profile and genetic distances.
-For more information about the \eqn{Z_{\beta}^{BetaCDF}}{Zbeta} statistic please see Jacobs (2016).
+For more information about the \eqn{Z_{\beta}^{BetaCDF}}{Zbeta} statistic, please see Jacobs (2016).
 The \eqn{Z_{\beta}^{BetaCDF}}{Zbeta} statistic is defined as:
 \deqn{Z_{\beta}^{BetaCDF}=\frac{\sum_{i \in L,j \in R}\frac{B(r^2_{i,j};a,b)}{B(a,b)}}{|L||R|}}
 where \code{|L|} and \code{|R|} are the number of SNPs to the left and right of the current locus within the given window \code{ws}, \eqn{r^2}{r^2} is equal to
@@ -43,8 +43,8 @@ the estimated a and b parameters from the LD profile.
 }
 \details{
 The LD profile describes the expected correlation between SNPs at a given genetic distance, generated using simulations or
-real data. Care should be taken to utilise an LD profile which is representative of the population in question. The LD
-profile should consist of evenly-sized bins of distances (for example 0.00001 cM per bin), where the value given is the (inclusive) lower
+real data. Care should be taken to utilise an LD profile that is representative of the population in question. The LD
+profile should consist of evenly sized bins of distances (for example 0.00001 cM per bin), where the value given is the (inclusive) lower
 bound of the bin.
 }
 \examples{

@@ -2,7 +2,7 @@
 #' Runs the Zalpha function
 #'
 #' Returns a \eqn{Z_{\alpha}}{Zalpha} value for each SNP location supplied to the function.
-#' For more information about the \eqn{Z_{\alpha}}{Zalpha} statistic please see Jacobs (2016).
+#' For more information about the \eqn{Z_{\alpha}}{Zalpha} statistic, please see Jacobs (2016).
 #' The \eqn{Z_{\alpha}}{Zalpha} statistic is defined as:
 #' \deqn{Z_{\alpha}=\frac{{|L| \choose 2}^{-1}\sum_{i,j \in L}r^2_{i,j} + {|R| \choose 2}^{-1}\sum_{i,j \in L}r^2_{i,j}}{2}}
 #' where \code{|L|} and \code{|R|} are the number of SNPs to the left and right of the current locus within the given window \code{ws}, and \eqn{r^2}{r^2} is equal to the squared correlation between a pair of SNPs
@@ -10,7 +10,7 @@
 #' @importFrom stats cor
 #'
 #' @param pos A numeric vector of SNP locations
-#' @param x A matrix of SNP values. Columns represent chromosomes, rows are SNP locations. Hence, the number of rows should equal the length of the \code{pos} vector. SNPs should all be biallelic.
+#' @param x A matrix of SNP values. Columns represent chromosomes; rows are SNP locations. Hence, the number of rows should equal the length of the \code{pos} vector. SNPs should all be biallelic.
 #' @param ws The window size which the \eqn{Z_{\alpha}}{Zalpha} statistic will be calculated over. This should be on the same scale as the \code{pos} vector.
 #' @param minRandL Minimum number of SNPs in each set R and L for the statistic to be calculated. Default is 4.
 #' @param minRL Minimum value for the product of the set sizes for R and L. Default is 25.

@@ -9,7 +9,7 @@ Zbeta(pos, x, ws, minRandL = 4, minRL = 25, X = NULL)
 \arguments{
 \item{pos}{A numeric vector of SNP locations}
 
-\item{x}{A matrix of SNP values. Columns represent chromosomes, rows are SNP locations. Hence, the number of rows should equal the length of the \code{pos} vector. SNPs should all be biallelic.}
+\item{x}{A matrix of SNP values. Columns represent chromosomes; rows are SNP locations. Hence, the number of rows should equal the length of the \code{pos} vector. SNPs should all be biallelic.}
 
 \item{ws}{The window size which the \eqn{Z_{\beta}}{Zbeta} statistic will be calculated over. This should be on the same scale as the \code{pos} vector.}
 
@@ -24,7 +24,7 @@ A list containing the SNP positions and the \eqn{Z_{\beta}}{Zbeta} values for th
 }
 \description{
 Returns a \eqn{Z_{\beta}}{Zbeta} value for each SNP location supplied to the function.
-For more information about the \eqn{Z_{\beta}}{Zbeta} statistic please see Jacobs (2016).
+For more information about the \eqn{Z_{\beta}}{Zbeta} statistic, please see Jacobs (2016).
 The \eqn{Z_{\beta}}{Zbeta} statistic is defined as:
 \deqn{Z_{\beta}=\frac{\sum_{i \in L,j \in R}r^2_{i,j}}{|L||R|}}
 where \code{|L|} and \code{|R|} are the number of SNPs to the left and right of the current locus within the given window \code{ws}, and \eqn{r^2}{r^2} is equal to the squared correlation between a pair of SNPs

@@ -11,7 +11,7 @@ Zalpha_all(pos, x = NULL, ws, dist = NULL, LDprofile_bins = NULL,
 \arguments{
 \item{pos}{A numeric vector of SNP locations}
 
-\item{x}{Optional. A matrix of SNP values. Columns represent chromosomes, rows are SNP locations. Hence, the number of rows should equal the length of the \code{pos} vector. SNPs should all be biallelic.}
+\item{x}{Optional. A matrix of SNP values. Columns represent chromosomes; rows are SNP locations. Hence, the number of rows should equal the length of the \code{pos} vector. SNPs should all be biallelic.}
 
 \item{ws}{The window size which the statistics will be calculated over. This should be on the same scale as the \code{pos} vector.}
 
@@ -48,7 +48,7 @@ This includes the statistics: \code{\link{Zalpha_expected}}, \code{\link{Zalpha_
   \item For \code{\link{Zalpha_Zscore}} and \code{\link{Zbeta_Zscore}} to be calculated, the parameter \code{LDprofile_sd} must also be supplied.
   \item For \code{\link{Zalpha_BetaCDF}} and \code{\link{Zbeta_BetaCDF}} to be calculated, the parameters \code{LDprofile_Beta_a} and \code{LDprofile_Beta_b} must also be supplied.
 }
-For more information about the statistics please see Jacobs (2016).
+For more information about the statistics, please see Jacobs (2016).
 }
 \examples{
 ## load the snps and LDprofile example datasets

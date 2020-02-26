@@ -18,7 +18,7 @@ A list containing the SNP positions and the \code{LR} values for those SNPs
 }
 \description{
 Returns the \code{|L||R|} value for each SNP location supplied to the function.
-For more information about the \code{|L||R|} diversity statistic please see Jacobs (2016).
+For more information about the \code{|L||R|} diversity statistic, please see Jacobs (2016).
 }
 \examples{
 ## load the snps example dataset
