@@ -4,14 +4,14 @@
 \alias{Zbeta}
 \title{Runs the Zbeta function}
 \usage{
-Zbeta(pos, x, ws, minRandL = 4, minRL = 25, X = NULL)
+Zbeta(pos, ws, x, minRandL = 4, minRL = 25, X = NULL)
 }
 \arguments{
 \item{pos}{A numeric vector of SNP locations}
 
-\item{x}{A matrix of SNP values. Columns represent chromosomes; rows are SNP locations. Hence, the number of rows should equal the length of the \code{pos} vector. SNPs should all be biallelic.}
-
 \item{ws}{The window size which the \eqn{Z_{\beta}}{Zbeta} statistic will be calculated over. This should be on the same scale as the \code{pos} vector.}
+
+\item{x}{A matrix of SNP values. Columns represent chromosomes; rows are SNP locations. Hence, the number of rows should equal the length of the \code{pos} vector. SNPs should all be biallelic.}
 
 \item{minRandL}{Minimum number of SNPs in each set R and L for the statistic to be calculated. Default is 4.}
 
@@ -33,9 +33,9 @@ where \code{|L|} and \code{|R|} are the number of SNPs to the left and right of 
 ## load the snps example dataset
 data(snps)
 ## run Zbeta over all the SNPs with a window size of 3000 bp
-Zbeta(snps$positions,as.matrix(snps[,3:12]),3000)
+Zbeta(snps$positions,3000,as.matrix(snps[,3:12]))
 ## only return results for SNPs between locations 600 and 1500 bp
-Zbeta(snps$positions,as.matrix(snps[,3:12]),3000,X=c(600,1500))
+Zbeta(snps$positions,3000,as.matrix(snps[,3:12]),X=c(600,1500))
 
 }
 \references{

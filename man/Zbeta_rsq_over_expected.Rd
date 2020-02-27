@@ -4,17 +4,17 @@
 \alias{Zbeta_rsq_over_expected}
 \title{Runs the Zbeta function on the r-squared values over the expected r-squared values for the region}
 \usage{
-Zbeta_rsq_over_expected(pos, x, dist, ws, LDprofile_bins, LDprofile_rsq,
+Zbeta_rsq_over_expected(pos, ws, x, dist, LDprofile_bins, LDprofile_rsq,
   minRandL = 4, minRL = 25, X = NULL)
 }
 \arguments{
 \item{pos}{A numeric vector of SNP locations}
 
+\item{ws}{The window size which the \eqn{Z_{\beta}^{r^2/E[r^2]}}{Zbeta} statistic will be calculated over. This should be on the same scale as the \code{pos} vector.}
+
 \item{x}{A matrix of SNP values. Columns represent chromosomes; rows are SNP locations. Hence, the number of rows should equal the length of the \code{pos} vector. SNPs should all be biallelic.}
 
 \item{dist}{A numeric vector of genetic distances (e.g. cM, LDU). This should be the same length as \code{pos}.}
-
-\item{ws}{The window size which the \eqn{Z_{\beta}^{r^2/E[r^2]}}{Zbeta} statistic will be calculated over. This should be on the same scale as the \code{pos} vector.}
 
 \item{LDprofile_bins}{A numeric vector containing the lower bound of the bins used in the LD profile. These should be of equal size.}
 
@@ -49,10 +49,10 @@ bound of the bin.
 data(snps)
 data(LDprofile)
 ## run Zbeta_rsq_over_expected over all the SNPs with a window size of 3000 bp
-Zbeta_rsq_over_expected(snps$positions,as.matrix(snps[,3:12]),snps$distances,3000,
+Zbeta_rsq_over_expected(snps$positions,3000,as.matrix(snps[,3:12]),snps$distances,
  LDprofile$bin,LDprofile$rsq)
 ## only return results for SNPs between locations 600 and 1500 bp
-Zbeta_rsq_over_expected(snps$positions,as.matrix(snps[,3:12]),snps$distances,3000,
+Zbeta_rsq_over_expected(snps$positions,3000,as.matrix(snps[,3:12]),snps$distances,
  LDprofile$bin,LDprofile$rsq,X=c(600,1500))
 
 }

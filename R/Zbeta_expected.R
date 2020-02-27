@@ -16,8 +16,8 @@
 #' bound of the bin.
 #'
 #' @param pos A numeric vector of SNP locations
-#' @param dist A numeric vector of genetic distances (e.g. cM, LDU). This should be the same length as \code{pos}.
 #' @param ws The window size which the \eqn{Z_{\beta}^{E[r^2]}}{Zbeta} statistic will be calculated over. This should be on the same scale as the \code{pos} vector.
+#' @param dist A numeric vector of genetic distances (e.g. cM, LDU). This should be the same length as \code{pos}.
 #' @param LDprofile_bins A numeric vector containing the lower bound of the bins used in the LD profile. These should be of equal size.
 #' @param LDprofile_rsq A numeric vector containing the expected \eqn{r^2}{r^2} values for the corresponding bin in the LD profile. Must be between 0 and 1.
 #' @param minRandL Minimum number of SNPs in each set R and L for the statistic to be calculated. Default is 4.
@@ -31,13 +31,13 @@
 #' data(snps)
 #' data(LDprofile)
 #' ## run Zbeta_expected over all the SNPs with a window size of 3000 bp
-#' Zbeta_expected(snps$positions,snps$distances,3000,LDprofile$bin,LDprofile$rsq)
+#' Zbeta_expected(snps$positions,3000,snps$distances,LDprofile$bin,LDprofile$rsq)
 #' ## only return results for SNPs between locations 600 and 1500 bp
-#' Zbeta_expected(snps$positions,snps$distances,3000,LDprofile$bin,LDprofile$rsq,X=c(600,1500))
+#' Zbeta_expected(snps$positions,3000,snps$distances,LDprofile$bin,LDprofile$rsq,X=c(600,1500))
 #'
 #' @export
 #'
-Zbeta_expected<-function(pos, dist, ws, LDprofile_bins, LDprofile_rsq, minRandL = 4, minRL = 25, X = NULL) {
+Zbeta_expected<-function(pos, ws, dist, LDprofile_bins, LDprofile_rsq, minRandL = 4, minRL = 25, X = NULL) {
   #Check things are in the correct format
 
   #Check pos is a numeric vector

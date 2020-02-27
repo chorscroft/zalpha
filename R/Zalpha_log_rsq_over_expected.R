@@ -18,9 +18,9 @@
 #' @importFrom stats cor
 #'
 #' @param pos A numeric vector of SNP locations
+#' @param ws The window size which the \eqn{Z_{\alpha}^{log_{10}(r^2/E[r^2])}}{Zalpha} statistic will be calculated over. This should be on the same scale as the \code{pos} vector.
 #' @param x A matrix of SNP values. Columns represent chromosomes; rows are SNP locations. Hence, the number of rows should equal the length of the \code{pos} vector. SNPs should all be biallelic.
 #' @param dist A numeric vector of genetic distances (e.g. cM, LDU). This should be the same length as \code{pos}.
-#' @param ws The window size which the \eqn{Z_{\alpha}^{log_{10}(r^2/E[r^2])}}{Zalpha} statistic will be calculated over. This should be on the same scale as the \code{pos} vector.
 #' @param LDprofile_bins A numeric vector containing the lower bound of the bins used in the LD profile. These should be of equal size.
 #' @param LDprofile_rsq A numeric vector containing the expected \eqn{r^2}{r^2} values for the corresponding bin in the LD profile. Must be between 0 and 1.
 #' @param minRandL Minimum number of SNPs in each set R and L for the statistic to be calculated. Default is 4.
@@ -34,14 +34,14 @@
 #' data(snps)
 #' data(LDprofile)
 #' ## run Zalpha_log_rsq_over_expected over all the SNPs with a window size of 3000 bp
-#' Zalpha_log_rsq_over_expected(snps$positions,as.matrix(snps[,3:12]),snps$distances,3000,
+#' Zalpha_log_rsq_over_expected(snps$positions,3000,as.matrix(snps[,3:12]),snps$distances,
 #'  LDprofile$bin,LDprofile$rsq)
 #' ## only return results for SNPs between locations 600 and 1500 bp
-#' Zalpha_log_rsq_over_expected(snps$positions,as.matrix(snps[,3:12]),snps$distances,3000,
+#' Zalpha_log_rsq_over_expected(snps$positions,3000,as.matrix(snps[,3:12]),snps$distances,
 #'  LDprofile$bin,LDprofile$rsq,X=c(600,1500))
 #'
 #' @export
-Zalpha_log_rsq_over_expected<-function(pos, x, dist, ws, LDprofile_bins, LDprofile_rsq, minRandL = 4, minRL = 25, X = NULL){
+Zalpha_log_rsq_over_expected<-function(pos, ws, x, dist, LDprofile_bins, LDprofile_rsq, minRandL = 4, minRL = 25, X = NULL){
 
   #Check things are in the correct format
 

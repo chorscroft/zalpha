@@ -24,7 +24,7 @@ LDprofile<-data.frame(
 
 test_that("Zalpha_expected calculates Zalpha_expected statistic correctly", {
 
-  expect_equal(Zalpha_expected(pos = df$POS, dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, minRandL = 4, minRL = 25, X = NULL),
+  expect_equal(Zalpha_expected(pos = df$POS, ws  = 3000, dist = df$dist, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, minRandL = 4, minRL = 25, X = NULL),
                list(
                  position=c(100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500),
                  Zalpha_expected=c(NA,NA,NA,NA,
@@ -43,7 +43,7 @@ test_that("Zalpha_expected calculates Zalpha_expected statistic correctly", {
 
 test_that("Zalpha_expected calculates Zalpha_expected statistic correctly with a different window size", {
 
-  expect_equal(Zalpha_expected(pos = df$POS, dist = df$dist, ws  = 1100, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, minRandL = 4, minRL = 25, X = NULL),
+  expect_equal(Zalpha_expected(pos = df$POS, ws  = 1100, dist = df$dist, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, minRandL = 4, minRL = 25, X = NULL),
                list(
                  position=c(100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500),
                  Zalpha_expected=c(NA,NA,NA,NA,NA,
@@ -60,7 +60,7 @@ test_that("Zalpha_expected calculates Zalpha_expected statistic correctly with a
 
 test_that("Zalpha_expected calculates Zalpha_expected statistic correctly with X supplied", {
 
-  expect_equal(Zalpha_expected(pos = df$POS, dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, minRandL = 4, minRL = 25, X = c(700,900)),
+  expect_equal(Zalpha_expected(pos = df$POS, ws  = 3000, dist = df$dist, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, minRandL = 4, minRL = 25, X = c(700,900)),
                list(
                  position=c(700,800,900),
                  Zalpha_expected=c(0.397339546324536,
@@ -73,7 +73,7 @@ test_that("Zalpha_expected calculates Zalpha_expected statistic correctly with X
 
 test_that("Zalpha_expected fails with an X supplied outside of the region defined in pos", {
 
-  expect_error(Zalpha_expected(pos = df$POS, dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, minRandL = 4, minRL = 25, X = c(7000,9000)),
+  expect_error(Zalpha_expected(pos = df$POS, ws  = 3000, dist = df$dist, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, minRandL = 4, minRL = 25, X = c(7000,9000)),
                "The region specified by X is outside the region contained in the pos vector")
 })
 
@@ -81,7 +81,7 @@ test_that("Zalpha_expected fails with an X supplied outside of the region define
 
 test_that("Zalpha_expected fails with an X supplied as a character", {
 
-  expect_error(Zalpha_expected(pos = df$POS, dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, minRandL = 4, minRL = 25, X = c("700bp","900bp")),
+  expect_error(Zalpha_expected(pos = df$POS, ws  = 3000, dist = df$dist, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, minRandL = 4, minRL = 25, X = c("700bp","900bp")),
                "X should be a numeric vector of length 2 e.g. c(100,200)",
                fixed=TRUE)
 })
@@ -90,7 +90,7 @@ test_that("Zalpha_expected fails with an X supplied as a character", {
 
 test_that("Zalpha_expected fails with an X supplied as only one number", {
 
-  expect_error(Zalpha_expected(pos = df$POS, dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, minRandL = 4, minRL = 25, X = 700),
+  expect_error(Zalpha_expected(pos = df$POS, ws  = 3000, dist = df$dist, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, minRandL = 4, minRL = 25, X = 700),
                "X should be a numeric vector of length 2 e.g. c(100,200)",
                fixed=TRUE)
 })
@@ -99,7 +99,7 @@ test_that("Zalpha_expected fails with an X supplied as only one number", {
 
 test_that("Zalpha_expected fails with an X supplied with too many numbers", {
 
-  expect_error(Zalpha_expected(pos = df$POS, dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, minRandL = 4, minRL = 25, X = c(700,900,1100)),
+  expect_error(Zalpha_expected(pos = df$POS, ws  = 3000, dist = df$dist, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, minRandL = 4, minRL = 25, X = c(700,900,1100)),
                "X should be a numeric vector of length 2 e.g. c(100,200)",
                fixed=TRUE)
 })
@@ -108,7 +108,7 @@ test_that("Zalpha_expected fails with an X supplied with too many numbers", {
 
 test_that("Zalpha_expected fails when ws is non-numeric", {
 
-  expect_error(Zalpha_expected(pos = df$POS, dist = df$dist, ws  = "3000bp", LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, minRandL = 4, minRL = 25, X = NULL),
+  expect_error(Zalpha_expected(pos = df$POS, ws  = "3000bp", dist = df$dist, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, minRandL = 4, minRL = 25, X = NULL),
                "ws must be a number greater than 0")
 })
 
@@ -116,7 +116,7 @@ test_that("Zalpha_expected fails when ws is non-numeric", {
 
 test_that("Zalpha_expected fails when ws is zero", {
 
-  expect_error(Zalpha_expected(pos = df$POS, dist = df$dist, ws  = 0, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, minRandL = 4, minRL = 25, X = NULL),
+  expect_error(Zalpha_expected(pos = df$POS, ws  = 0, dist = df$dist, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, minRandL = 4, minRL = 25, X = NULL),
                "ws must be a number greater than 0")
 })
 
@@ -124,7 +124,7 @@ test_that("Zalpha_expected fails when ws is zero", {
 
 test_that("Zalpha_expected fails when pos is non-numeric", {
 
-  expect_error(Zalpha_expected(pos = paste0(df$POS,"bp"), dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, minRandL = 4, minRL = 25, X = NULL),
+  expect_error(Zalpha_expected(pos = paste0(df$POS,"bp"), ws  = 3000, dist = df$dist, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, minRandL = 4, minRL = 25, X = NULL),
                "pos must be a numeric vector")
 })
 
@@ -132,7 +132,7 @@ test_that("Zalpha_expected fails when pos is non-numeric", {
 
 test_that("Zalpha_expected fails when minLandR is non-numeric", {
 
-  expect_error(Zalpha_expected(pos = df$POS, dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, minRandL = "4snps", minRL = 25, X = NULL),
+  expect_error(Zalpha_expected(pos = df$POS, ws  = 3000, dist = df$dist, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, minRandL = "4snps", minRL = 25, X = NULL),
                "minRandL must be a number greater than or equal to 0")
 })
 
@@ -140,7 +140,7 @@ test_that("Zalpha_expected fails when minLandR is non-numeric", {
 
 test_that("Zalpha_expected fails when minLandR is negative", {
 
-  expect_error(Zalpha_expected(pos = df$POS, dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, minRandL = -1, minRL = 25, X = NULL),
+  expect_error(Zalpha_expected(pos = df$POS, ws  = 3000, dist = df$dist, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, minRandL = -1, minRL = 25, X = NULL),
                "minRandL must be a number greater than or equal to 0")
 })
 
@@ -148,7 +148,7 @@ test_that("Zalpha_expected fails when minLandR is negative", {
 
 test_that("Zalpha_expected fails when minLR is non-numeric", {
 
-  expect_error(Zalpha_expected(pos = df$POS, dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, minRandL = 4, minRL = "25b", X = NULL),
+  expect_error(Zalpha_expected(pos = df$POS, ws  = 3000, dist = df$dist, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, minRandL = 4, minRL = "25b", X = NULL),
                "minRL must be a number greater than or equal to 0")
 })
 
@@ -156,7 +156,7 @@ test_that("Zalpha_expected fails when minLR is non-numeric", {
 
 test_that("Zalpha_expected fails when minLR is negative", {
 
-  expect_error(Zalpha_expected(pos = df$POS, dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, minRandL = 4, minRL = -25, X = NULL),
+  expect_error(Zalpha_expected(pos = df$POS, ws  = 3000, dist = df$dist, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, minRandL = 4, minRL = -25, X = NULL),
                "minRL must be a number greater than or equal to 0")
 })
 
@@ -164,7 +164,7 @@ test_that("Zalpha_expected fails when minLR is negative", {
 
 test_that("Zalpha_expected warns about all NAs", {
 
-  expect_warning(Zalpha_expected(pos = df$POS, dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, minRandL = 4, minRL = 50, X = NULL),
+  expect_warning(Zalpha_expected(pos = df$POS, ws  = 3000, dist = df$dist, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, minRandL = 4, minRL = 50, X = NULL),
                  "No Zalpha_expected values were calculated, try reducing minRandL and minRL or increasing the window size")
 })
 
@@ -172,7 +172,7 @@ test_that("Zalpha_expected warns about all NAs", {
 
 test_that("Zalpha_expected fails when dist is non-numeric", {
 
-  expect_error(Zalpha_expected(pos = df$POS, dist = paste0(df$dist,"dist"), ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, minRandL = 4, minRL = 25, X = NULL),
+  expect_error(Zalpha_expected(pos = df$POS, ws  = 3000, dist = paste0(df$dist,"dist"), LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, minRandL = 4, minRL = 25, X = NULL),
                "dist must be a numeric vector")
 })
 
@@ -180,7 +180,7 @@ test_that("Zalpha_expected fails when dist is non-numeric", {
 
 test_that("Zalpha_expected fails when dist is a different length to pos", {
 
-  expect_error(Zalpha_expected(pos = df$POS, dist = c(df$dist,1), ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, minRandL = 4, minRL = 25, X = NULL),
+  expect_error(Zalpha_expected(pos = df$POS, ws  = 3000, dist = c(df$dist,1), LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, minRandL = 4, minRL = 25, X = NULL),
                "The number of values in dist must equal the number of SNP locations given in pos")
 })
 
@@ -188,7 +188,7 @@ test_that("Zalpha_expected fails when dist is a different length to pos", {
 
 test_that("Zalpha_expected fails when LDprofile_bins is non-numeric", {
 
-  expect_error(Zalpha_expected(pos = df$POS, dist = df$dist, ws  = 3000, LDprofile_bins = paste0(LDprofile$bin,"dist"), LDprofile_rsq = LDprofile$rsq, minRandL = 4, minRL = 25, X = NULL),
+  expect_error(Zalpha_expected(pos = df$POS, ws  = 3000, dist = df$dist, LDprofile_bins = paste0(LDprofile$bin,"dist"), LDprofile_rsq = LDprofile$rsq, minRandL = 4, minRL = 25, X = NULL),
                "LDprofile_bins must be a numeric vector")
 })
 
@@ -208,7 +208,7 @@ tempLDprofile<-data.frame(
 )
 test_that("Zalpha_expected fails when LDprofile_bins are not of equal size", {
 
-  expect_error(Zalpha_expected(pos = df$POS, dist = df$dist, ws  = 3000, LDprofile_bins = tempLDprofile$bin, LDprofile_rsq = LDprofile$rsq, minRandL = 4, minRL = 25, X = NULL),
+  expect_error(Zalpha_expected(pos = df$POS, ws  = 3000, dist = df$dist, LDprofile_bins = tempLDprofile$bin, LDprofile_rsq = LDprofile$rsq, minRandL = 4, minRL = 25, X = NULL),
                "LDprofile_bins must be of equal size")
 })
 
@@ -216,7 +216,7 @@ test_that("Zalpha_expected fails when LDprofile_bins are not of equal size", {
 
 test_that("Zalpha_expected fails when LDprofile_rsq is non-numeric", {
 
-  expect_error(Zalpha_expected(pos = df$POS, dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_rsq = paste0(LDprofile$rsq,"r"), minRandL = 4, minRL = 25, X = NULL),
+  expect_error(Zalpha_expected(pos = df$POS, ws  = 3000, dist = df$dist, LDprofile_bins = LDprofile$bin, LDprofile_rsq = paste0(LDprofile$rsq,"r"), minRandL = 4, minRL = 25, X = NULL),
                "LDprofile_rsq must be a numeric vector")
 })
 
@@ -236,7 +236,7 @@ tempLDprofile<-data.frame(
 )
 test_that("Zalpha_expected fails when LDprofile_rsq contains values not between 0 and 1", {
 
-  expect_error(Zalpha_expected(pos = df$POS, dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_rsq = tempLDprofile$rsq, minRandL = 4, minRL = 25, X = NULL),
+  expect_error(Zalpha_expected(pos = df$POS, ws  = 3000, dist = df$dist, LDprofile_bins = LDprofile$bin, LDprofile_rsq = tempLDprofile$rsq, minRandL = 4, minRL = 25, X = NULL),
                "Values stored in LDprofile_rsq must be between 0 and 1")
 })
 
@@ -244,6 +244,6 @@ test_that("Zalpha_expected fails when LDprofile_rsq contains values not between 
 
 test_that("Zalpha_expected fails when LDprofile_bins and LDprofile_rsq are different lengths", {
 
-  expect_error(Zalpha_expected(pos = df$POS, dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_rsq = c(LDprofile$rsq,1), minRandL = 4, minRL = 25, X = NULL),
+  expect_error(Zalpha_expected(pos = df$POS, ws  = 3000, dist = df$dist, LDprofile_bins = LDprofile$bin, LDprofile_rsq = c(LDprofile$rsq,1), minRandL = 4, minRL = 25, X = NULL),
                "LDprofile_rsq must contain the same number of values as there are bins given in LDprofile_bins")
 })

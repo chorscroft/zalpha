@@ -10,8 +10,8 @@
 #' @importFrom stats cor
 #'
 #' @param pos A numeric vector of SNP locations
-#' @param x A matrix of SNP values. Columns represent chromosomes; rows are SNP locations. Hence, the number of rows should equal the length of the \code{pos} vector. SNPs should all be biallelic.
 #' @param ws The window size which the \eqn{Z_{\alpha}}{Zalpha} statistic will be calculated over. This should be on the same scale as the \code{pos} vector.
+#' @param x A matrix of SNP values. Columns represent chromosomes; rows are SNP locations. Hence, the number of rows should equal the length of the \code{pos} vector. SNPs should all be biallelic.
 #' @param minRandL Minimum number of SNPs in each set R and L for the statistic to be calculated. Default is 4.
 #' @param minRL Minimum value for the product of the set sizes for R and L. Default is 25.
 #' @param X Optional. Specify a region of the chromosome to calculate \eqn{Z_{\alpha}}{Zalpha} for in the format \code{c(startposition, endposition)}. The start position and the end position should be within the extremes of the positions given in the \code{pos} vector. If not supplied, the function will calculate \eqn{Z_{\alpha}}{Zalpha} for every SNP in the \code{pos} vector.
@@ -22,13 +22,13 @@
 #' ## load the snps example dataset
 #' data(snps)
 #' ## run Zalpha over all the SNPs with a window size of 3000 bp
-#' Zalpha(snps$positions,as.matrix(snps[,3:12]),3000)
+#' Zalpha(snps$positions,3000,as.matrix(snps[,3:12]))
 #' ## only return results for SNPs between locations 600 and 1500 bp
-#' Zalpha(snps$positions,as.matrix(snps[,3:12]),3000,X=c(600,1500))
+#' Zalpha(snps$positions,3000,as.matrix(snps[,3:12]),X=c(600,1500))
 #'
 #' @export
 
-Zalpha <- function(pos, x, ws, minRandL = 4, minRL = 25, X = NULL) {
+Zalpha <- function(pos, ws, x, minRandL = 4, minRL = 25, X = NULL) {
   #Check things are in the correct format
 
   #Check pos is a numeric vector

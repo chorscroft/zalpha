@@ -41,12 +41,12 @@ To test for selection, the user can use the Zalpha function. This function takes
 
 * A vector of the physical locations of each of the SNPs
 
-* A matrix of the SNP alleles across each chromosome in the sample. The number of rows should be equal to the number of SNPs, and the columns are each of the chromosomes.
-
 * The window size. This is set to 3000 for this small example but realistically a window size of around 200 Kb is appropriate. The window is centred on the target locus, and considers SNPs that are within ws/2 to the left and ws/2 to the right of the target SNP.
 
+* A matrix of the SNP alleles across each chromosome in the sample. The number of rows should be equal to the number of SNPs, and the columns are each of the chromosomes.
+
 ```{r}
-results<-Zalpha(snps$positions,as.matrix(snps[,3:12]),3000)
+results<-Zalpha(snps$positions,3000,as.matrix(snps[,3:12]))
 results
 plot(results$position,results$Zalpha)
 ```
@@ -56,7 +56,7 @@ The output shows the positions of each of the SNPs and the Zalpha value calculat
 Say the user is only interested in the output of Zalpha for a particular region of the chromosome; this is achieved by setting the "X" parameter to the lower and upper bounds of the region.
 
 ```{r}
-Zalpha(snps$positions,as.matrix(snps[,3:12]),3000,X=c(500,1000))
+Zalpha(snps$positions,3000,as.matrix(snps[,3:12]),X=c(500,1000))
 ```
 
 ## LD Profile
@@ -87,7 +87,7 @@ For real world data, Jacobs et al. (2006) recommend using distances up to 2 cM a
 The expected Zalpha value can be calculated for a chromosome given an LD profile and the genetic distances between each SNP in the chromosome. Instead of calculating the r^2^ values between SNPs, the function works out the genetic distance between them, finds the bin in the LD profile that the genetic distance falls into, and reads out the expected r^2^ value. The function then calculates Zalpha as normal.
 
 ```{r}
-Zalpha_expected(snps$positions, snps$distances, 3000, LDprofile$bin, LDprofile$rsq)
+Zalpha_expected(snps$positions, 3000, snps$distances, LDprofile$bin, LDprofile$rsq)
 ```
 Once Zalpha_expected has been calculated, it can be combined with the Zalpha results to adjust for recombination, for example by computing Zalpha - Zalpha_expected or Zalpha/Zalpha_expected.
 
@@ -103,7 +103,7 @@ Zalpha_all is the recommended function for using this package. It will run all t
 For example, this code will only return Zalpha, Zbeta and the two diversity statistics LR and L_plus_R, as an LDprofile was not supplied:
 
 ```{r}
-Zalpha_all(snps$positions,as.matrix(snps[,3:12]),3000)
+Zalpha_all(snps$positions,3000,as.matrix(snps[,3:12]))
 ```
 Supplying an LDprofile will result in more of the statistics being calculated.
 

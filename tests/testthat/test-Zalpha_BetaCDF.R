@@ -36,7 +36,7 @@ LDprofile<-data.frame(
 
 test_that("Zalpha_BetaCDF calculates Zalpha_BetaCDF statistic correctly", {
 
-  expect_equal(Zalpha_BetaCDF(pos = df$POS, x = as.matrix(df[,3:7]), dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_Beta_a = LDprofile$Beta_a, LDprofile_Beta_b = LDprofile$Beta_b, minRandL = 4, minRL = 25, X = NULL),
+  expect_equal(Zalpha_BetaCDF(pos = df$POS, ws  = 3000, x = as.matrix(df[,3:7]), dist = df$dist, LDprofile_bins = LDprofile$bin, LDprofile_Beta_a = LDprofile$Beta_a, LDprofile_Beta_b = LDprofile$Beta_b, minRandL = 4, minRL = 25, X = NULL),
                list(
                  position=c(100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500),
                  Zalpha_BetaCDF=c(NA,NA,NA,NA,
@@ -55,7 +55,7 @@ test_that("Zalpha_BetaCDF calculates Zalpha_BetaCDF statistic correctly", {
 
 test_that("Zalpha_BetaCDF calculates Zalpha_BetaCDF statistic correctly with a different window size", {
 
-  expect_equal(Zalpha_BetaCDF(pos = df$POS, x = as.matrix(df[,3:7]), dist = df$dist, ws  = 1100, LDprofile_bins = LDprofile$bin, LDprofile_Beta_a = LDprofile$Beta_a, LDprofile_Beta_b = LDprofile$Beta_b, minRandL = 4, minRL = 25, X = NULL),
+  expect_equal(Zalpha_BetaCDF(pos = df$POS, ws  = 1100, x = as.matrix(df[,3:7]), dist = df$dist, LDprofile_bins = LDprofile$bin, LDprofile_Beta_a = LDprofile$Beta_a, LDprofile_Beta_b = LDprofile$Beta_b, minRandL = 4, minRL = 25, X = NULL),
                list(
                  position=c(100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500),
                  Zalpha_BetaCDF=c(NA,NA,NA,NA,NA,
@@ -74,7 +74,7 @@ test_that("Zalpha_BetaCDF calculates Zalpha_BetaCDF statistic correctly with cha
   df1<-df
   df1[df1==1]<-"A"
   df1[df1==2]<-"B"
-  expect_equal(Zalpha_BetaCDF(pos = df$POS, x = as.matrix(df1[,3:7]), dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_Beta_a = LDprofile$Beta_a, LDprofile_Beta_b = LDprofile$Beta_b, minRandL = 4, minRL = 25, X = NULL),
+  expect_equal(Zalpha_BetaCDF(pos = df$POS, ws  = 3000, x = as.matrix(df1[,3:7]), dist = df$dist, LDprofile_bins = LDprofile$bin, LDprofile_Beta_a = LDprofile$Beta_a, LDprofile_Beta_b = LDprofile$Beta_b, minRandL = 4, minRL = 25, X = NULL),
                list(
                  position=c(100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500),
                  Zalpha_BetaCDF=c(NA,NA,NA,NA,
@@ -93,7 +93,7 @@ test_that("Zalpha_BetaCDF calculates Zalpha_BetaCDF statistic correctly with cha
 
 test_that("Zalpha_BetaCDF calculates Zalpha_BetaCDF statistic correctly with X supplied", {
 
-  expect_equal(Zalpha_BetaCDF(pos = df$POS, x = as.matrix(df[,3:7]), dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_Beta_a = LDprofile$Beta_a, LDprofile_Beta_b = LDprofile$Beta_b, minRandL = 4, minRL = 25, X = c(700,900)),
+  expect_equal(Zalpha_BetaCDF(pos = df$POS, ws  = 3000, x = as.matrix(df[,3:7]), dist = df$dist, LDprofile_bins = LDprofile$bin, LDprofile_Beta_a = LDprofile$Beta_a, LDprofile_Beta_b = LDprofile$Beta_b, minRandL = 4, minRL = 25, X = c(700,900)),
                list(
                  position=c(700,800,900),
                  Zalpha_BetaCDF=c(0.461984646273587,
@@ -106,7 +106,7 @@ test_that("Zalpha_BetaCDF calculates Zalpha_BetaCDF statistic correctly with X s
 
 test_that("Zalpha_BetaCDF fails with an X supplied outside of the region defined in pos", {
 
-  expect_error(Zalpha_BetaCDF(pos = df$POS, x = as.matrix(df[,3:7]), dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_Beta_a = LDprofile$Beta_a, LDprofile_Beta_b = LDprofile$Beta_b, minRandL = 4, minRL = 25, X = c(7000,9000)),
+  expect_error(Zalpha_BetaCDF(pos = df$POS, ws  = 3000, x = as.matrix(df[,3:7]), dist = df$dist, LDprofile_bins = LDprofile$bin, LDprofile_Beta_a = LDprofile$Beta_a, LDprofile_Beta_b = LDprofile$Beta_b, minRandL = 4, minRL = 25, X = c(7000,9000)),
                "The region specified by X is outside the region contained in the pos vector")
 })
 
@@ -114,7 +114,7 @@ test_that("Zalpha_BetaCDF fails with an X supplied outside of the region defined
 
 test_that("Zalpha_BetaCDF fails with an X supplied as a character", {
 
-  expect_error(Zalpha_BetaCDF(pos = df$POS, x = as.matrix(df[,3:7]), dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_Beta_a = LDprofile$Beta_a, LDprofile_Beta_b = LDprofile$Beta_b, minRandL = 4, minRL = 25, X = c("700bp","900bp")),
+  expect_error(Zalpha_BetaCDF(pos = df$POS, ws  = 3000, x = as.matrix(df[,3:7]), dist = df$dist, LDprofile_bins = LDprofile$bin, LDprofile_Beta_a = LDprofile$Beta_a, LDprofile_Beta_b = LDprofile$Beta_b, minRandL = 4, minRL = 25, X = c("700bp","900bp")),
                "X should be a numeric vector of length 2 e.g. c(100,200)",
                fixed=TRUE)
 })
@@ -123,7 +123,7 @@ test_that("Zalpha_BetaCDF fails with an X supplied as a character", {
 
 test_that("Zalpha_BetaCDF fails with an X supplied as only one number", {
 
-  expect_error(Zalpha_BetaCDF(pos = df$POS, x = as.matrix(df[,3:7]), dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_Beta_a = LDprofile$Beta_a, LDprofile_Beta_b = LDprofile$Beta_b, minRandL = 4, minRL = 25, X = 700),
+  expect_error(Zalpha_BetaCDF(pos = df$POS, ws  = 3000, x = as.matrix(df[,3:7]), dist = df$dist, LDprofile_bins = LDprofile$bin, LDprofile_Beta_a = LDprofile$Beta_a, LDprofile_Beta_b = LDprofile$Beta_b, minRandL = 4, minRL = 25, X = 700),
                "X should be a numeric vector of length 2 e.g. c(100,200)",
                fixed=TRUE)
 })
@@ -132,7 +132,7 @@ test_that("Zalpha_BetaCDF fails with an X supplied as only one number", {
 
 test_that("Zalpha_BetaCDF fails with an X supplied with too many numbers", {
 
-  expect_error(Zalpha_BetaCDF(pos = df$POS, x = as.matrix(df[,3:7]), dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_Beta_a = LDprofile$Beta_a, LDprofile_Beta_b = LDprofile$Beta_b, minRandL = 4, minRL = 25, X = c(700,900,1100)),
+  expect_error(Zalpha_BetaCDF(pos = df$POS, ws  = 3000, x = as.matrix(df[,3:7]), dist = df$dist, LDprofile_bins = LDprofile$bin, LDprofile_Beta_a = LDprofile$Beta_a, LDprofile_Beta_b = LDprofile$Beta_b, minRandL = 4, minRL = 25, X = c(700,900,1100)),
                "X should be a numeric vector of length 2 e.g. c(100,200)",
                fixed=TRUE)
 })
@@ -141,7 +141,7 @@ test_that("Zalpha_BetaCDF fails with an X supplied with too many numbers", {
 
 test_that("Zalpha_BetaCDF fails when ws is non-numeric", {
 
-  expect_error(Zalpha_BetaCDF(pos = df$POS, x = as.matrix(df[,3:7]), dist = df$dist, ws  = "3000bp", LDprofile_bins = LDprofile$bin, LDprofile_Beta_a = LDprofile$Beta_a, LDprofile_Beta_b = LDprofile$Beta_b, minRandL = 4, minRL = 25, X = NULL),
+  expect_error(Zalpha_BetaCDF(pos = df$POS, ws  = "3000bp", x = as.matrix(df[,3:7]), dist = df$dist, LDprofile_bins = LDprofile$bin, LDprofile_Beta_a = LDprofile$Beta_a, LDprofile_Beta_b = LDprofile$Beta_b, minRandL = 4, minRL = 25, X = NULL),
                "ws must be a number greater than 0")
 })
 
@@ -149,7 +149,7 @@ test_that("Zalpha_BetaCDF fails when ws is non-numeric", {
 
 test_that("Zalpha_BetaCDF fails when ws is zero", {
 
-  expect_error(Zalpha_BetaCDF(pos = df$POS, x = as.matrix(df[,3:7]), dist = df$dist, ws  = 0, LDprofile_bins = LDprofile$bin, LDprofile_Beta_a = LDprofile$Beta_a, LDprofile_Beta_b = LDprofile$Beta_b, minRandL = 4, minRL = 25, X = NULL),
+  expect_error(Zalpha_BetaCDF(pos = df$POS, ws  = 0, x = as.matrix(df[,3:7]), dist = df$dist, LDprofile_bins = LDprofile$bin, LDprofile_Beta_a = LDprofile$Beta_a, LDprofile_Beta_b = LDprofile$Beta_b, minRandL = 4, minRL = 25, X = NULL),
                "ws must be a number greater than 0")
 })
 
@@ -157,7 +157,7 @@ test_that("Zalpha_BetaCDF fails when ws is zero", {
 
 test_that("Zalpha_BetaCDF fails when pos is non-numeric", {
 
-  expect_error(Zalpha_BetaCDF(pos = paste0(df$POS,"bp"), x = as.matrix(df[,3:7]), dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_Beta_a = LDprofile$Beta_a, LDprofile_Beta_b = LDprofile$Beta_b, minRandL = 4, minRL = 25, X = NULL),
+  expect_error(Zalpha_BetaCDF(pos = paste0(df$POS,"bp"), ws  = 3000, x = as.matrix(df[,3:7]), dist = df$dist, LDprofile_bins = LDprofile$bin, LDprofile_Beta_a = LDprofile$Beta_a, LDprofile_Beta_b = LDprofile$Beta_b, minRandL = 4, minRL = 25, X = NULL),
                "pos must be a numeric vector")
 })
 
@@ -165,7 +165,7 @@ test_that("Zalpha_BetaCDF fails when pos is non-numeric", {
 
 test_that("Zalpha_BetaCDF fails when minLandR is non-numeric", {
 
-  expect_error(Zalpha_BetaCDF(pos = df$POS, x = as.matrix(df[,3:7]), dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_Beta_a = LDprofile$Beta_a, LDprofile_Beta_b = LDprofile$Beta_b, minRandL = "4snps", minRL = 25, X = NULL),
+  expect_error(Zalpha_BetaCDF(pos = df$POS, ws  = 3000, x = as.matrix(df[,3:7]), dist = df$dist, LDprofile_bins = LDprofile$bin, LDprofile_Beta_a = LDprofile$Beta_a, LDprofile_Beta_b = LDprofile$Beta_b, minRandL = "4snps", minRL = 25, X = NULL),
                "minRandL must be a number greater than or equal to 0")
 })
 
@@ -173,7 +173,7 @@ test_that("Zalpha_BetaCDF fails when minLandR is non-numeric", {
 
 test_that("Zalpha_BetaCDF fails when minLandR is negative", {
 
-  expect_error(Zalpha_BetaCDF(pos = df$POS, x = as.matrix(df[,3:7]), dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_Beta_a = LDprofile$Beta_a, LDprofile_Beta_b = LDprofile$Beta_b, minRandL = -1, minRL = 25, X = NULL),
+  expect_error(Zalpha_BetaCDF(pos = df$POS, ws  = 3000, x = as.matrix(df[,3:7]), dist = df$dist, LDprofile_bins = LDprofile$bin, LDprofile_Beta_a = LDprofile$Beta_a, LDprofile_Beta_b = LDprofile$Beta_b, minRandL = -1, minRL = 25, X = NULL),
                "minRandL must be a number greater than or equal to 0")
 })
 
@@ -181,7 +181,7 @@ test_that("Zalpha_BetaCDF fails when minLandR is negative", {
 
 test_that("Zalpha_BetaCDF fails when minLR is non-numeric", {
 
-  expect_error(Zalpha_BetaCDF(pos = df$POS, x = as.matrix(df[,3:7]), dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_Beta_a = LDprofile$Beta_a, LDprofile_Beta_b = LDprofile$Beta_b, minRandL = 4, minRL = "25b", X = NULL),
+  expect_error(Zalpha_BetaCDF(pos = df$POS, ws  = 3000, x = as.matrix(df[,3:7]), dist = df$dist, LDprofile_bins = LDprofile$bin, LDprofile_Beta_a = LDprofile$Beta_a, LDprofile_Beta_b = LDprofile$Beta_b, minRandL = 4, minRL = "25b", X = NULL),
                "minRL must be a number greater than or equal to 0")
 })
 
@@ -189,7 +189,7 @@ test_that("Zalpha_BetaCDF fails when minLR is non-numeric", {
 
 test_that("Zalpha_BetaCDF fails when minLR is negative", {
 
-  expect_error(Zalpha_BetaCDF(pos = df$POS, x = as.matrix(df[,3:7]), dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_Beta_a = LDprofile$Beta_a, LDprofile_Beta_b = LDprofile$Beta_b, minRandL = 4, minRL = -25, X = NULL),
+  expect_error(Zalpha_BetaCDF(pos = df$POS, ws  = 3000, x = as.matrix(df[,3:7]), dist = df$dist, LDprofile_bins = LDprofile$bin, LDprofile_Beta_a = LDprofile$Beta_a, LDprofile_Beta_b = LDprofile$Beta_b, minRandL = 4, minRL = -25, X = NULL),
                "minRL must be a number greater than or equal to 0")
 })
 
@@ -197,7 +197,7 @@ test_that("Zalpha_BetaCDF fails when minLR is negative", {
 
 test_that("Zalpha_BetaCDF warns about all NAs", {
 
-  expect_warning(Zalpha_BetaCDF(pos = df$POS, x = as.matrix(df[,3:7]), dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_Beta_a = LDprofile$Beta_a, LDprofile_Beta_b = LDprofile$Beta_b, minRandL = 4, minRL = 50, X = NULL),
+  expect_warning(Zalpha_BetaCDF(pos = df$POS, ws  = 3000, x = as.matrix(df[,3:7]), dist = df$dist, LDprofile_bins = LDprofile$bin, LDprofile_Beta_a = LDprofile$Beta_a, LDprofile_Beta_b = LDprofile$Beta_b, minRandL = 4, minRL = 50, X = NULL),
                  "No Zalpha_BetaCDF values were calculated, try reducing minRandL and minRL or increasing the window size")
 })
 
@@ -205,7 +205,7 @@ test_that("Zalpha_BetaCDF warns about all NAs", {
 
 test_that("Zalpha_BetaCDF fails when dist is non-numeric", {
 
-  expect_error(Zalpha_BetaCDF(pos = df$POS, x = as.matrix(df[,3:7]), dist = paste0(df$dist,"dist"), ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_Beta_a = LDprofile$Beta_a, LDprofile_Beta_b = LDprofile$Beta_b, minRandL = 4, minRL = 25, X = NULL),
+  expect_error(Zalpha_BetaCDF(pos = df$POS, ws  = 3000, x = as.matrix(df[,3:7]), dist = paste0(df$dist,"dist"), LDprofile_bins = LDprofile$bin, LDprofile_Beta_a = LDprofile$Beta_a, LDprofile_Beta_b = LDprofile$Beta_b, minRandL = 4, minRL = 25, X = NULL),
                "dist must be a numeric vector")
 })
 
@@ -213,7 +213,7 @@ test_that("Zalpha_BetaCDF fails when dist is non-numeric", {
 
 test_that("Zalpha_BetaCDF fails when dist is a different length to pos", {
 
-  expect_error(Zalpha_BetaCDF(pos = df$POS, x = as.matrix(df[,3:7]), dist = c(df$dist,1), ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_Beta_a = LDprofile$Beta_a, LDprofile_Beta_b = LDprofile$Beta_b, minRandL = 4, minRL = 25, X = NULL),
+  expect_error(Zalpha_BetaCDF(pos = df$POS, ws  = 3000, x = as.matrix(df[,3:7]), dist = c(df$dist,1), LDprofile_bins = LDprofile$bin, LDprofile_Beta_a = LDprofile$Beta_a, LDprofile_Beta_b = LDprofile$Beta_b, minRandL = 4, minRL = 25, X = NULL),
                "The number of values in dist must equal the number of SNP locations given in pos")
 })
 
@@ -221,7 +221,7 @@ test_that("Zalpha_BetaCDF fails when dist is a different length to pos", {
 
 test_that("Zalpha_BetaCDF fails when LDprofile_bins is non-numeric", {
 
-  expect_error(Zalpha_BetaCDF(pos = df$POS, x = as.matrix(df[,3:7]), dist = df$dist, ws  = 3000, LDprofile_bins = paste0(LDprofile$bin,"dist"), LDprofile_Beta_a = LDprofile$Beta_a, LDprofile_Beta_b = LDprofile$Beta_b, minRandL = 4, minRL = 25, X = NULL),
+  expect_error(Zalpha_BetaCDF(pos = df$POS, ws  = 3000, x = as.matrix(df[,3:7]), dist = df$dist, LDprofile_bins = paste0(LDprofile$bin,"dist"), LDprofile_Beta_a = LDprofile$Beta_a, LDprofile_Beta_b = LDprofile$Beta_b, minRandL = 4, minRL = 25, X = NULL),
                "LDprofile_bins must be a numeric vector")
 })
 
@@ -241,7 +241,7 @@ tempLDprofile<-data.frame(
 )
 test_that("Zalpha_BetaCDF fails when LDprofile_bins are not of equal size", {
 
-  expect_error(Zalpha_BetaCDF(pos = df$POS, x = as.matrix(df[,3:7]), dist = df$dist, ws  = 3000, LDprofile_bins = tempLDprofile$bin, LDprofile_Beta_a = LDprofile$Beta_a, LDprofile_Beta_b = LDprofile$Beta_b, minRandL = 4, minRL = 25, X = NULL),
+  expect_error(Zalpha_BetaCDF(pos = df$POS, ws  = 3000, x = as.matrix(df[,3:7]), dist = df$dist, LDprofile_bins = tempLDprofile$bin, LDprofile_Beta_a = LDprofile$Beta_a, LDprofile_Beta_b = LDprofile$Beta_b, minRandL = 4, minRL = 25, X = NULL),
                "LDprofile_bins must be of equal size")
 })
 
@@ -249,7 +249,7 @@ test_that("Zalpha_BetaCDF fails when LDprofile_bins are not of equal size", {
 
 test_that("Zalpha_BetaCDF fails when LDprofile_Beta_a is non-numeric", {
 
-  expect_error(Zalpha_BetaCDF(pos = df$POS, x = as.matrix(df[,3:7]), dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_Beta_a = paste0(LDprofile$Beta_a,"r"), LDprofile_Beta_b = LDprofile$Beta_b, minRandL = 4, minRL = 25, X = NULL),
+  expect_error(Zalpha_BetaCDF(pos = df$POS, ws  = 3000, x = as.matrix(df[,3:7]), dist = df$dist, LDprofile_bins = LDprofile$bin, LDprofile_Beta_a = paste0(LDprofile$Beta_a,"r"), LDprofile_Beta_b = LDprofile$Beta_b, minRandL = 4, minRL = 25, X = NULL),
                "LDprofile_Beta_a must be a numeric vector")
 })
 
@@ -257,7 +257,7 @@ test_that("Zalpha_BetaCDF fails when LDprofile_Beta_a is non-numeric", {
 
 test_that("Zalpha_BetaCDF fails when LDprofile_Beta_b is non-numeric", {
 
-  expect_error(Zalpha_BetaCDF(pos = df$POS, x = as.matrix(df[,3:7]), dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_Beta_a = LDprofile$Beta_a, LDprofile_Beta_b = paste0(LDprofile$Beta_b,"sd"), minRandL = 4, minRL = 25, X = NULL),
+  expect_error(Zalpha_BetaCDF(pos = df$POS, ws  = 3000, x = as.matrix(df[,3:7]), dist = df$dist, LDprofile_bins = LDprofile$bin, LDprofile_Beta_a = LDprofile$Beta_a, LDprofile_Beta_b = paste0(LDprofile$Beta_b,"sd"), minRandL = 4, minRL = 25, X = NULL),
                "LDprofile_Beta_b must be a numeric vector")
 })
 
@@ -265,7 +265,7 @@ test_that("Zalpha_BetaCDF fails when LDprofile_Beta_b is non-numeric", {
 
 test_that("Zalpha_BetaCDF fails when x is not a matrix", {
 
-  expect_error(Zalpha_BetaCDF(pos = df$POS, x = df[,3:7], dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_Beta_a = LDprofile$Beta_a, LDprofile_Beta_b = LDprofile$Beta_b, minRandL = 4, minRL = 25, X = NULL),
+  expect_error(Zalpha_BetaCDF(pos = df$POS, ws  = 3000, x = df[,3:7], dist = df$dist, LDprofile_bins = LDprofile$bin, LDprofile_Beta_a = LDprofile$Beta_a, LDprofile_Beta_b = LDprofile$Beta_b, minRandL = 4, minRL = 25, X = NULL),
                "x must be a matrix")
 })
 
@@ -273,7 +273,7 @@ test_that("Zalpha_BetaCDF fails when x is not a matrix", {
 
 test_that("Zalpha_BetaCDF fails when the number of rows in x is not equal to the length of pos", {
 
-  expect_error(Zalpha_BetaCDF(pos = df$POS, x = t(as.matrix(df[,3:7])), dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_Beta_a = LDprofile$Beta_a, LDprofile_Beta_b = LDprofile$Beta_b, minRandL = 4, minRL = 25, X = NULL),
+  expect_error(Zalpha_BetaCDF(pos = df$POS, ws  = 3000, x = t(as.matrix(df[,3:7])), dist = df$dist, LDprofile_bins = LDprofile$bin, LDprofile_Beta_a = LDprofile$Beta_a, LDprofile_Beta_b = LDprofile$Beta_b, minRandL = 4, minRL = 25, X = NULL),
                "The number of rows in x must equal the number of SNP locations given in pos")
 })
 
@@ -283,7 +283,7 @@ test_that("Zalpha_BetaCDF fails when a SNP has only one allele", {
 
   df1<-df
   df1[1,3:7]<-1
-  expect_error(Zalpha_BetaCDF(pos = df1$POS, x = as.matrix(df1[,3:7]), dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_Beta_a = LDprofile$Beta_a, LDprofile_Beta_b = LDprofile$Beta_b, minRandL = 4, minRL = 25, X = NULL),
+  expect_error(Zalpha_BetaCDF(pos = df1$POS, ws  = 3000, x = as.matrix(df1[,3:7]), dist = df$dist, LDprofile_bins = LDprofile$bin, LDprofile_Beta_a = LDprofile$Beta_a, LDprofile_Beta_b = LDprofile$Beta_b, minRandL = 4, minRL = 25, X = NULL),
                "SNPs must all be biallelic")
 })
 
@@ -293,7 +293,7 @@ test_that("Zalpha_BetaCDF fails when a SNP has more than two alleles", {
 
   df1<-df
   df1[1,7]<-3
-  expect_error(Zalpha_BetaCDF(pos = df1$POS, x = as.matrix(df1[,3:7]), dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_Beta_a = LDprofile$Beta_a, LDprofile_Beta_b = LDprofile$Beta_b, minRandL = 4, minRL = 25, X = NULL),
+  expect_error(Zalpha_BetaCDF(pos = df1$POS, ws  = 3000, x = as.matrix(df1[,3:7]), dist = df$dist, LDprofile_bins = LDprofile$bin, LDprofile_Beta_a = LDprofile$Beta_a, LDprofile_Beta_b = LDprofile$Beta_b, minRandL = 4, minRL = 25, X = NULL),
                "SNPs must all be biallelic")
 })
 
@@ -301,7 +301,7 @@ test_that("Zalpha_BetaCDF fails when a SNP has more than two alleles", {
 
 test_that("Zalpha_BetaCDF fails when LDprofile_bins and LDprofile_Beta_a are different lengths", {
 
-  expect_error(Zalpha_BetaCDF(pos = df$POS, x = as.matrix(df[,3:7]), dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_Beta_a = c(LDprofile$Beta_a,1), LDprofile_Beta_b = LDprofile$Beta_b, minRandL = 4, minRL = 25, X = NULL),
+  expect_error(Zalpha_BetaCDF(pos = df$POS, ws  = 3000, x = as.matrix(df[,3:7]), dist = df$dist, LDprofile_bins = LDprofile$bin, LDprofile_Beta_a = c(LDprofile$Beta_a,1), LDprofile_Beta_b = LDprofile$Beta_b, minRandL = 4, minRL = 25, X = NULL),
                "LDprofile_Beta_a must contain the same number of values as there are bins given in LDprofile_bins")
 })
 
@@ -309,7 +309,7 @@ test_that("Zalpha_BetaCDF fails when LDprofile_bins and LDprofile_Beta_a are dif
 
 test_that("Zalpha_BetaCDF fails when LDprofile_bins and LDprofile_Beta_b are different lengths", {
 
-  expect_error(Zalpha_BetaCDF(pos = df$POS, x = as.matrix(df[,3:7]), dist = df$dist, ws  = 3000, LDprofile_bins = LDprofile$bin, LDprofile_Beta_a = LDprofile$Beta_a, LDprofile_Beta_b = c(LDprofile$Beta_b,1), minRandL = 4, minRL = 25, X = NULL),
+  expect_error(Zalpha_BetaCDF(pos = df$POS, ws  = 3000, x = as.matrix(df[,3:7]), dist = df$dist, LDprofile_bins = LDprofile$bin, LDprofile_Beta_a = LDprofile$Beta_a, LDprofile_Beta_b = c(LDprofile$Beta_b,1), minRandL = 4, minRL = 25, X = NULL),
                "LDprofile_Beta_b must contain the same number of values as there are bins given in LDprofile_bins")
 })
 

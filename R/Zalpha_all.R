@@ -16,8 +16,8 @@
 #' @importFrom stats cor pbeta
 #'
 #' @param pos A numeric vector of SNP locations
-#' @param x Optional. A matrix of SNP values. Columns represent chromosomes; rows are SNP locations. Hence, the number of rows should equal the length of the \code{pos} vector. SNPs should all be biallelic.
 #' @param ws The window size which the statistics will be calculated over. This should be on the same scale as the \code{pos} vector.
+#' @param x Optional. A matrix of SNP values. Columns represent chromosomes; rows are SNP locations. Hence, the number of rows should equal the length of the \code{pos} vector. SNPs should all be biallelic.
 #' @param dist Optional. A numeric vector of genetic distances (e.g. cM, LDU). This should be the same length as \code{pos}.
 #' @param LDprofile_bins Optional. A numeric vector containing the lower bound of the bins used in the LD profile. These should be of equal size.
 #' @param LDprofile_rsq Optional. A numeric vector containing the expected \eqn{r^2}{r^2} values for the corresponding bin in the LD profile. Must be between 0 and 1.
@@ -36,18 +36,18 @@
 #' data(LDprofile)
 #' ## run Zalpha_all over all the SNPs with a window size of 3000 bp
 #' ## will return all 15 statistics
-#' Zalpha_all(snps$positions,as.matrix(snps[,3:12]),3000,snps$distances,
+#' Zalpha_all(snps$positions,3000,as.matrix(snps[,3:12]),snps$distances,
 #'  LDprofile$bin,LDprofile$rsq,LDprofile$sd,LDprofile$Beta_a,LDprofile$Beta_b)
 #' ## only return results for SNPs between locations 600 and 1500 bp
-#' Zalpha_all(snps$positions,as.matrix(snps[,3:12]),3000,snps$distances,
+#' Zalpha_all(snps$positions,3000,as.matrix(snps[,3:12]),snps$distances,
 #'  LDprofile$bin,LDprofile$rsq,LDprofile$sd,LDprofile$Beta_a,LDprofile$Beta_b,X=c(600,1500))
 #' ## will only return statistics not requiring an LD profile
-#'Zalpha_all(snps$positions,as.matrix(snps[,3:12]),3000)
+#'Zalpha_all(snps$positions,3000,as.matrix(snps[,3:12]))
 #'
 #' @export
 #' @seealso \code{\link{Zalpha}} \code{\link{Zalpha_expected}} \code{\link{Zalpha_rsq_over_expected}} \code{\link{Zalpha_log_rsq_over_expected}} \code{\link{Zalpha_Zscore}} \code{\link{Zalpha_BetaCDF}} \code{\link{Zbeta}} \code{\link{Zbeta_expected}} \code{\link{Zbeta_rsq_over_expected}} \code{\link{Zbeta_log_rsq_over_expected}} \code{\link{Zbeta_Zscore}} \code{\link{Zbeta_BetaCDF}} \code{\link{LR}} \code{\link{L_plus_R}}
 
-Zalpha_all <- function(pos, x=NULL, ws, dist=NULL, LDprofile_bins=NULL, LDprofile_rsq=NULL, LDprofile_sd=NULL, LDprofile_Beta_a=NULL, LDprofile_Beta_b=NULL, minRandL = 4, minRL = 25, X = NULL) {
+Zalpha_all <- function(pos, ws, x=NULL, dist=NULL, LDprofile_bins=NULL, LDprofile_rsq=NULL, LDprofile_sd=NULL, LDprofile_Beta_a=NULL, LDprofile_Beta_b=NULL, minRandL = 4, minRL = 25, X = NULL) {
   #Check things are in the correct format
 
   #Check pos is a numeric vector

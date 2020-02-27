@@ -15,7 +15,7 @@ df<-data.frame(
 
 test_that("Zalpha calculates Zalpha statistic correctly", {
 
-  expect_equal(Zalpha(pos = df$POS, x = as.matrix(df[,3:7]), ws  = 3000, minRandL = 4, minRL = 25, X = NULL),
+  expect_equal(Zalpha(pos = df$POS, ws  = 3000, x = as.matrix(df[,3:7]), minRandL = 4, minRL = 25, X = NULL),
                list(
                  position=c(100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500),
                  Zalpha=c(NA,NA,NA,NA,
@@ -34,7 +34,7 @@ test_that("Zalpha calculates Zalpha statistic correctly", {
 
 test_that("Zalpha calculates Zalpha statistic correctly with a different window size", {
 
-  expect_equal(Zalpha(pos = df$POS, x = as.matrix(df[,3:7]), ws  = 1100, minRandL = 4, minRL = 25, X = NULL),
+  expect_equal(Zalpha(pos = df$POS, ws  = 1100, x = as.matrix(df[,3:7]), minRandL = 4, minRL = 25, X = NULL),
                list(
                  position=c(100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500),
                  Zalpha=c(NA,NA,NA,NA,NA,
@@ -54,7 +54,7 @@ test_that("Zalpha calculates Zalpha statistic correctly with character matrix", 
   df1<-df
   df1[df1==1]<-"A"
   df1[df1==2]<-"B"
-  expect_equal(Zalpha(pos = df1$POS, x = as.matrix(df1[,3:7]), ws  = 3000, minRandL = 4, minRL = 25, X = NULL),
+  expect_equal(Zalpha(pos = df1$POS, ws  = 3000, x = as.matrix(df1[,3:7]), minRandL = 4, minRL = 25, X = NULL),
                list(
                  position=c(100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500),
                  Zalpha=c(NA,NA,NA,NA,
@@ -73,7 +73,7 @@ test_that("Zalpha calculates Zalpha statistic correctly with character matrix", 
 
 test_that("Zalpha calculates Zalpha statistic correctly with X supplied", {
 
-  expect_equal(Zalpha(pos = df$POS, x = as.matrix(df[,3:7]), ws  = 3000, minRandL = 4, minRL = 25, X = c(700,900)),
+  expect_equal(Zalpha(pos = df$POS, ws  = 3000, x = as.matrix(df[,3:7]), minRandL = 4, minRL = 25, X = c(700,900)),
                list(
                  position=c(700,800,900),
                  Zalpha=c(((7+31/72)/15+(7+13/48)/28)/2,
@@ -86,7 +86,7 @@ test_that("Zalpha calculates Zalpha statistic correctly with X supplied", {
 
 test_that("Zalpha fails with an X supplied outside of the region defined in pos", {
 
-  expect_error(Zalpha(pos = df$POS, x = as.matrix(df[,3:7]), ws  = 3000, minRandL = 4, minRL = 25, X = c(7000,9000)),
+  expect_error(Zalpha(pos = df$POS, ws  = 3000, x = as.matrix(df[,3:7]), minRandL = 4, minRL = 25, X = c(7000,9000)),
                "The region specified by X is outside the region contained in the pos vector")
 })
 
@@ -94,7 +94,7 @@ test_that("Zalpha fails with an X supplied outside of the region defined in pos"
 
 test_that("Zalpha fails with an X supplied as a character", {
 
-  expect_error(Zalpha(pos = df$POS, x = as.matrix(df[,3:7]), ws  = 3000, minRandL = 4, minRL = 25, X = c("700bp","900bp")),
+  expect_error(Zalpha(pos = df$POS, ws  = 3000, x = as.matrix(df[,3:7]), minRandL = 4, minRL = 25, X = c("700bp","900bp")),
                "X should be a numeric vector of length 2 e.g. c(100,200)",
                fixed=TRUE)
 })
@@ -103,7 +103,7 @@ test_that("Zalpha fails with an X supplied as a character", {
 
 test_that("Zalpha fails with an X supplied as only one number", {
 
-  expect_error(Zalpha(pos = df$POS, x = as.matrix(df[,3:7]), ws  = 3000, minRandL = 4, minRL = 25, X = 700),
+  expect_error(Zalpha(pos = df$POS, ws  = 3000, x = as.matrix(df[,3:7]), minRandL = 4, minRL = 25, X = 700),
                "X should be a numeric vector of length 2 e.g. c(100,200)",
                fixed=TRUE)
 })
@@ -112,7 +112,7 @@ test_that("Zalpha fails with an X supplied as only one number", {
 
 test_that("Zalpha fails with an X supplied with too many numbers", {
 
-  expect_error(Zalpha(pos = df$POS, x = as.matrix(df[,3:7]), ws  = 3000, minRandL = 4, minRL = 25, X = c(700,900,1100)),
+  expect_error(Zalpha(pos = df$POS, ws  = 3000, x = as.matrix(df[,3:7]), minRandL = 4, minRL = 25, X = c(700,900,1100)),
                "X should be a numeric vector of length 2 e.g. c(100,200)",
                fixed=TRUE)
 })
@@ -121,7 +121,7 @@ test_that("Zalpha fails with an X supplied with too many numbers", {
 
 test_that("Zalpha fails when ws is non-numeric", {
 
-  expect_error(Zalpha(pos = df$POS, x = as.matrix(df[,3:7]), ws  = "3000bp", minRandL = 4, minRL = 25, X = NULL),
+  expect_error(Zalpha(pos = df$POS, ws  = "3000bp", x = as.matrix(df[,3:7]), minRandL = 4, minRL = 25, X = NULL),
                "ws must be a number greater than 0")
 })
 
@@ -129,7 +129,7 @@ test_that("Zalpha fails when ws is non-numeric", {
 
 test_that("Zalpha fails when ws is zero", {
 
-  expect_error(Zalpha(pos = df$POS, x = as.matrix(df[,3:7]), ws  = 0, minRandL = 4, minRL = 25, X = NULL),
+  expect_error(Zalpha(pos = df$POS, ws  = 0, x = as.matrix(df[,3:7]), minRandL = 4, minRL = 25, X = NULL),
                "ws must be a number greater than 0")
 })
 
@@ -137,7 +137,7 @@ test_that("Zalpha fails when ws is zero", {
 
 test_that("Zalpha fails when pos is non-numeric", {
 
-  expect_error(Zalpha(pos = paste0(df$POS,"bp"), x = as.matrix(df[,3:7]), ws  = 3000, minRandL = 4, minRL = 25, X = NULL),
+  expect_error(Zalpha(pos = paste0(df$POS,"bp"), ws  = 3000, x = as.matrix(df[,3:7]), minRandL = 4, minRL = 25, X = NULL),
                "pos must be a numeric vector")
 })
 
@@ -145,7 +145,7 @@ test_that("Zalpha fails when pos is non-numeric", {
 
 test_that("Zalpha fails when minLandR is non-numeric", {
 
-  expect_error(Zalpha(pos = df$POS, x = as.matrix(df[,3:7]), ws  = 3000, minRandL = "4snps", minRL = 25, X = NULL),
+  expect_error(Zalpha(pos = df$POS, ws  = 3000, x = as.matrix(df[,3:7]), minRandL = "4snps", minRL = 25, X = NULL),
                "minRandL must be a number greater than or equal to 0")
 })
 
@@ -153,7 +153,7 @@ test_that("Zalpha fails when minLandR is non-numeric", {
 
 test_that("Zalpha fails when minLandR is negative", {
 
-  expect_error(Zalpha(pos = df$POS, x = as.matrix(df[,3:7]), ws  = 3000, minRandL = -1, minRL = 25, X = NULL),
+  expect_error(Zalpha(pos = df$POS, ws  = 3000, x = as.matrix(df[,3:7]), minRandL = -1, minRL = 25, X = NULL),
                "minRandL must be a number greater than or equal to 0")
 })
 
@@ -161,7 +161,7 @@ test_that("Zalpha fails when minLandR is negative", {
 
 test_that("Zalpha fails when minLR is non-numeric", {
 
-  expect_error(Zalpha(pos = df$POS, x = as.matrix(df[,3:7]), ws  = 3000, minRandL = 4, minRL = "25b", X = NULL),
+  expect_error(Zalpha(pos = df$POS, ws  = 3000, x = as.matrix(df[,3:7]), minRandL = 4, minRL = "25b", X = NULL),
                "minRL must be a number greater than or equal to 0")
 })
 
@@ -169,7 +169,7 @@ test_that("Zalpha fails when minLR is non-numeric", {
 
 test_that("Zalpha fails when minLR is negative", {
 
-  expect_error(Zalpha(pos = df$POS, x = as.matrix(df[,3:7]), ws  = 3000, minRandL = 4, minRL = -25, X = NULL),
+  expect_error(Zalpha(pos = df$POS, ws  = 3000, x = as.matrix(df[,3:7]), minRandL = 4, minRL = -25, X = NULL),
                "minRL must be a number greater than or equal to 0")
 })
 
@@ -177,7 +177,7 @@ test_that("Zalpha fails when minLR is negative", {
 
 test_that("Zalpha fails when x is not a matrix", {
 
-  expect_error(Zalpha(pos = df$POS, x = df[,3:7], ws  = 3000, minRandL = 4, minRL = 25, X = NULL),
+  expect_error(Zalpha(pos = df$POS, ws  = 3000, x = df[,3:7], minRandL = 4, minRL = 25, X = NULL),
                "x must be a matrix")
 })
 
@@ -185,7 +185,7 @@ test_that("Zalpha fails when x is not a matrix", {
 
 test_that("Zalpha fails when the number of rows in x is not equal to the length of pos", {
 
-  expect_error(Zalpha(pos = df$POS, x = t(as.matrix(df[,3:7])), ws  = 3000, minRandL = 4, minRL = 25, X = NULL),
+  expect_error(Zalpha(pos = df$POS, ws  = 3000, x = t(as.matrix(df[,3:7])), minRandL = 4, minRL = 25, X = NULL),
                "The number of rows in x must equal the number of SNP locations given in pos")
 })
 
@@ -195,7 +195,7 @@ test_that("Zalpha fails when a SNP has only one allele", {
 
   df1<-df
   df1[1,3:7]<-1
-  expect_error(Zalpha(pos = df1$POS, x = as.matrix(df1[,3:7]), ws  = 3000, minRandL = 4, minRL = 25, X = NULL),
+  expect_error(Zalpha(pos = df1$POS, ws  = 3000, x = as.matrix(df1[,3:7]), minRandL = 4, minRL = 25, X = NULL),
                "SNPs must all be biallelic")
 })
 
@@ -205,7 +205,7 @@ test_that("Zalpha fails when a SNP has more than two alleles", {
 
   df1<-df
   df1[1,7]<-3
-  expect_error(Zalpha(pos = df1$POS, x = as.matrix(df1[,3:7]), ws  = 3000, minRandL = 4, minRL = 25, X = NULL),
+  expect_error(Zalpha(pos = df1$POS, ws  = 3000, x = as.matrix(df1[,3:7]), minRandL = 4, minRL = 25, X = NULL),
                "SNPs must all be biallelic")
 })
 
@@ -213,6 +213,6 @@ test_that("Zalpha fails when a SNP has more than two alleles", {
 
 test_that("Zalpha warns about all NAs", {
 
-  expect_warning(Zalpha(pos = df$POS, x = as.matrix(df[,3:7]), ws  = 3000, minRandL = 4, minRL = 50, X = NULL),
+  expect_warning(Zalpha(pos = df$POS, ws  = 3000, x = as.matrix(df[,3:7]), minRandL = 4, minRL = 50, X = NULL),
                "No Zalpha values were calculated, try reducing minRandL and minRL or increasing the window size")
 })

@@ -4,17 +4,17 @@
 \alias{Zalpha_BetaCDF}
 \title{Runs the Zalpha function using a cumulative beta distribution function on the r-squared values for the region}
 \usage{
-Zalpha_BetaCDF(pos, x, dist, ws, LDprofile_bins, LDprofile_Beta_a,
+Zalpha_BetaCDF(pos, ws, x, dist, LDprofile_bins, LDprofile_Beta_a,
   LDprofile_Beta_b, minRandL = 4, minRL = 25, X = NULL)
 }
 \arguments{
 \item{pos}{A numeric vector of SNP locations}
 
+\item{ws}{The window size which the \eqn{Z_{\alpha}^{BetaCDF}}{Zalpha} statistic will be calculated over. This should be on the same scale as the \code{pos} vector.}
+
 \item{x}{A matrix of SNP values. Columns represent chromosomes; rows are SNP locations. Hence, the number of rows should equal the length of the \code{pos} vector. SNPs should all be biallelic.}
 
 \item{dist}{A numeric vector of genetic distances (e.g. cM, LDU). This should be the same length as \code{pos}.}
-
-\item{ws}{The window size which the \eqn{Z_{\alpha}^{BetaCDF}}{Zalpha} statistic will be calculated over. This should be on the same scale as the \code{pos} vector.}
 
 \item{LDprofile_bins}{A numeric vector containing the lower bound of the bins used in the LD profile. These should be of equal size.}
 
@@ -52,10 +52,10 @@ bound of the bin.
 data(snps)
 data(LDprofile)
 ## run Zalpha_BetaCDF over all the SNPs with a window size of 3000 bp
-Zalpha_BetaCDF(snps$positions,as.matrix(snps[,3:12]),snps$distances,3000,
+Zalpha_BetaCDF(snps$positions,3000,as.matrix(snps[,3:12]),snps$distances,
  LDprofile$bin,LDprofile$Beta_a,LDprofile$Beta_b)
 ## only return results for SNPs between locations 600 and 1500 bp
-Zalpha_BetaCDF(snps$positions,as.matrix(snps[,3:12]),snps$distances,3000,
+Zalpha_BetaCDF(snps$positions,3000,as.matrix(snps[,3:12]),snps$distances,
  LDprofile$bin,LDprofile$Beta_a,LDprofile$Beta_b,X=c(600,1500))
 
 }
