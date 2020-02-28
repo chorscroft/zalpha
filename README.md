@@ -24,6 +24,15 @@ library(devtools)
 install_github("chorscroft/zalpha")
 ```
 
+## How to use the zalpha package
+
+For a full explanation of how to use the zalpha package, please see the "zalpha" vignette.
+
+```
+install_github("chorscroft/zalpha", build_vignettes=TRUE)  # might also have to include the option force=TRUE if the package is already installed
+vignette("zalpha")
+```
+
 ## Authors
 
 * **Clare Horscroft**
