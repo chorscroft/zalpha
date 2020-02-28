@@ -1,7 +1,7 @@
 
 #' Runs the L_plus_R function
 #'
-#' Returns the \eqn{{|L| \choose 2} + {|R| \choose 2}}{(|L| choose 2) + (|R| choose 2)} value for each SNP location supplied to the function.
+#' Returns the \eqn{{|L| \choose 2} + {|R| \choose 2}}{(|L| choose 2) + (|R| choose 2)} value for each SNP location supplied to the function. \code{|L|} and \code{|R|} are the number of SNPs to the left and right of the current locus within the given window \code{ws}.
 #' For more information about the \code{L_plus_R} diversity statistic, please see Jacobs (2016).
 #'
 #'

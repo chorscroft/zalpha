@@ -17,7 +17,7 @@ LR(pos, ws, X = NULL)
 A list containing the SNP positions and the \code{LR} values for those SNPs
 }
 \description{
-Returns the \code{|L||R|} value for each SNP location supplied to the function.
+Returns the \code{|L||R|} value for each SNP location supplied to the function, where \code{|L|} and \code{|R|} are the number of SNPs to the left and right of the current locus within the given window \code{ws}.
 For more information about the \code{|L||R|} diversity statistic, please see Jacobs (2016).
 }
 \examples{
