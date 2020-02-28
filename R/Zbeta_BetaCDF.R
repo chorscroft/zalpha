@@ -13,7 +13,7 @@
 #'
 #' The LD profile describes the expected correlation between SNPs at a given genetic distance, generated using simulations or
 #' real data. Care should be taken to utilise an LD profile that is representative of the population in question. The LD
-#' profile should consist of evenly sized bins of distances (for example 0.00001 cM per bin), where the value given is the (inclusive) lower
+#' profile should consist of evenly sized bins of distances (for example 0.0001 cM per bin), where the value given is the (inclusive) lower
 #' bound of the bin.
 #'
 #' @importFrom stats cor pbeta
