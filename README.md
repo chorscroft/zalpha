@@ -6,19 +6,19 @@ R package for the zalpha suite of selection statistics. This package allows the 
 
 To install this package:
 
-1) Install the package "devtools"
+1) Install the devtools package
 
 ```
 install.packages("devtools")
 ```
 
-2) Load the "devtools" package
+2) Load the devtools package
 
 ```
 library(devtools)
 ```
 
-3) Install the zalpha package direct from github using the install_github function
+3) Install the zalpha package direct from Github using the install_github function
 
 ```
 install_github("chorscroft/zalpha")
