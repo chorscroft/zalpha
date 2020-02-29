@@ -37,10 +37,6 @@ vignette("zalpha")
 
 * **Clare Horscroft**
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
 ## Acknowledgments
 
 Guy Jacobs for the original development of the Zalpha statistics
