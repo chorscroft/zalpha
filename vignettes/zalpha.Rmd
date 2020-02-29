@@ -80,7 +80,7 @@ The LD (linkage disequilibrium) profile contains data about the expected correla
 
 For example, if we assume the bins are in centimorgans, and we know two SNPs are 0.00015 cM apart, the LDprofile tells us that we expect the r^2^ value to be 0.093, with a standard deviation of 0.22 and fits the distribution Beta(0.27,2.03).
 
-For real world data, Jacobs et al. (2006) recommend using distances up to 2 cM assigned to 20,000 bins.
+For real world data, Jacobs et al. (2016) recommend using distances up to 2 cM assigned to 20,000 bins.
 
 ## Zalpha_expected
 
