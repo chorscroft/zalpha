@@ -4,8 +4,17 @@
 \alias{Zbeta_log_rsq_over_expected}
 \title{Runs the Zbeta function on the log of the r-squared values over the expected r-squared values for the region}
 \usage{
-Zbeta_log_rsq_over_expected(pos, ws, x, dist, LDprofile_bins,
-  LDprofile_rsq, minRandL = 4, minRL = 25, X = NULL)
+Zbeta_log_rsq_over_expected(
+  pos,
+  ws,
+  x,
+  dist,
+  LDprofile_bins,
+  LDprofile_rsq,
+  minRandL = 4,
+  minRL = 25,
+  X = NULL
+)
 }
 \arguments{
 \item{pos}{A numeric vector of SNP locations}

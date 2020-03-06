@@ -4,9 +4,20 @@
 \alias{Zalpha_all}
 \title{Runs all the statistics in the zalpha package}
 \usage{
-Zalpha_all(pos, ws, x = NULL, dist = NULL, LDprofile_bins = NULL,
-  LDprofile_rsq = NULL, LDprofile_sd = NULL, LDprofile_Beta_a = NULL,
-  LDprofile_Beta_b = NULL, minRandL = 4, minRL = 25, X = NULL)
+Zalpha_all(
+  pos,
+  ws,
+  x = NULL,
+  dist = NULL,
+  LDprofile_bins = NULL,
+  LDprofile_rsq = NULL,
+  LDprofile_sd = NULL,
+  LDprofile_Beta_a = NULL,
+  LDprofile_Beta_b = NULL,
+  minRandL = 4,
+  minRL = 25,
+  X = NULL
+)
 }
 \arguments{
 \item{pos}{A numeric vector of SNP locations}

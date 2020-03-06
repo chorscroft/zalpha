@@ -4,8 +4,16 @@
 \alias{Zbeta_expected}
 \title{Runs the Zbeta function on the expected r-squared values for the region}
 \usage{
-Zbeta_expected(pos, ws, dist, LDprofile_bins, LDprofile_rsq,
-  minRandL = 4, minRL = 25, X = NULL)
+Zbeta_expected(
+  pos,
+  ws,
+  dist,
+  LDprofile_bins,
+  LDprofile_rsq,
+  minRandL = 4,
+  minRL = 25,
+  X = NULL
+)
 }
 \arguments{
 \item{pos}{A numeric vector of SNP locations}

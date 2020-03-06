@@ -4,8 +4,18 @@
 \alias{Zalpha_Zscore}
 \title{Runs the Zalpha function using the Z score of the r-squared values for the region}
 \usage{
-Zalpha_Zscore(pos, ws, x, dist, LDprofile_bins, LDprofile_rsq,
-  LDprofile_sd, minRandL = 4, minRL = 25, X = NULL)
+Zalpha_Zscore(
+  pos,
+  ws,
+  x,
+  dist,
+  LDprofile_bins,
+  LDprofile_rsq,
+  LDprofile_sd,
+  minRandL = 4,
+  minRL = 25,
+  X = NULL
+)
 }
 \arguments{
 \item{pos}{A numeric vector of SNP locations}

@@ -4,8 +4,18 @@
 \alias{Zalpha_BetaCDF}
 \title{Runs the Zalpha function using a cumulative beta distribution function on the r-squared values for the region}
 \usage{
-Zalpha_BetaCDF(pos, ws, x, dist, LDprofile_bins, LDprofile_Beta_a,
-  LDprofile_Beta_b, minRandL = 4, minRL = 25, X = NULL)
+Zalpha_BetaCDF(
+  pos,
+  ws,
+  x,
+  dist,
+  LDprofile_bins,
+  LDprofile_Beta_a,
+  LDprofile_Beta_b,
+  minRandL = 4,
+  minRL = 25,
+  X = NULL
+)
 }
 \arguments{
 \item{pos}{A numeric vector of SNP locations}

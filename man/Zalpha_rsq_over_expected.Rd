@@ -4,8 +4,17 @@
 \alias{Zalpha_rsq_over_expected}
 \title{Runs the Zalpha function on the r-squared values over the expected r-squared values for the region}
 \usage{
-Zalpha_rsq_over_expected(pos, ws, x, dist, LDprofile_bins, LDprofile_rsq,
-  minRandL = 4, minRL = 25, X = NULL)
+Zalpha_rsq_over_expected(
+  pos,
+  ws,
+  x,
+  dist,
+  LDprofile_bins,
+  LDprofile_rsq,
+  minRandL = 4,
+  minRL = 25,
+  X = NULL
+)
 }
 \arguments{
 \item{pos}{A numeric vector of SNP locations}
