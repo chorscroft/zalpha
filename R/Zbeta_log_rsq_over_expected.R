@@ -124,7 +124,8 @@ Zbeta_log_rsq_over_expected<-function(pos, ws, x, dist, LDprofile_bins, LDprofil
   }
 
   # Force the R code to print decimals in full rather than in scientific format
-  options(scipen=999)
+  oldOptions<-options(scipen=999)
+  on.exit(options(oldOptions))
 
   #Change matrix x to numeric if it isn't already
   if (is.numeric(x)==FALSE){

@@ -107,7 +107,8 @@ Zalpha_expected<-function(pos, ws, dist, LDprofile_bins, LDprofile_rsq, minRandL
   }
 
   # Force the R code to print decimals in full rather than in scientific format
-  options(scipen=999)
+  oldOptions<-options(scipen=999)
+  on.exit(options(oldOptions))
 
   # Set up output list
   outputLength<-length(pos[pos>=X[1] & pos <= X[2]])

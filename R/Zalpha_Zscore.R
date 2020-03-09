@@ -133,7 +133,8 @@ Zalpha_Zscore<-function(pos, ws, x, dist, LDprofile_bins, LDprofile_rsq, LDprofi
   }
 
   # Force the R code to print decimals in full rather than in scientific format
-  options(scipen=999)
+  oldOptions<-options(scipen=999)
+  on.exit(options(oldOptions))
 
   #Change matrix x to numeric if it isn't already
   if (is.numeric(x)==FALSE){
