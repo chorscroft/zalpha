@@ -2,11 +2,9 @@
 
 This is a resubmission. In this version I have:
 
-* Removed a broken URI
+* added an immediate call to on.exit after changing options so as to not change the user's options outside of the function
 
-* Added a reference to the description field of the DESCRIPTION file including a doi
-
-Thanks to Uwe Ligges for the fix suggestions.
+Thanks to Martina Schmirl for the suggestion!
 
 ## Test environments
 * Windows 10 x64
@@ -41,3 +39,5 @@ Mis-spelled words are author names. DOI is correct, https://doi.org/10.1534/gene
  * Possibly mis-spelled words in DESCRIPTION:
       Kivisild (7:122)
       Sluckin (7:110)
+
+Mis-spelled words are author names.
