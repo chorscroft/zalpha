@@ -101,7 +101,7 @@ Zbeta <- function(pos, ws, x, minRandL = 4, minRL = 25, X = NULL) {
       #NA
       outputList$Zbeta[i]<-NA
     } else {
-      rsqSum<-sum((cor(t(x[pos>=currentPos-ws/2 & pos<=currentPos+ws/2,]))^2)[1:noL,(noL+2):(noL+noR+1)])
+      rsqSum<-sum((cor(t(x[pos>=currentPos-ws/2 & pos<=currentPos+ws/2,]),use="pairwise.complete.obs")^2)[1:noL,(noL+2):(noL+noR+1)])
       outputList$Zbeta[i]<-rsqSum/(noL*noR)
     }
   }

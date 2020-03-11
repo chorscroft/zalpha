@@ -153,13 +153,13 @@ Zalpha_log_rsq_over_expected<-function(pos, ws, x, dist, LDprofile_bins, LDprofi
       ##Left
       # Find distances between each SNP in L and round to bin size
       bins<-sapply(lower_triangle(outer(dist[pos>=currentPos-ws/2 & pos < currentPos],dist[pos>=currentPos-ws/2 & pos < currentPos],"-")),assign_bins,bin_size=bin_size)
-      Lrsq<- lower_triangle(cor(t(x[pos>=currentPos-ws/2 & pos < currentPos,]))^2)
+      Lrsq<- lower_triangle(cor(t(x[pos>=currentPos-ws/2 & pos < currentPos,]),use="pairwise.complete.obs")^2)
       Lrsq[Lrsq==0]<-min(Lrsq[Lrsq>0])  #removes zeros by replacing with lowest correlation greater than zero
       LrsqExp<-merge(data.frame(bins=as.character(bins),Lrsq),data.frame(LDprofile_bins=as.character(LDprofile_bins),LDprofile_rsq),by.x="bins",by.y="LDprofile_bins",all.x=TRUE,sort=FALSE)
       LrsqSum<-sum(log10(LrsqExp$Lrsq/LrsqExp$LDprofile_rsq))
       ##Right
       bins<-sapply(lower_triangle(outer(dist[pos<=currentPos+ws/2 & pos > currentPos],dist[pos<=currentPos+ws/2 & pos > currentPos],"-")),assign_bins,bin_size=bin_size)
-      Rrsq<-lower_triangle(cor(t(x[pos<=currentPos+ws/2 & pos > currentPos,]))^2)
+      Rrsq<-lower_triangle(cor(t(x[pos<=currentPos+ws/2 & pos > currentPos,]),use="pairwise.complete.obs")^2)
       Rrsq[Rrsq==0]<-min(Rrsq[Rrsq>0])  #removes zeros by replacing with lowest correlation greater than zero
       RrsqExp<-merge(data.frame(bins=as.character(bins),Rrsq),data.frame(LDprofile_bins=as.character(LDprofile_bins),LDprofile_rsq),by.x="bins",by.y="LDprofile_bins",all.x=TRUE,sort=FALSE)
       RrsqSum<-sum(log10(RrsqExp$Rrsq/RrsqExp$LDprofile_rsq))

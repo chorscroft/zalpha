@@ -215,11 +215,11 @@ Zalpha_all <- function(pos, ws, x=NULL, dist=NULL, LDprofile_bins=NULL, LDprofil
       outputList$L_plus_R[i]<-choose(noL,2)+choose(noR,2)
       if (is.null(x)==FALSE){
         ##Left
-        Lrsq <- lower_triangle(cor(t(x[pos>=currentPos-ws/2 & pos < currentPos,]))^2)
+        Lrsq <- lower_triangle(cor(t(x[pos>=currentPos-ws/2 & pos < currentPos,]),use="pairwise.complete.obs")^2)
         ##Right
-        Rrsq<-lower_triangle(cor(t(x[pos<=currentPos+ws/2 & pos > currentPos,]))^2)
+        Rrsq<-lower_triangle(cor(t(x[pos<=currentPos+ws/2 & pos > currentPos,]),use="pairwise.complete.obs")^2)
         ##Over
-        rsq<-as.vector(t((cor(t(x[pos>=currentPos-ws/2 & pos<=currentPos+ws/2,]))^2)[1:noL,(noL+2):(noL+noR+1)]))
+        rsq<-as.vector(t((cor(t(x[pos>=currentPos-ws/2 & pos<=currentPos+ws/2,]),use="pairwise.complete.obs")^2)[1:noL,(noL+2):(noL+noR+1)]))
         outputList$Zalpha[i]<-(sum(Lrsq)/choose(noL,2)+sum(Rrsq)/choose(noR,2))/2
         outputList$Zbeta[i]<-sum(rsq)/(noL*noR)
       } else {
