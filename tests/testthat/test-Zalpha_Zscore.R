@@ -332,4 +332,22 @@ test_that("Zalpha_Zscore fails when LDprofile_bins and LDprofile_sd are differen
                "LDprofile_sd must contain the same number of values as there are bins given in LDprofile_bins")
 })
 
+## test that Zalpha_Zscore works with a missing value
+df1<-df
+df1$C1[15]<-NA
+test_that("Zalpha_Zscore calculates Zalpha_Zscore statistic correctly with missing value", {
 
+  expect_equal(Zalpha_Zscore(pos = df1$POS, ws  = 3000, x = as.matrix(df1[,3:7]), dist = df1$dist, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, LDprofile_sd = LDprofile$sd, minRandL = 4, minRL = 25, X = NULL),
+               list(
+                 position=c(100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500),
+                 Zalpha_Zscore=c(NA,NA,NA,NA,
+                                 0.1293462762460600,
+                                 0.2214307128814780,
+                                 0.0107400139438311,
+                                 -0.1948882077777450,
+                                 -0.2427674321057070,
+                                 -0.1850465883763240,
+                                 -0.0912782685815102,
+                                 NA,NA,NA,NA)
+               ))
+})

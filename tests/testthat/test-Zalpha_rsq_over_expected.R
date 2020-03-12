@@ -306,4 +306,22 @@ test_that("Zalpha_rsq_over_expected fails when LDprofile_bins and LDprofile_rsq 
                "LDprofile_rsq must contain the same number of values as there are bins given in LDprofile_bins")
 })
 
+## test that Zalpha_rsq_over_expected works with a missing value
+df1<-df
+df1$C1[15]<-NA
+test_that("Zalpha_rsq_over_expected calculates Zalpha_rsq_over_expected statistic correctly with missing value", {
 
+  expect_equal(Zalpha_rsq_over_expected(pos = df1$POS, ws  = 3000, x = as.matrix(df1[,3:7]), dist = df1$dist, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, minRandL = 4, minRL = 25, X = NULL),
+               list(
+                 position=c(100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500),
+                 Zalpha_rsq_over_expected=c(NA,NA,NA,NA,
+                                            1.144893254873100,
+                                            1.236446352382830,
+                                            1.020556368226920,
+                                            0.810519367025429,
+                                            0.761404523358315,
+                                            0.823237169574888,
+                                            0.907695973532459,
+                                            NA,NA,NA,NA)
+               ))
+})

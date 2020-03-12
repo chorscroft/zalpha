@@ -216,3 +216,23 @@ test_that("Zbeta warns about all NAs", {
   expect_warning(Zbeta(pos = df$POS, ws  = 3000, x = as.matrix(df[,3:7]), minRandL = 4, minRL = 50, X = NULL),
                  "No Zbeta values were calculated, try reducing minRandL and minRL or increasing the window size")
 })
+
+## test that Zbeta works with a missing value
+df1<-df
+df1$C1[15]<-NA
+test_that("Zbeta calculates Zbeta statistic correctly with missing value", {
+
+  expect_equal(Zbeta(pos = df1$POS, ws  = 3000, x = as.matrix(df1[,3:7]), minRandL = 4, minRL = 25, X = NULL),
+               list(
+                 position=c(100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500),
+                 Zbeta=c(NA,NA,NA,NA,
+                         0.248611111111111,
+                         0.235185185185185,
+                         0.233651620370370,
+                         0.257794784580499,
+                         0.250144675925926,
+                         0.259413580246914,
+                         0.271354166666667,
+                         NA,NA,NA,NA)
+               ))
+})

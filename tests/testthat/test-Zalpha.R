@@ -216,3 +216,24 @@ test_that("Zalpha warns about all NAs", {
   expect_warning(Zalpha(pos = df$POS, ws  = 3000, x = as.matrix(df[,3:7]), minRandL = 4, minRL = 50, X = NULL),
                "No Zalpha values were calculated, try reducing minRandL and minRL or increasing the window size")
 })
+
+## test that zalpha works with a missing value
+
+df1<-df
+df1$C1[15]<-NA
+test_that("Zalpha calculates Zalpha statistic correctly with missing value", {
+
+  expect_equal(Zalpha(pos = df1$POS, ws  = 3000, x = as.matrix(df1[,3:7]), minRandL = 4, minRL = 25, X = NULL),
+               list(
+                 position=c(100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500),
+                 Zalpha=c(NA,NA,NA,NA,
+                          0.434953703703704,
+                          0.473283179012346,
+                          0.397114748677249,
+                          0.317791005291005,
+                          0.300801917989418,
+                          0.322897376543210,
+                          0.360532407407407,
+                          NA,NA,NA,NA)
+               ))
+})

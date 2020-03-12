@@ -553,3 +553,18 @@ test_that("Zalpha_all calculates statistics correctly with LDprofile_bins not su
                  Zbeta=c(NA,NA,NA,NA,(10+5/18)/40,(10+35/36)/45,(11+103/144)/48,(12+73/144)/49,(11+83/144)/48,(11+17/48)/45,(10+65/144)/40,NA,NA,NA,NA)
                ))
 })
+
+## test that Zalpha_all works with a missing value
+df1<-df
+df1$C1[15]<-NA
+test_that("Zalpha_all calculates statistics correctly with missing value", {
+
+  expect_equal(Zalpha_all(pos = df1$POS, ws  = 3000, x = as.matrix(df1[,3:7])),
+               list(
+                 position=c(100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500),
+                 LR=c(NA,NA,NA,NA,40,45,48,49,48,45,40,NA,NA,NA,NA),
+                 L_plus_R=c(NA,NA,NA,NA,51,46,43,42,43,46,51,NA,NA,NA,NA),
+                 Zalpha=c(NA,NA,NA,NA,0.434953703703704,0.473283179012346,0.397114748677249,0.317791005291005,0.300801917989418,0.322897376543210,0.360532407407407,NA,NA,NA,NA),
+                 Zbeta=c(NA,NA,NA,NA,0.248611111111111,0.235185185185185,0.233651620370370,0.257794784580499,0.250144675925926,0.259413580246914,0.271354166666667,NA,NA,NA,NA)
+               ))
+})

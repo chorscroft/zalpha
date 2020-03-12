@@ -313,4 +313,22 @@ test_that("Zbeta_BetaCDF fails when LDprofile_bins and LDprofile_Beta_b are diff
                "LDprofile_Beta_b must contain the same number of values as there are bins given in LDprofile_bins")
 })
 
+## test that Zbeta_BetaCDF works with a missing value
+df1<-df
+df1$C1[15]<-NA
+test_that("Zbeta_BetaCDF calculates Zbeta_BetaCDF statistic correctly with missing value", {
 
+  expect_equal(Zbeta_BetaCDF(pos = df1$POS, ws  = 3000, x = as.matrix(df1[,3:7]), dist = df1$dist, LDprofile_bins = LDprofile$bin, LDprofile_Beta_a = LDprofile$Beta_a, LDprofile_Beta_b = LDprofile$Beta_b, minRandL = 4, minRL = 25, X = NULL),
+               list(
+                 position=c(100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500),
+                 Zbeta_BetaCDF=c(NA,NA,NA,NA,
+                                 0.412985057460831,
+                                 0.400927939537124,
+                                 0.395021661102834,
+                                 0.415693421938135,
+                                 0.407239348282580,
+                                 0.414765530721706,
+                                 0.422608554537899,
+                                 NA,NA,NA,NA)
+               ))
+})
