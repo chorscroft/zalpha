@@ -15,7 +15,7 @@
 #' profile should consist of evenly sized bins of distances (for example 0.0001 cM per bin), where the value given is the (inclusive) lower
 #' bound of the bin.
 #'
-#' @importFrom stats cor
+#' @importFrom stats cor na.omit
 #'
 #' @param pos A numeric vector of SNP locations
 #' @param ws The window size which the \eqn{Z_{\alpha}^{Zscore}}{Zalpha} statistic will be calculated over. This should be on the same scale as the \code{pos} vector.
@@ -59,7 +59,7 @@ Zalpha_Zscore<-function(pos, ws, x, dist, LDprofile_bins, LDprofile_rsq, LDprofi
     stop("The number of rows in x must equal the number of SNP locations given in pos")
   }
   #Check SNPs are all biallelic
-  if(sum(apply(x,1,function(x){length(unique(x))}) != 2)>0){
+  if(sum(apply(x,1,function(x){length(na.omit(unique(x)))}) != 2)>0){
     stop("SNPs must all be biallelic")
   }
   #Check dist is a numeric vector

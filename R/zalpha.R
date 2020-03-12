@@ -7,7 +7,7 @@
 #' \deqn{Z_{\alpha}=\frac{{|L| \choose 2}^{-1}\sum_{i,j \in L}r^2_{i,j} + {|R| \choose 2}^{-1}\sum_{i,j \in L}r^2_{i,j}}{2}}
 #' where \code{|L|} and \code{|R|} are the number of SNPs to the left and right of the current locus within the given window \code{ws}, and \eqn{r^2}{r^2} is equal to the squared correlation between a pair of SNPs
 #'
-#' @importFrom stats cor
+#' @importFrom stats cor na.omit
 #'
 #' @param pos A numeric vector of SNP locations
 #' @param ws The window size which the \eqn{Z_{\alpha}}{Zalpha} statistic will be calculated over. This should be on the same scale as the \code{pos} vector.
@@ -44,7 +44,7 @@ Zalpha <- function(pos, ws, x, minRandL = 4, minRL = 25, X = NULL) {
     stop("The number of rows in x must equal the number of SNP locations given in pos")
   }
   #Check SNPs are all biallelic
-  if(sum(apply(x,1,function(x){length(unique(x))}) != 2)>0){
+  if(sum(apply(x,1,function(x){length(na.omit(unique(x)))}) != 2)>0){
     stop("SNPs must all be biallelic")
   }
   #Check windowsize is a number greater than 0

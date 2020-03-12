@@ -13,7 +13,7 @@
 #' }
 #' For more information about the statistics, please see Jacobs (2016).
 #'
-#' @importFrom stats cor pbeta
+#' @importFrom stats cor pbeta na.omit
 #'
 #' @param pos A numeric vector of SNP locations
 #' @param ws The window size which the statistics will be calculated over. This should be on the same scale as the \code{pos} vector.
@@ -65,7 +65,7 @@ Zalpha_all <- function(pos, ws, x=NULL, dist=NULL, LDprofile_bins=NULL, LDprofil
       stop("The number of rows in x must equal the number of SNP locations given in pos")
     }
     #Check SNPs are all biallelic
-    if(sum(apply(x,1,function(x){length(unique(x))}) != 2)>0){
+    if(sum(apply(x,1,function(x){length(na.omit(unique(x)))}) != 2)>0){
       stop("SNPs must all be biallelic")
     }
     #Change matrix x to numeric if it isn't already
