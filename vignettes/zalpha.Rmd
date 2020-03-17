@@ -33,7 +33,7 @@ This data set contains information about each of the SNPs. The first column give
 
 The next column is the genetic distance of the SNP from the start of the chromosome. This could be in centimorgans (cM), linkage disequilibrium units (LDU) or any other way of measuring genetic distance, as long as it is additive (i.e. the distance between SNP A and SNP C is equal to the distance between SNP A and SNP B plus SNP B and SNP C). This data is only required if the user is interested in adjusting for recombination and supplies an LDprofile.
 
-The final columns are the SNP alleles for each of the chromosomes in the population. Each SNP must be biallelic, but can contain any value, for example 0s and 1s, or A/G/C/Ts.
+The final columns are the SNP alleles for each of the chromosomes in the population. Each SNP must be biallelic, but can contain any value, for example 0s and 1s, or A/G/C/Ts. The data can contain missing values, however it is recommended that the cut off is 10% missing at most. It is also recommended to use a minor allele frequecy of 5% or higher.
 
 ## Zalpha
 
