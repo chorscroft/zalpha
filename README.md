@@ -4,7 +4,15 @@ R package for the zalpha suite of selection statistics. This package allows the 
 
 ## Installing
 
-To install this package:
+Version 0.1.0 is on CRAN.
+
+**To install this package from CRAN:**
+
+```
+install.packages("zalpha")
+```
+
+**To install the development version of this package from github:**
 
 1) Install the devtools package
 
@@ -29,10 +37,13 @@ install_github("chorscroft/zalpha")
 For a full explanation of how to use the zalpha package, please see the "zalpha" vignette.
 
 ```
-install_github("chorscroft/zalpha", build_vignettes=TRUE)  # might also have to include the option force=TRUE if the package is already installed
 vignette("zalpha")
 ```
+If this does not work and you installed the packages directly from Github, try installing using the following code:
 
+```
+install_github("chorscroft/zalpha", build_vignettes=TRUE)  # might also have to include the option force=TRUE if the package is already installed
+```
 ## Authors
 
 * **Clare Horscroft**
