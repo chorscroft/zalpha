@@ -78,11 +78,11 @@ create_LDprofile<-function(dist,x,bin_size,max_dist=NULL,beta_params=FALSE){
   diffs<-lower_triangle(outer(dist,dist,"-"))
 
   #Find the rsquared value between pairs of SNPs
-  rsq<-lower_triangle(cor(t(x))^2)
+  rsq<-lower_triangle(cor(t(x),use="pairwise.complete.obs")^2)
 
-  #Filter for just those less than the max genetic distance
-  rsq<-rsq[diffs<max_dist]
-  diffs<-diffs[diffs<max_dist]
+  #Filter for just those less than the max genetic distance and filter out missing distances
+  rsq<-rsq[diffs<max_dist & is.na(diffs)==FALSE]
+  diffs<-diffs[diffs<max_dist & is.na(diffs)==FALSE]
 
   #Assign diffs to bins
   bins<-assign_bins(bin_size,diffs)
@@ -90,12 +90,10 @@ create_LDprofile<-function(dist,x,bin_size,max_dist=NULL,beta_params=FALSE){
   #Create LDprofile data frame
   LDprofile<-data.frame(bin=seq(0,max_dist-bin_size,bin_size),rsq=NA,sd=NA,Beta_a=NA,Beta_b=NA,n=NA)
 
-  print.default("test")
-
   #Loop for each bin (i)
   for (i in 1:nrow(LDprofile)){
     LDprofile$n[i]<-sum(bins==LDprofile$bin[i])
-    #If there is at least one pair whose egentic distance falls within the bin, calculate stats
+    #If there is at least one pair whose genetic distance falls within the bin, calculate stats
     if (LDprofile$n[i]>0){
       #Get the rsquared values for all pairs in this bin
       temprsq<-rsq[bins==LDprofile$bin[i]]
@@ -118,7 +116,6 @@ create_LDprofile<-function(dist,x,bin_size,max_dist=NULL,beta_params=FALSE){
           LDprofile$Beta_b[i]<-betafit$estimate[2]
         } else {
           #If failed to fit, try again using estimated beta parameters to initialise
-          print.default("errored")
           startBetaParams<-est_Beta_Params(LDprofile$rsq[i], LDprofile$sd[i]^2)
           betafit<-try(fitdistrplus::fitdist(temprsq,"beta",start=list(shape1=startBetaParams$alpha, shape2=startBetaParams$beta)))
           if (class(betafit) != "try-error"){

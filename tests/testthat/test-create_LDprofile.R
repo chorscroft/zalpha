@@ -8,11 +8,6 @@ df<-data.frame(
   C5=c(1,1,2,1,2,1,2,1,1,1,1,1,2,1,1),
   dist=c(0,0.00101,0.00123,0.00207,0.00218,0.00223,0.00235,0.00251,0.00272,0.00289,0.00304,0.00316,0.00335,0.00345,0.00374)
 )
-dist = df$dist
-x = as.matrix(df[,3:7])
-bin_size = 0.001
-max_dist = 0.005
-beta_params = TRUE
 
 ## test that everything is calculated correctly given all parameters
 
@@ -202,7 +197,38 @@ test_that("create_LDprofile fails when beta_params is not logical", {
                "beta_params must be TRUE or FALSE")
 })
 
-## Test the function with missing values
+## Test the function with missing value in x
+df1<-df
+df1$C1[15]<-NA
+test_that("create_LDprofile calculates the LD profile correctly with missing value in x", {
+
+  expect_equal(create_LDprofile(dist = df1$dist, x = as.matrix(df1[,3:7]), bin_size = 0.001, max_dist = 0.005, beta_params = TRUE),
+               data.frame(
+                 bin=c(0,0.001,0.002,0.003,0.004),
+                 rsq=c(0.302340534979424,0.298387096774194,0.256481481481481,0.297222222222222,NA),
+                 sd=c(0.285102946872176,0.231243979115867,0.324764476229430,0.125615767273278,NA),
+                 Beta_a=c(0.606846782972070,0.932888189465068,0.616307318328496,4.643089841249520,NA),
+                 Beta_b=c(0.942600409939103,1.692309859072240,1.139111486418360,11.012925076592600,NA),
+                 n=c(54,31,15,5,0)
+               ))
+})
+
+## Test the function with missing value in dist
+df1<-df
+df1$dist[5]<-NA
+test_that("create_LDprofile calculates the LD profile correctly with missing value in dist", {
+
+  expect_equal(create_LDprofile(dist = df1$dist, x = as.matrix(df1[,3:7]), bin_size = 0.001, max_dist = 0.005, beta_params = TRUE),
+               data.frame(
+                 bin=c(0,0.001,0.002,0.003,0.004),
+                 rsq=c(0.279320987654321,0.270833333333333,0.255952380952381,0.319444444444444,NA),
+                 sd=c(0.268871132983145,0.155580832042849,0.332406755525893,0.142318760638328,NA),
+                 Beta_a=c(0.634602938184746,1.570771368863860,0.611627386753874,3.941019442363900,NA),
+                 Beta_b=c(1.133751642734910,4.401600723631340,1.116161049339830,8.454825333760550,NA),
+                 n=c(45,27,14,5,0)
+               ))
+})
+
 
 ## Test the function with fitdistrplus package not loaded and beta_params = TRUE
 
