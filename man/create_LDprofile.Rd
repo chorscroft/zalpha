@@ -33,6 +33,11 @@ By default, Beta parameters are not calculated. To calcualte Beta parameters, ne
 data(snps)
 ## Create an LD profile using this data
 create_LDprofile(snps$distances,as.matrix(snps[,3:12]),0.001)
+## To get the Beta distribution parameter estimates, the fitdistrplus package is required
+if (requireNamespace("fitdistrplus", quietly = TRUE)==TRUE) {
+  create_LDprofile(snps$distances,as.matrix(snps[,3:12]),0.001,beta_params=TRUE)
+}
+
 
 }
 \references{

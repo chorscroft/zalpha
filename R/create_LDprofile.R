@@ -20,6 +20,11 @@
 #' data(snps)
 #' ## Create an LD profile using this data
 #' create_LDprofile(snps$distances,as.matrix(snps[,3:12]),0.001)
+#' ## To get the Beta distribution parameter estimates, the fitdistrplus package is required
+#' if (requireNamespace("fitdistrplus", quietly = TRUE)==TRUE) {
+#'   create_LDprofile(snps$distances,as.matrix(snps[,3:12]),0.001,beta_params=TRUE)
+#' }
+#'
 #'
 #' @export
 #' @seealso \code{\link{Zalpha_expected}} \code{\link{Zalpha_rsq_over_expected}} \code{\link{Zalpha_log_rsq_over_expected}} \code{\link{Zalpha_Zscore}} \code{\link{Zalpha_BetaCDF}} \code{\link{Zbeta_expected}} \code{\link{Zbeta_rsq_over_expected}} \code{\link{Zbeta_log_rsq_over_expected}} \code{\link{Zbeta_Zscore}} \code{\link{Zbeta_BetaCDF}} \code{\link{Zalpha_all}}
