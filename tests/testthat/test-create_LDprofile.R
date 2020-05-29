@@ -109,15 +109,15 @@ test_that("create_LDprofile calculates the LD profile correctly with character m
 test_that("create_LDprofile fails when dist is non-numeric", {
 
   expect_error(create_LDprofile(dist = paste0(df$dist,"dist"), x = as.matrix(df[,3:7]), bin_size = 0.001, max_dist = 0.005, beta_params = TRUE),
-               "dist must be a numeric vector")
+               "dist must be a numeric vector or list of numeric vectors")
 })
 
-## Test the function with dists not a matrix
+## Test the function with dists not a vector
 
-test_that("create_LDprofile fails when dist is not a matrix", {
+test_that("create_LDprofile fails when dist is not a vector", {
 
-  expect_error(create_LDprofile(dist = df, x = as.matrix(df[,3:7]), bin_size = 0.001, max_dist = 0.005, beta_params = TRUE),
-               "dist must be a numeric vector")
+  expect_error(create_LDprofile(dist = as.matrix(df$dist), x = as.matrix(df[,3:7]), bin_size = 0.001, max_dist = 0.005, beta_params = TRUE),
+               "dist must be a numeric vector or list of numeric vectors")
 })
 
 
@@ -125,8 +125,8 @@ test_that("create_LDprofile fails when dist is not a matrix", {
 
 test_that("create_LDprofile fails when x is not a matrix", {
 
-  expect_error(create_LDprofile(dist = df$dist, x = df[,3:7], bin_size = 0.001, max_dist = 0.005, beta_params = TRUE),
-               "x must be a matrix")
+  expect_error(create_LDprofile(dist = df$dist, x = df$C1, bin_size = 0.001, max_dist = 0.005, beta_params = TRUE),
+               "x must be a matrix or list of matrices")
 })
 
 ## Test the function with x not having the correct amount of rows
@@ -134,7 +134,7 @@ test_that("create_LDprofile fails when x is not a matrix", {
 test_that("create_LDprofile fails when the number of rows in x is not equal to the length of pos", {
 
   expect_error(create_LDprofile(dist = df$dist, x = t(as.matrix(df[,3:7])), bin_size = 0.001, max_dist = 0.005, beta_params = TRUE),
-               "The number of rows in x must equal the number of SNP genetic distances given in dist")
+               "The number of rows in x must equal the number of SNP genetic distances given in the corresponding dist")
 })
 
 ## Test the function with a SNP having only one allele

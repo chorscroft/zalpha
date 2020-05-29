@@ -7,9 +7,9 @@
 create_LDprofile(dist, x, bin_size, max_dist = NULL, beta_params = FALSE)
 }
 \arguments{
-\item{dist}{A numeric vector containing genetic distances.}
+\item{dist}{A numeric vector, or a list of numeric vectors, containing genetic distances.}
 
-\item{x}{A matrix of SNP values. Columns represent chromosomes; rows are SNP locations. Hence, the number of rows should equal the length of the \code{dist} vector. SNPs should all be biallelic.}
+\item{x}{A matrix of SNP values, or a list of matrices. Columns represent chromosomes; rows are SNP locations. Hence, the number of rows should equal the length of the \code{dist} vector. SNPs should all be biallelic.}
 
 \item{bin_size}{The size of each bin, in the same units as \code{dist}.}
 
@@ -21,9 +21,12 @@ create_LDprofile(dist, x, bin_size, max_dist = NULL, beta_params = FALSE)
 A data frame containing an LD profile that can be used by other statistics in this package.
 }
 \description{
-An LD (linkage disequilibrium) profile is a look-up table that tell you the expected correlation between SNPs given the genetic distance between them.
+An LD (linkage disequilibrium) profile is a look-up table containing the expected correlation between SNPs given the genetic distance between them.
 }
 \details{
+The input for \code{dist} and \code{x} can be lists. This is to allow multiple datasets to be used in the creation of the LD profile. For example, using all 22 autosomes from the human genome would involve 22 different distance vectors and SNP matrices.
+Both lists should be the same length and should correspond exactly to eachother (i.e. the distances in each element of dist should go with the SNPs in the same element of x)
+
 In the output, bins represent lower bounds. The first bin contains pairs where the genetic distance is greater than or equal to 0 and less than \code{bin_size}. The final bin contains pairs where the genetic distance is greater than or equal to \code{max_dist}-\code{bin_size} and less than \code{max_dist}.
 If the \code{max_dist} is not an increment of \code{bin_size}, it will be adjusted to the next highest increment.The maximum bin will be the bin that \code{max_dist} falls into. For example, if the \code{max_dist} is given as 4.5 and the \code{bin_size} is 1, the final bin will be 4.\cr
 By default, Beta parameters are not calculated. To calcualte Beta parameters, needed for the \code{\link{Zalpha_BetaCDF}} and \code{\link{Zbeta_BetaCDF}} statistics, \code{beta_params} should be set to TRUE and the package \code{fitdistrplus} must be installed.

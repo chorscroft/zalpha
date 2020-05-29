@@ -1,14 +1,17 @@
 
 #' Creates an LD profile
 #'
-#' An LD (linkage disequilibrium) profile is a look-up table that tell you the expected correlation between SNPs given the genetic distance between them.
+#' An LD (linkage disequilibrium) profile is a look-up table containing the expected correlation between SNPs given the genetic distance between them.
+#'
+#' The input for \code{dist} and \code{x} can be lists. This is to allow multiple datasets to be used in the creation of the LD profile. For example, using all 22 autosomes from the human genome would involve 22 different distance vectors and SNP matrices.
+#' Both lists should be the same length and should correspond exactly to eachother (i.e. the distances in each element of dist should go with the SNPs in the same element of x)
 #'
 #' In the output, bins represent lower bounds. The first bin contains pairs where the genetic distance is greater than or equal to 0 and less than \code{bin_size}. The final bin contains pairs where the genetic distance is greater than or equal to \code{max_dist}-\code{bin_size} and less than \code{max_dist}.
 #' If the \code{max_dist} is not an increment of \code{bin_size}, it will be adjusted to the next highest increment.The maximum bin will be the bin that \code{max_dist} falls into. For example, if the \code{max_dist} is given as 4.5 and the \code{bin_size} is 1, the final bin will be 4.\cr
 #' By default, Beta parameters are not calculated. To calcualte Beta parameters, needed for the \code{\link{Zalpha_BetaCDF}} and \code{\link{Zbeta_BetaCDF}} statistics, \code{beta_params} should be set to TRUE and the package \code{fitdistrplus} must be installed.
 #'
-#' @param dist A numeric vector containing genetic distances.
-#' @param x A matrix of SNP values. Columns represent chromosomes; rows are SNP locations. Hence, the number of rows should equal the length of the \code{dist} vector. SNPs should all be biallelic.
+#' @param dist A numeric vector, or a list of numeric vectors, containing genetic distances.
+#' @param x A matrix of SNP values, or a list of matrices. Columns represent chromosomes; rows are SNP locations. Hence, the number of rows should equal the length of the \code{dist} vector. SNPs should all be biallelic.
 #' @param bin_size The size of each bin, in the same units as \code{dist}.
 #' @param max_dist Optional. The maximum genetic distance to be considered. If this is not supplied, it will default to the maximum distance in the \code{dist} vector.
 #' @param beta_params Optional. Beta parameters are calculated if this is set to TRUE. Default is FALSE.
@@ -30,27 +33,47 @@
 #' @seealso \code{\link{Zalpha_expected}} \code{\link{Zalpha_rsq_over_expected}} \code{\link{Zalpha_log_rsq_over_expected}} \code{\link{Zalpha_Zscore}} \code{\link{Zalpha_BetaCDF}} \code{\link{Zbeta_expected}} \code{\link{Zbeta_rsq_over_expected}} \code{\link{Zbeta_log_rsq_over_expected}} \code{\link{Zbeta_Zscore}} \code{\link{Zbeta_BetaCDF}} \code{\link{Zalpha_all}}
 #'
 create_LDprofile<-function(dist,x,bin_size,max_dist=NULL,beta_params=FALSE){
+
+  #Changes dist into a list if it is not one already
+  if (is.list(dist)==FALSE){
+    dist<-list(dist)
+  }
+
+  #Changes x into a list if it is not one already
+  if (is.list(x)==FALSE){
+    x<-list(x)
+  }
+
   #Checks
-  #Check dist is vector
-  if (is.numeric(dist) ==FALSE || is.vector(dist)==FALSE){
-    stop("dist must be a numeric vector")
+  #Check the dist list and the x list have the same length
+  if (length(dist)!=length(x)){
+    stop("dist and x should contain the same number of elements")
   }
-  #Check x is a matrix
-  if (is.matrix(x)==FALSE){
-    stop("x must be a matrix")
+
+  #Check for each element in dist and x
+  for (el in 1:length(dist)){
+    #Check dist is vector
+    if (is.numeric(dist[[el]]) ==FALSE || is.vector(dist[[el]])==FALSE){
+      stop("dist must be a numeric vector or list of numeric vectors")
+    }
+    #Check x is a matrix
+    if (is.matrix(x[[el]])==FALSE){
+      stop("x must be a matrix or list of matrices")
+    }
+    #Check x has rows equal to the length of dist
+    if (length(dist[[el]]) != nrow(x[[el]])){
+      stop("The number of rows in x must equal the number of SNP genetic distances given in the corresponding dist")
+    }
+    #Check SNPs are all biallelic
+    if (sum(apply(x[[el]],1,function(x){length(na.omit(unique(x)))}) != 2)>0){
+      stop("SNPs must all be biallelic")
+    }
+    #Change matrix x to numeric if it isn't already
+    if (is.numeric(x[[el]])==FALSE){
+      x[[el]]<-matrix(as.numeric(factor(x[[el]])),nrow=dim(x[[el]])[1])
+    }
   }
-  #Check x has rows equal to the length of dist
-  if (length(dist) != nrow(x)){
-    stop("The number of rows in x must equal the number of SNP genetic distances given in dist")
-  }
-  #Check SNPs are all biallelic
-  if (sum(apply(x,1,function(x){length(na.omit(unique(x)))}) != 2)>0){
-    stop("SNPs must all be biallelic")
-  }
-  #Change matrix x to numeric if it isn't already
-  if (is.numeric(x)==FALSE){
-    x<-matrix(as.numeric(factor(x)),nrow=dim(x)[1])
-  }
+
   #Check bin_size is a number
   if (is.numeric(bin_size) ==FALSE || bin_size <= 0){
     stop("bin_size must be a number greater than 0")
@@ -62,7 +85,7 @@ create_LDprofile<-function(dist,x,bin_size,max_dist=NULL,beta_params=FALSE){
     }
   } else {
     #Set max_dist to the maximum distance in the data if it was not supplied
-    max_dist<-dist[length(dist)]-dist[1]
+    max_dist<-max(sapply(dist,function(x){x[length(x)]-x[1]}),na.rm = TRUE)
   }
   #Adjusts the Max_dist value so it is equal to an increment of bin_size if it isn't already
   if(!isTRUE(all.equal(max_dist,assign_bins(bin_size,max_dist)))){
@@ -79,12 +102,16 @@ create_LDprofile<-function(dist,x,bin_size,max_dist=NULL,beta_params=FALSE){
     }
   }
 
-  #Find the differences in genetic distances between pairs of SNPs
-  diffs<-lower_triangle(outer(dist,dist,"-"))
+  diffs<-NULL
+  rsq<-NULL
+  #for each element in dist and x, get the differences and rsquared values
+  for (el in 1:length(dist)){
+    #Find the differences in genetic distances between pairs of SNPs
+    diffs<-c(diffs,lower_triangle(outer(dist[[el]],dist[[el]],"-")))
 
-  #Find the rsquared value between pairs of SNPs
-  rsq<-lower_triangle(cor(t(x),use="pairwise.complete.obs")^2)
-
+    #Find the rsquared value between pairs of SNPs
+    rsq<-c(rsq,lower_triangle(cor(t(x[[el]]),use="pairwise.complete.obs")^2))
+  }
   #Filter for just those less than the max genetic distance and filter out missing distances
   rsq<-rsq[diffs<max_dist & is.na(diffs)==FALSE]
   diffs<-diffs[diffs<max_dist & is.na(diffs)==FALSE]
