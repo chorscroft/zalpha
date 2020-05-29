@@ -157,6 +157,15 @@ test_that("create_LDprofile fails when a SNP has more than two alleles", {
                "SNPs must all be biallelic")
 })
 
+## Test the function with dists and x have a different number of elements
+
+test_that("create_LDprofile fails when dist and x are different lengths", {
+
+  expect_error(create_LDprofile(dist = list(df$dist,df$dist), x = as.matrix(df[,3:7]), bin_size = 0.001, max_dist = 0.005, beta_params = TRUE),
+               "dist and x should contain the same number of elements")
+})
+
+
 ## Test the function with bin_size as non-numeric
 
 test_that("create_LDprofile fails when bin_size is non-numeric", {
