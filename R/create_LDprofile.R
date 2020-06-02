@@ -10,6 +10,8 @@
 #' If the \code{max_dist} is not an increment of \code{bin_size}, it will be adjusted to the next highest increment.The maximum bin will be the bin that \code{max_dist} falls into. For example, if the \code{max_dist} is given as 4.5 and the \code{bin_size} is 1, the final bin will be 4.\cr
 #' By default, Beta parameters are not calculated. To calcualte Beta parameters, needed for the \code{\link{Zalpha_BetaCDF}} and \code{\link{Zbeta_BetaCDF}} statistics, \code{beta_params} should be set to TRUE and the package \code{fitdistrplus} must be installed.
 #'
+#' @importFrom stats cor sd
+#'
 #' @param dist A numeric vector, or a list of numeric vectors, containing genetic distances.
 #' @param x A matrix of SNP values, or a list of matrices. Columns represent chromosomes; rows are SNP locations. Hence, the number of rows should equal the length of the \code{dist} vector. SNPs should all be biallelic.
 #' @param bin_size The size of each bin, in the same units as \code{dist}.
@@ -107,14 +109,20 @@ create_LDprofile<-function(dist,x,bin_size,max_dist=NULL,beta_params=FALSE){
   #for each element in dist and x, get the differences and rsquared values
   for (el in 1:length(dist)){
     #Find the differences in genetic distances between pairs of SNPs
-    diffs<-c(diffs,lower_triangle(outer(dist[[el]],dist[[el]],"-")))
+    tempdiffs<-lower_triangle(outer(dist[[el]],dist[[el]],"-"))
 
     #Find the rsquared value between pairs of SNPs
-    rsq<-c(rsq,lower_triangle(cor(t(x[[el]]),use="pairwise.complete.obs")^2))
+    temprsq<-lower_triangle(cor(t(x[[el]]),use="pairwise.complete.obs")^2)
+
+    #Filter for just those less than the max genetic distance and filter out missing distances
+    temprsq<-temprsq[tempdiffs<max_dist & is.na(tempdiffs)==FALSE]
+    tempdiffs<-tempdiffs[tempdiffs<max_dist & is.na(tempdiffs)==FALSE]
+
+    #Add to final vector
+    diffs<-c(diffs,tempdiffs)
+    rsq<-c(rsq,temprsq)
   }
-  #Filter for just those less than the max genetic distance and filter out missing distances
-  rsq<-rsq[diffs<max_dist & is.na(diffs)==FALSE]
-  diffs<-diffs[diffs<max_dist & is.na(diffs)==FALSE]
+  rm(tempdiffs,temprsq)
 
   #Assign diffs to bins
   bins<-assign_bins(bin_size,diffs)
