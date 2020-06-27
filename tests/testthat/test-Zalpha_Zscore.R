@@ -47,7 +47,7 @@ test_that("Zalpha_Zscore calculates Zalpha_Zscore statistic correctly", {
                                  -0.285401890680237,
                                  -0.270109843273656,
                                   NA,NA,NA,NA)
-               ))
+               ),tolerance=0.0001)
 })
 
 ## Test the function with a different window size
@@ -64,7 +64,7 @@ test_that("Zalpha_Zscore calculates Zalpha_Zscore statistic correctly with a dif
                                  -0.507186471020645,
                                  -0.535949238344209,
                                   NA,NA,NA,NA,NA)
-               ))
+               ),tolerance=0.0001)
 })
 ## Test the function with a character matrix as x
 
@@ -85,7 +85,7 @@ test_that("Zalpha_Zscore calculates Zalpha_Zscore statistic correctly with chara
                                  -0.285401890680237,
                                  -0.270109843273656,
                                   NA,NA,NA,NA)
-               ))
+               ),tolerance=0.0001)
 })
 
 ## Test the function with X supplied as a parameter
@@ -98,7 +98,7 @@ test_that("Zalpha_Zscore calculates Zalpha_Zscore statistic correctly with X sup
                  Zalpha_Zscore=c(-0.038223960672508,
                                  -0.240917156668399,
                                  -0.316679396483571)
-               ))
+               ),tolerance=0.0001)
 })
 
 ## Test the function with X supplied as a parameter outside of the region defined in pos
@@ -349,5 +349,5 @@ test_that("Zalpha_Zscore calculates Zalpha_Zscore statistic correctly with missi
                                  -0.1850465883763240,
                                  -0.0912782685815102,
                                  NA,NA,NA,NA)
-               ))
+               ),tolerance=0.0001)
 })

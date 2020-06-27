@@ -37,7 +37,7 @@ test_that("Zbeta_rsq_over_expected calculates Zbeta_rsq_over_expected statistic 
                                            0.690647913157800,
                                            0.710787633520743,
                                            NA,NA,NA,NA)
-               ))
+               ),tolerance=0.0001)
 })
 
 ## Test the function with a different window size
@@ -54,7 +54,7 @@ test_that("Zbeta_rsq_over_expected calculates Zbeta_rsq_over_expected statistic 
                                            0.686521835223347,
                                            0.732759533350118,
                                            NA,NA,NA,NA,NA)
-               ))
+               ),tolerance=0.0001)
 })
 ## Test the function with a character matrix as x
 
@@ -75,7 +75,7 @@ test_that("Zbeta_rsq_over_expected calculates Zbeta_rsq_over_expected statistic 
                                            0.690647913157800,
                                            0.710787633520743,
                                            NA,NA,NA,NA)
-               ))
+               ),tolerance=0.0001)
 })
 
 ## Test the function with X supplied as a parameter
@@ -88,7 +88,7 @@ test_that("Zbeta_rsq_over_expected calculates Zbeta_rsq_over_expected statistic 
                  Zbeta_rsq_over_expected=c(0.691113499222754,
                                            0.716092979819490,
                                            0.663090587779225)
-               ))
+               ),tolerance=0.0001)
 })
 
 ## Test the function with X supplied as a parameter outside of the region defined in pos
@@ -323,5 +323,5 @@ test_that("Zbeta_rsq_over_expected calculates Zbeta_rsq_over_expected statistic 
                                            0.708332106873554,
                                            0.735944021838047,
                                            NA,NA,NA,NA)
-               ))
+               ),tolerance=0.0001)
 })

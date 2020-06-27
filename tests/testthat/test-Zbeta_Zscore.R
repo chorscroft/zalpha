@@ -47,7 +47,7 @@ test_that("Zbeta_Zscore calculates Zbeta_Zscore statistic correctly", {
                                 -0.298557987824230,
                                 -0.278980061934724,
                                  NA,NA,NA,NA)
-               ))
+               ),tolerance=0.0001)
 })
 
 ## Test the function with a different window size
@@ -64,7 +64,7 @@ test_that("Zbeta_Zscore calculates Zbeta_Zscore statistic correctly with a diffe
                                 -0.308094601136825,
                                 -0.264295466759451,
                                  NA,NA,NA,NA,NA)
-               ))
+               ),tolerance=0.0001)
 })
 ## Test the function with a character matrix as x
 
@@ -85,7 +85,7 @@ test_that("Zbeta_Zscore calculates Zbeta_Zscore statistic correctly with charact
                                 -0.298557987824230,
                                 -0.278980061934724,
                                  NA,NA,NA,NA)
-               ))
+               ),tolerance=0.0001)
 })
 
 ## Test the function with X supplied as a parameter
@@ -349,5 +349,5 @@ test_that("Zbeta_Zscore calculates Zbeta_Zscore statistic correctly with missing
                                 -0.280921980725937,
                                 -0.253883231792888,
                                 NA,NA,NA,NA)
-               ))
+               ),tolerance=0.0001)
 })

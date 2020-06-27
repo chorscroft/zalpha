@@ -37,7 +37,7 @@ test_that("Zalpha_rsq_over_expected calculates Zalpha_rsq_over_expected statisti
                                             0.728230393808371,
                                             0.737847444047460,
                                    NA,NA,NA,NA)
-               ))
+               ),tolerance=0.0001)
 })
 
 ## Test the function with a different window size
@@ -54,7 +54,7 @@ test_that("Zalpha_rsq_over_expected calculates Zalpha_rsq_over_expected statisti
                                             0.499640647493653,
                                             0.478776705516631,
                                    NA,NA,NA,NA,NA)
-               ))
+               ),tolerance=0.0001)
 })
 ## Test the function with a character matrix as x
 
@@ -75,7 +75,7 @@ test_that("Zalpha_rsq_over_expected calculates Zalpha_rsq_over_expected statisti
                                             0.728230393808371,
                                             0.737847444047460,
                                             NA,NA,NA,NA)
-               ))
+               ),tolerance=0.0001)
 })
 
 ## Test the function with X supplied as a parameter
@@ -88,7 +88,7 @@ test_that("Zalpha_rsq_over_expected calculates Zalpha_rsq_over_expected statisti
                  Zalpha_rsq_over_expected=c(0.973208670564282,
                                             0.767152145198758,
                                             0.691051112331195)
-               ))
+               ),tolerance=0.0001)
 })
 
 ## Test the function with X supplied as a parameter outside of the region defined in pos
@@ -323,5 +323,5 @@ test_that("Zalpha_rsq_over_expected calculates Zalpha_rsq_over_expected statisti
                                             0.823237169574888,
                                             0.907695973532459,
                                             NA,NA,NA,NA)
-               ))
+               ),tolerance=0.0001)
 })

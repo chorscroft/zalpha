@@ -73,7 +73,7 @@ test_that("Zalpha_all calculates statistics correctly", {
                  Zbeta_Zscore=c(NA,NA,NA,NA,-0.249622295287423,-0.298443278340203,-0.303226918699104,-0.278319517790552,-0.324158658191404,-0.298557987824230,-0.278980061934724,NA,NA,NA,NA),
                  Zalpha_BetaCDF=c(NA,NA,NA,NA,0.498582271149287,0.525043954366501,0.461984646273587,0.409097872871755,0.388665184297966,0.396797658473664,0.393583363498442,NA,NA,NA,NA),
                  Zbeta_BetaCDF=c(NA,NA,NA,NA,0.418016604924725,0.406297914560424,0.401067078642937,0.410829577389033,0.397509236264354,0.405347850057668,0.409781300588220,NA,NA,NA,NA)
-               ))
+               ),tolerance=0.0001)
 })
 
 ## Test the function with a different window size
@@ -97,7 +97,7 @@ test_that("Zalpha_all calculates the statistics correctly with a different windo
                  Zbeta_Zscore=c(NA,NA,NA,NA,NA,-0.209270924830470,-0.410246297817478,-0.344123580516901,-0.308094601136825,-0.264295466759451,NA,NA,NA,NA,NA),
                  Zalpha_BetaCDF=c(NA,NA,NA,NA,NA,0.504981991655003,0.459025835290601,0.371462610998979,0.325273987256311,0.319208662374142,NA,NA,NA,NA,NA),
                  Zbeta_BetaCDF=c(NA,NA,NA,NA,NA,0.422727696221137,0.368571388831177,0.391643594518566,0.398259343601550,0.408526848230388,NA,NA,NA,NA,NA)
-               ))
+               ),tolerance=0.0001)
 })
 
 ## Test the function with a character matrix as x
@@ -124,7 +124,7 @@ test_that("Zalpha_all calculates all statistics correctly with character matrix"
                  Zbeta_Zscore=c(NA,NA,NA,NA,-0.249622295287423,-0.298443278340203,-0.303226918699104,-0.278319517790552,-0.324158658191404,-0.298557987824230,-0.278980061934724,NA,NA,NA,NA),
                  Zalpha_BetaCDF=c(NA,NA,NA,NA,0.498582271149287,0.525043954366501,0.461984646273587,0.409097872871755,0.388665184297966,0.396797658473664,0.393583363498442,NA,NA,NA,NA),
                  Zbeta_BetaCDF=c(NA,NA,NA,NA,0.418016604924725,0.406297914560424,0.401067078642937,0.410829577389033,0.397509236264354,0.405347850057668,0.409781300588220,NA,NA,NA,NA)
-               ))
+               ),tolerance=0.0001)
 })
 
 ## Test the function with X supplied as a parameter
@@ -148,7 +148,7 @@ test_that("Zalpha_all calculates the statistics correctly with X supplied", {
                   Zbeta_Zscore=c(-0.303226918699104,-0.278319517790552,-0.324158658191404),
                   Zalpha_BetaCDF=c(0.461984646273587,0.409097872871755,0.388665184297966),
                   Zbeta_BetaCDF=c(0.401067078642937,0.410829577389033,0.397509236264354)
-               ))
+               ),tolerance=0.0001)
 })
 
 ## Test the function with X supplied as a parameter outside of the region defined in pos
@@ -431,7 +431,7 @@ test_that("Zalpha_all calculates statistics correctly with only x supplied", {
                  L_plus_R=c(NA,NA,NA,NA,51,46,43,42,43,46,51,NA,NA,NA,NA),
                  Zalpha=c(NA,NA,NA,NA,((3+1/2)/6+(11+41/144)/45)/2,((6+1/4)/10+(9+41/48)/36)/2,((7+31/72)/15+(7+13/48)/28)/2,((8+17/144)/21+(4+7/16)/21)/2,((9+131/144)/28+(2+13/16)/15)/2,((13+97/144)/36+(1+121/144)/10)/2,((15+25/48)/45+(1+55/144)/6)/2,NA,NA,NA,NA),
                  Zbeta=c(NA,NA,NA,NA,(10+5/18)/40,(10+35/36)/45,(11+103/144)/48,(12+73/144)/49,(11+83/144)/48,(11+17/48)/45,(10+65/144)/40,NA,NA,NA,NA)
-               ))
+               ),tolerance=0.0001)
 })
 
 ## test that only the relevant statistics are calculated with dist, LDprofile_bins and _rsq supplied
@@ -445,7 +445,7 @@ test_that("Zalpha_all calculates statistics correctly with dist, LDprofile_bins 
                  L_plus_R=c(NA,NA,NA,NA,51,46,43,42,43,46,51,NA,NA,NA,NA),
                  Zalpha_expected=c(NA,NA,NA,NA,0.390457304338967,0.392014054942343,0.397339546324536,0.398874728980465,0.400715520018796,0.401718327864356,0.399526703832832,NA,NA,NA,NA),
                  Zbeta_expected=c(NA,NA,NA,NA,0.350404001770323,0.357372168444253,0.360647397851440,0.361951221318345,0.362988750761055,0.364752550557575,0.366343120440209,NA,NA,NA,NA)
-               ))
+               ),tolerance=0.0001)
 })
 
 ## test that only the relevant statistics are calculated with x, dist, LDprofile_bins and _rsq supplied
@@ -465,7 +465,7 @@ test_that("Zalpha_all calculates statistics correctly with x, dist, LDprofile_bi
                  Zalpha_log_rsq_over_expected=c(NA,NA,NA,NA, -0.129685954728232, -0.086676970494806,-0.207059296326176,  -0.317561061974900, -0.355497049708911, -0.345346264723395, -0.340516242835506,NA,NA,NA,NA),
                  Zbeta_rsq_over_expected=c(NA,NA,NA,NA,0.741001103918817,0.693986983022872,0.691113499222754,0.716092979819490,0.663090587779225,0.690647913157800,0.710787633520743,NA,NA,NA,NA),
                  Zbeta_log_rsq_over_expected=c(NA,NA,NA,NA,-0.310756050486805,-0.323333602724241,-0.349639186187507,-0.339617245857445,-0.355799393664026,-0.313469388842524,-0.304918066115218,NA,NA,NA,NA)
-                 ))
+                 ),tolerance=0.0001)
 })
 
 ## test that only the relevant statistics are calculated with only LDprofile_Beta_a and _b not supplied
@@ -487,7 +487,7 @@ test_that("Zalpha_all calculates statistics correctly with only LDprofile_Beta_a
                  Zbeta_log_rsq_over_expected=c(NA,NA,NA,NA,-0.310756050486805,-0.323333602724241,-0.349639186187507,-0.339617245857445,-0.355799393664026,-0.313469388842524,-0.304918066115218,NA,NA,NA,NA),
                  Zalpha_Zscore=c(NA,NA,NA,NA,0.083669516080429,0.160231324773080,-0.038223960672508,-0.240917156668399,-0.316679396483571,-0.285401890680237,-0.270109843273656,NA,NA,NA,NA),
                  Zbeta_Zscore=c(NA,NA,NA,NA,-0.249622295287423,-0.298443278340203,-0.303226918699104,-0.278319517790552,-0.324158658191404,-0.298557987824230,-0.278980061934724,NA,NA,NA,NA)
-               ))
+               ),tolerance=0.0001)
 })
 
 ## test that only the relevant statistics are calculated with only LDprofile_sd not supplied
@@ -509,7 +509,7 @@ test_that("Zalpha_all calculates statistics correctly with only LDprofile_sd not
                  Zbeta_log_rsq_over_expected=c(NA,NA,NA,NA,-0.310756050486805,-0.323333602724241,-0.349639186187507,-0.339617245857445,-0.355799393664026,-0.313469388842524,-0.304918066115218,NA,NA,NA,NA),
                  Zalpha_BetaCDF=c(NA,NA,NA,NA,0.498582271149287,0.525043954366501,0.461984646273587,0.409097872871755,0.388665184297966,0.396797658473664,0.393583363498442,NA,NA,NA,NA),
                  Zbeta_BetaCDF=c(NA,NA,NA,NA,0.418016604924725,0.406297914560424,0.401067078642937,0.410829577389033,0.397509236264354,0.405347850057668,0.409781300588220,NA,NA,NA,NA)
-                ))
+                ),tolerance=0.0001)
 })
 
 ## test that only the relevant statistics are calculated with x not supplied
@@ -523,7 +523,7 @@ test_that("Zalpha_all calculates statistics correctly with only x not supplied",
                  L_plus_R=c(NA,NA,NA,NA,51,46,43,42,43,46,51,NA,NA,NA,NA),
                  Zalpha_expected=c(NA,NA,NA,NA,0.390457304338967,0.392014054942343,0.397339546324536,0.398874728980465,0.400715520018796,0.401718327864356,0.399526703832832,NA,NA,NA,NA),
                  Zbeta_expected=c(NA,NA,NA,NA,0.350404001770323,0.357372168444253,0.360647397851440,0.361951221318345,0.362988750761055,0.364752550557575,0.366343120440209,NA,NA,NA,NA)
-               ))
+               ),tolerance=0.0001)
 })
 
 ## test that only the relevant statistics are calculated with dist not supplied
@@ -537,7 +537,7 @@ test_that("Zalpha_all calculates statistics correctly with dist not supplied", {
                  L_plus_R=c(NA,NA,NA,NA,51,46,43,42,43,46,51,NA,NA,NA,NA),
                  Zalpha=c(NA,NA,NA,NA,((3+1/2)/6+(11+41/144)/45)/2,((6+1/4)/10+(9+41/48)/36)/2,((7+31/72)/15+(7+13/48)/28)/2,((8+17/144)/21+(4+7/16)/21)/2,((9+131/144)/28+(2+13/16)/15)/2,((13+97/144)/36+(1+121/144)/10)/2,((15+25/48)/45+(1+55/144)/6)/2,NA,NA,NA,NA),
                  Zbeta=c(NA,NA,NA,NA,(10+5/18)/40,(10+35/36)/45,(11+103/144)/48,(12+73/144)/49,(11+83/144)/48,(11+17/48)/45,(10+65/144)/40,NA,NA,NA,NA)
-               ))
+               ),tolerance=0.0001)
 })
 
 ## test that only the relevant statistics are calculated with LDprofile_bins not supplied
@@ -551,7 +551,7 @@ test_that("Zalpha_all calculates statistics correctly with LDprofile_bins not su
                  L_plus_R=c(NA,NA,NA,NA,51,46,43,42,43,46,51,NA,NA,NA,NA),
                  Zalpha=c(NA,NA,NA,NA,((3+1/2)/6+(11+41/144)/45)/2,((6+1/4)/10+(9+41/48)/36)/2,((7+31/72)/15+(7+13/48)/28)/2,((8+17/144)/21+(4+7/16)/21)/2,((9+131/144)/28+(2+13/16)/15)/2,((13+97/144)/36+(1+121/144)/10)/2,((15+25/48)/45+(1+55/144)/6)/2,NA,NA,NA,NA),
                  Zbeta=c(NA,NA,NA,NA,(10+5/18)/40,(10+35/36)/45,(11+103/144)/48,(12+73/144)/49,(11+83/144)/48,(11+17/48)/45,(10+65/144)/40,NA,NA,NA,NA)
-               ))
+               ),tolerance=0.0001)
 })
 
 ## test that Zalpha_all works with a missing value
@@ -566,5 +566,5 @@ test_that("Zalpha_all calculates statistics correctly with missing value", {
                  L_plus_R=c(NA,NA,NA,NA,51,46,43,42,43,46,51,NA,NA,NA,NA),
                  Zalpha=c(NA,NA,NA,NA,0.434953703703704,0.473283179012346,0.397114748677249,0.317791005291005,0.300801917989418,0.322897376543210,0.360532407407407,NA,NA,NA,NA),
                  Zbeta=c(NA,NA,NA,NA,0.248611111111111,0.235185185185185,0.233651620370370,0.257794784580499,0.250144675925926,0.259413580246914,0.271354166666667,NA,NA,NA,NA)
-               ))
+               ),tolerance=0.0001)
 })

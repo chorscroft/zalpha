@@ -36,7 +36,7 @@ test_that("Zalpha_expected calculates Zalpha_expected statistic correctly", {
                                   0.401718327864356,
                                   0.399526703832832,
                                   NA,NA,NA,NA)
-               ))
+               ),tolerance=0.0001)
 })
 
 ## Test the function with a different window size
@@ -53,7 +53,7 @@ test_that("Zalpha_expected calculates Zalpha_expected statistic correctly with a
                                    0.419512588688985,
                                    0.421536156959405,
                                    NA,NA,NA,NA,NA)
-               ))
+               ),tolerance=0.0001)
 })
 
 ## Test the function with X supplied as a parameter
@@ -66,7 +66,7 @@ test_that("Zalpha_expected calculates Zalpha_expected statistic correctly with X
                  Zalpha_expected=c(0.397339546324536,
                                    0.398874728980465,
                                    0.400715520018796)
-               ))
+               ),tolerance=0.0001)
 })
 
 ## Test the function with X supplied as a parameter outside of the region defined in pos

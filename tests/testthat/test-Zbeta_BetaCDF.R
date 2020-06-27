@@ -48,7 +48,7 @@ test_that("Zbeta_BetaCDF calculates Zbeta_BetaCDF statistic correctly", {
                                  0.405347850057668,
                                  0.409781300588220,
                                  NA,NA,NA,NA)
-               ))
+               ),tolerance=0.0001)
 })
 
 ## Test the function with a different window size
@@ -65,7 +65,7 @@ test_that("Zbeta_BetaCDF calculates Zbeta_BetaCDF statistic correctly with a dif
                                  0.398259343601550,
                                  0.408526848230388,
                                  NA,NA,NA,NA,NA)
-               ))
+               ),tolerance=0.0001)
 })
 ## Test the function with a character matrix as x
 
@@ -86,7 +86,7 @@ test_that("Zbeta_BetaCDF calculates Zbeta_BetaCDF statistic correctly with chara
                                  0.405347850057668,
                                  0.409781300588220,
                                  NA,NA,NA,NA)
-               ))
+               ),tolerance=0.0001)
 })
 
 ## Test the function with X supplied as a parameter
@@ -99,7 +99,7 @@ test_that("Zbeta_BetaCDF calculates Zbeta_BetaCDF statistic correctly with X sup
                  Zbeta_BetaCDF=c(0.401067078642937,
                                  0.410829577389033,
                                  0.397509236264354)
-               ))
+               ),tolerance=0.0001)
 })
 
 ## Test the function with X supplied as a parameter outside of the region defined in pos
@@ -330,5 +330,5 @@ test_that("Zbeta_BetaCDF calculates Zbeta_BetaCDF statistic correctly with missi
                                  0.414765530721706,
                                  0.422608554537899,
                                  NA,NA,NA,NA)
-               ))
+               ),tolerance=0.0001)
 })

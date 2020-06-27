@@ -27,7 +27,7 @@ test_that("Zbeta calculates Zbeta statistic correctly", {
                           (11+17/48)/45,
                           (10+65/144)/40,
                           NA,NA,NA,NA)
-               ))
+               ),tolerance=0.0001)
 })
 
 ## Test the function with a different window size
@@ -44,7 +44,7 @@ test_that("Zbeta calculates Zbeta statistic correctly with a different window si
                           (6+101/144)/25,
                           (7+17/144)/25,
                           NA,NA,NA,NA,NA)
-               ))
+               ),tolerance=0.0001)
 })
 
 ## Test the function with a character matrix as x
@@ -66,7 +66,7 @@ test_that("Zbeta calculates Zbeta statistic correctly with character matrix", {
                          (11+17/48)/45,
                          (10+65/144)/40,
                          NA,NA,NA,NA)
-               ))
+               ),tolerance=0.0001)
 })
 
 ## Test the function with X supplied as a parameter
@@ -79,7 +79,7 @@ test_that("Zbeta calculates Zbeta statistic correctly with X supplied", {
                  Zbeta=c((11+103/144)/48,
                          (12+73/144)/49,
                          (11+83/144)/48)
-               ))
+               ),tolerance=0.0001)
 })
 
 ## Test the function with X supplied as a parameter outside of the region defined in pos
@@ -234,5 +234,5 @@ test_that("Zbeta calculates Zbeta statistic correctly with missing value", {
                          0.259413580246914,
                          0.271354166666667,
                          NA,NA,NA,NA)
-               ))
+               ),tolerance=0.0001)
 })

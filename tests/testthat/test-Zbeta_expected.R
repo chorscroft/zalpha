@@ -36,7 +36,7 @@ test_that("Zbeta_expected calculates Zbeta_expected statistic correctly", {
                                   0.364752550557575,
                                   0.366343120440209,
                                   NA,NA,NA,NA)
-               ))
+               ),tolerance=0.0001)
 })
 
 ## Test the function with a different window size
@@ -53,7 +53,7 @@ test_that("Zbeta_expected calculates Zbeta_expected statistic correctly with a d
                                   0.388272359451172,
                                   0.387629142774876,
                                   NA,NA,NA,NA,NA)
-               ))
+               ),tolerance=0.0001)
 })
 
 ## Test the function with X supplied as a parameter
@@ -66,7 +66,7 @@ test_that("Zbeta_expected calculates Zbeta_expected statistic correctly with X s
                  Zbeta_expected=c(0.360647397851440,
                                   0.361951221318345,
                                   0.362988750761055)
-               ))
+               ),tolerance=0.0001)
 })
 
 ## Test the function with X supplied as a parameter outside of the region defined in pos

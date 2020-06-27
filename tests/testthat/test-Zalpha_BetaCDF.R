@@ -48,7 +48,7 @@ test_that("Zalpha_BetaCDF calculates Zalpha_BetaCDF statistic correctly", {
                                   0.396797658473664,
                                   0.393583363498442,
                                   NA,NA,NA,NA)
-               ))
+               ),tolerance=0.0001)
 })
 
 ## Test the function with a different window size
@@ -65,7 +65,7 @@ test_that("Zalpha_BetaCDF calculates Zalpha_BetaCDF statistic correctly with a d
                                   0.325273987256311,
                                   0.319208662374142,
                                   NA,NA,NA,NA,NA)
-               ))
+               ),tolerance=0.0001)
 })
 ## Test the function with a character matrix as x
 
@@ -86,7 +86,7 @@ test_that("Zalpha_BetaCDF calculates Zalpha_BetaCDF statistic correctly with cha
                                   0.396797658473664,
                                   0.393583363498442,
                                   NA,NA,NA,NA)
-               ))
+               ),tolerance=0.0001)
 })
 
 ## Test the function with X supplied as a parameter
@@ -99,7 +99,7 @@ test_that("Zalpha_BetaCDF calculates Zalpha_BetaCDF statistic correctly with X s
                  Zalpha_BetaCDF=c(0.461984646273587,
                                   0.409097872871755,
                                   0.388665184297966)
-               ))
+               ),tolerance=0.0001)
 })
 
 ## Test the function with X supplied as a parameter outside of the region defined in pos
@@ -330,5 +330,5 @@ test_that("Zalpha_BetaCDF calculates Zalpha_BetaCDF statistic correctly with mis
                                   0.431252209159130,
                                   0.453835332399716,
                                   NA,NA,NA,NA)
-               ))
+               ),tolerance=0.0001)
 })

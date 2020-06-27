@@ -21,7 +21,7 @@ test_that("create_LDprofile calculates the LD profile correctly", {
                  Beta_a=c(0.619957744381906,1.125028692019340,0.635410044952769,3.941019442363900,NA),
                  Beta_b=c(1.062459890834270,2.446706389704430,1.149319432462400,8.454825333760550,NA),
                  n=c(54,31,15,5,0)
-               ))
+               ),tolerance=0.0001)
 })
 
 ## Test the function with a different max_dist
@@ -36,7 +36,7 @@ test_that("create_LDprofile calculates the LD profile correctly with a different
                  Beta_a=c(0.619957744381906,1.125028692019340,0.635410044952769),
                  Beta_b=c(1.062459890834270,2.446706389704430,1.149319432462400),
                  n=c(54,31,15)
-               ))
+               ),tolerance=0.0001)
 })
 ## Test the function with no max_dist given
 
@@ -50,7 +50,7 @@ test_that("create_LDprofile calculates the LD profile correctly with no max_dist
                  Beta_a=c(0.619957744381906,1.125028692019340,0.635410044952769,3.941019442363900),
                  Beta_b=c(1.062459890834270,2.446706389704430,1.149319432462400,8.454825333760550),
                  n=c(54,31,15,5)
-               ))
+               ),tolerance=0.0001)
 })
 
 
@@ -66,7 +66,7 @@ test_that("create_LDprofile calculates the LD profile correctly with a different
                  Beta_a=c(0.916070145958307,0.637072700079744,1.046576044485340,1.909812912830260,0.775059123115346,1.088198634018290,3.789877096116000,NA),
                  Beta_b=c(2.326350552394540,0.872215477086822,2.166981335251990,5.166454170350760,1.748740564135290,1.488374161884570,9.367197007381050,NA),
                  n=c(29,25,22,9,10,5,4,1)
-               ))
+               ),tolerance=0.0001)
 })
 
 ## Test the function with beta_params not specified
@@ -81,7 +81,7 @@ test_that("create_LDprofile calculates the LD profile correctly with beta_params
                  Beta_a=c(NA,NA,NA,NA,NA),
                  Beta_b=c(NA,NA,NA,NA,NA),
                  n=c(54,31,15,5,0)
-               ))
+               ),tolerance=0.0001)
 })
 
 ## Test the function with a character matrix as x
@@ -99,7 +99,7 @@ test_that("create_LDprofile calculates the LD profile correctly with character m
                  Beta_a=c(0.619957744381906,1.125028692019340,0.635410044952769,3.941019442363900,NA),
                  Beta_b=c(1.062459890834270,2.446706389704430,1.149319432462400,8.454825333760550,NA),
                  n=c(54,31,15,5,0)
-               ))
+               ),tolerance=0.0001)
 })
 
 ## Test all the checks
@@ -219,7 +219,7 @@ test_that("create_LDprofile calculates the LD profile correctly with missing val
                  Beta_a=c(0.606846782972070,0.932888189465068,0.616307318328496,4.643089841249520,NA),
                  Beta_b=c(0.942600409939103,1.692309859072240,1.139111486418360,11.012925076592600,NA),
                  n=c(54,31,15,5,0)
-               ))
+               ),tolerance=0.0001)
 })
 
 ## Test the function with missing value in dist
@@ -235,7 +235,7 @@ test_that("create_LDprofile calculates the LD profile correctly with missing val
                  Beta_a=c(0.634602938184746,1.570771368863860,0.611627386753874,3.941019442363900,NA),
                  Beta_b=c(1.133751642734910,4.401600723631340,1.116161049339830,8.454825333760550,NA),
                  n=c(45,27,14,5,0)
-               ))
+               ),tolerance=0.0001)
 })
 
 

@@ -27,7 +27,7 @@ test_that("Zalpha calculates Zalpha statistic correctly", {
                           ((13+97/144)/36+(1+121/144)/10)/2,
                           ((15+25/48)/45+(1+55/144)/6)/2,
                           NA,NA,NA,NA)
-               ))
+               ),tolerance=0.0001)
 })
 
 ## Test the function with a different window size
@@ -44,7 +44,7 @@ test_that("Zalpha calculates Zalpha statistic correctly with a different window 
                           ((2+3/16)/10+(2+7/144)/10)/2,
                           ((2+3/16)/10+(1+121/144)/10)/2,
                           NA,NA,NA,NA,NA)
-               ))
+               ),tolerance=0.0001)
 })
 
 ## Test the function with a character matrix as x
@@ -66,7 +66,7 @@ test_that("Zalpha calculates Zalpha statistic correctly with character matrix", 
                           ((13+97/144)/36+(1+121/144)/10)/2,
                           ((15+25/48)/45+(1+55/144)/6)/2,
                           NA,NA,NA,NA)
-               ))
+               ),tolerance=0.0001)
 })
 
 ## Test the function with X supplied as a parameter
@@ -79,7 +79,7 @@ test_that("Zalpha calculates Zalpha statistic correctly with X supplied", {
                  Zalpha=c(((7+31/72)/15+(7+13/48)/28)/2,
                           ((8+17/144)/21+(4+7/16)/21)/2,
                           ((9+131/144)/28+(2+13/16)/15)/2)
-               ))
+               ),tolerance=0.0001)
 })
 
 ## Test the function with X supplied as a parameter outside of the region defined in pos
@@ -235,5 +235,5 @@ test_that("Zalpha calculates Zalpha statistic correctly with missing value", {
                           0.322897376543210,
                           0.360532407407407,
                           NA,NA,NA,NA)
-               ))
+               ),tolerance=0.0001)
 })
