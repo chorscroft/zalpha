@@ -5,8 +5,8 @@
 #'
 #' @format A data frame with 20 rows and 12 variables:
 #' \describe{
-#'   \item{positions}{location of the SNP on the chromosome e.g. in base pairs}
-#'   \item{distances}{genetic distance of the SNP from the start of the chromosome e.g. in centimorgans}
+#'   \item{bp_positions}{location of the SNP on the chromosome e.g. in base pairs}
+#'   \item{cM_distances}{genetic distance of the SNP from the start of the chromosome e.g. in centimorgans}
 #'   \item{chrom_1}{allele of the SNP on the first example chromosome}
 #'   \item{chrom_2}{allele of the SNP on the second example chromosome}
 #'   \item{chrom_3}{allele of the SNP on the third example chromosome}
