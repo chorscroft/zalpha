@@ -15,13 +15,38 @@ knitr::opts_chunk$set(
 library(zalpha)
 ```
 
-The zalpha package contains statistics for identifying areas of the genome that have undergone a selective sweep. The idea behind these statistics is to find areas of the genome that are highly correlated, as this can be a sign that a sweep has occurred recently in the vicinity. For more information on the statistics, please see the paper by Jacobs et al. (2016) referenced below.
+The zalpha package contains statistics for identifying areas of the genome that have undergone a selective sweep. The idea behind these statistics is to find areas of the genome that are highly correlated, as this can be a sign that a sweep has occurred recently in the vicinity. For more information on the statistics, please see the paper by Jacobs et al. (2016)[1] referenced below.
 
-## Data
+## A simple example
 
-The data used in this vignette is a very small simple dataset containing 20 SNPs and a population of 10 chromosomes. Realistically, the dataset would be much bigger. It is highly recommended to use only SNPs with a minor allele frequency of over 5%, as it is hard to find correlations between rare alleles.
+Here we have a dataset containing five humans with a single pair of chromosomes each. The chromosome has 20 SNPs, at base pair 100, 200, 300, ..., 2000. 
 
-The dataset "snps" is included with this package and can be loaded using the code:
+-------- ------------ --------------------
+Person 1 Chromosome A AGGAAGGGATACGGTTATAC	
+         Chromosome B CGGAACTGATCAGCTCAGGG	
+Person 2 Chromosome A CGGTACTGTCACGGGCATGG	
+         Chromosome B ATGTAGGGTCCAGCTCTGAC	
+Person 3 Chromosome A ATGTCGGCATCCAGGCAGAC	
+         Chromosome B ATGAACGCATCAACTTTGAG	
+Person 4 Chromosome A CGGTCGGCTCCAGCTTTTGG	
+         Chromosome B CTGTCCGCTCCCGGGTTTGC	
+Person 5 Chromosome A CGCAACGGACACGCGCATGC	
+         Chromosome B CTGACGTCACCCAGTTTGAG
+-------- ------------ --------------------
+
+For this simple example all that is needed is:
+
+* The vector of SNP locations
+
+* The matrix of SNP values. This could be in ACGT format as above, or in 0 and 1 notation, or any other notation as long as SNPs are biallelic. Data extracted from a .tped file is in the ideal format for this analysis.
+
+### The snps dataset
+
+The snps dataset is a data frame that comes with the zalpha package. It is identical to the simple example above, but with 0s and 1s instead of ACGTs.
+
+Realistically, the dataset would be much bigger. It is highly recommended to only use SNPs with a minor allele frequency of over 5%, as it is hard to find correlations between rare alleles. Any missing values should be coded as NA.
+
+The snps dataset can be loaded using the code:
 
 ```{r}
 library(zalpha)
@@ -29,89 +54,240 @@ data(snps)
 ## This is what the dataset looks like:
 snps
 ```
-This data set contains information about each of the SNPs. The first column gives the physical location of the SNP along the chromosome, in whatever units is useful to the user (usually bp or Kb). In this example, the positions are assumed to be in base pairs (bp).
+This data set contains information about each of the SNPs. The first column gives the physical location of the SNP along the chromosome, in whatever units is useful to the user (usually bp or Kb). In this example, the positions are in base pairs (bp).
 
-The next column is the genetic distance of the SNP from the start of the chromosome. This could be in centimorgans (cM), linkage disequilibrium units (LDU) or any other way of measuring genetic distance, as long as it is additive (i.e. the distance between SNP A and SNP C is equal to the distance between SNP A and SNP B plus SNP B and SNP C). This data is only required if the user is interested in adjusting for recombination and supplies an LDprofile.
+The next column is the genetic distance of the SNP from the start of the chromosome. Ignore this column for now.
 
-The final columns are the SNP alleles for each of the chromosomes in the population. Each SNP must be biallelic, but can contain any value, for example 0s and 1s, or A/G/C/Ts. The data can contain missing values, however it is recommended that the cut off is 10% missing at most. It is also recommended to use a minor allele frequecy of 5% or higher.
+The final columns are the SNP alleles for each of the chromosomes in the population. Each SNP must be biallelic, but can contain any value, for example 0s and 1s, or ACGTs. The data can contain missing values, however it is recommended that the cut off is 10% missing at most. It is also recommended to use a minor allele frequency of 5% or higher.
+
+__Note:__ There is no requirement to put data into a data frame - all that is required is a vector of SNP positions and a matrix of SNP values.
 
 ## Zalpha
 
-To test for selection, the user can use the Zalpha function. This function takes each SNP in the dataset, the "target locus", calculates the $Z_{\alpha}$ value, then moves on to the next SNP. It works by calculating correlations between alleles on each side of the target locus and averaging them. To do this, the function needs three inputs:
+To test for selection, the user can use the Zalpha function. This function assigns the first SNP in the dataset as the "target locus", calculates the $Z_{\alpha}$ value, then moves on to the next SNP making that the target locus, until every SNP in the dataset has been considered. It works by calculating correlations between alleles on each side of the target locus and averaging them. To do this, the function needs three inputs:
 
-* A vector of the physical locations of each of the SNPs
+* __pos__ A vector of the physical locations of each of the SNPs. For this example, we will use the first column from the snps dataset: snps$bp_positions.
 
-* The window size. This is set to 3000 for this small example but realistically a window size of around 200 Kb is appropriate. The window is centred on the target locus, and considers SNPs that are within ws/2 to the left and ws/2 to the right of the target SNP.
+* __ws__ The window size. This is set to 3000 for this small example but realistically a window size of around 200 Kb is appropriate. The window is centred on the target locus, and considers SNPs that are within ws/2 to the left and ws/2 to the right of the target SNP.
 
-* A matrix of the SNP alleles across each chromosome in the sample. The number of rows should be equal to the number of SNPs, and the columns are each of the chromosomes.
+* __x__ A matrix of the SNP alleles across each chromosome in the sample. The number of rows should be equal to the number of SNPs, and the columns are each of the chromosomes. For this example we extract the SNP values from the snps dataset found in columns 3 to 12, and convert into a matrix: as.matrix(snps[,3:12]).
+
 
 ```{r}
-results<-Zalpha(snps$positions,3000,as.matrix(snps[,3:12]))
+results<-Zalpha(snps$bp_positions,3000,as.matrix(snps[,3:12]))
 results
 plot(results$position,results$Zalpha)
 ```
 
-The output shows the positions of each of the SNPs and the $Z_{\alpha}$ value calculated for each SNP. The NAs are due to the parameters minRandL and minRL, which have defaults 4 and 25 respectively. minRandL specifies the minimum number of SNPs that must be to the left and right of the target SNP within the window. minRL is the product of these numbers.
+The output is in the form of a list and shows the positions of each of the SNPs and the $Z_{\alpha}$ value calculated for each SNP. The NAs are because there were not enough SNPs on one side of the target locus for an accurate $Z_{\alpha}$ value to be calculated. This is controlled by the parameters minRandL and minRL, which have defaults 4 and 25 respectively. minRandL specifies the minimum number of SNPs that must be to the left and right of the target SNP within the window for $Z_{\alpha}$ to be calculated. minRL is the product of these numbers.
+
+The graph shows a sharp increase in $Z_{\alpha}$ values in the centre of this region, which could indicate the presence of a sweep. The user should compare the values across the whole genome to find outliers. 
 
 Say the user is only interested in the output of Zalpha for a particular region of the chromosome; this is achieved by setting the "X" parameter to the lower and upper bounds of the region.
 
 ```{r}
-Zalpha(snps$positions,3000,as.matrix(snps[,3:12]),X=c(500,1000))
+Zalpha(snps$bp_positions,3000,as.matrix(snps[,3:12]),X=c(500,1000))
 ```
 
-## LD Profile
-Using an LD profile allows the user to adjust for variable recombination rates along the chromosome. Here is the example LD profile provided with the zalpha R package:
+That concludes the simple example of the Zalpha function!
+
+It is recommended that the user uses the Zalpha_all function, as this function will calculate all of the statistics in the zalpha package in one go, rather than running all of the statistics separately. More information on the Zalpha_all function can be found further down this vignette. Read on for information on the other statistics in the package and what they require.
+
+## Adjusting for expected correlations between SNPs
+
+There are many reasons that SNPs could be correlated apart from selection, including recombination. This package allows the user to correct for expected correlations between SNPs. There are multiple functions included in this package that adjust for expected correlations, all of which have an example below. First however, the new inputs will be described. The extra inputs required are:
+
+* __dist__ A vector containing the genetic distances between SNPs
+
+* An LD profile
+
+Returning to the snps example dataset, we can now consider the second column of the dataset "cM_distance".
 
 ```{r}
+snps$cM_distances
+```
+
+Each value is the genetic distance of the SNP from the start of the chromosome. This could be in centimorgans (cM), linkage disequilibrium units (LDU) or any other way of measuring genetic distance, as long as it is additive (i.e. the distance between SNP A and SNP C is equal to the distance between SNP A and SNP B plus SNP B and SNP C). 
+
+There are many ways of calculating the genetic distances between SNPs. Some software that could be used include LDhat[2], pyrho[3], FastEPRR[4], and LDJump[5].
+
+### LD Profile
+
+Using an LD (linkage disequilibrium) profile allows the user to adjust for variable recombination rates along the chromosome. An LD profile is a basic look-up table. It tells the user what the expected correlation between two SNPs is, given the genetic distance between them. Here is the example LD profile provided with the zalpha R package:
+
+```{r}
+data(LDprofile)
 LDprofile
 ```
 
-The LD (linkage disequilibrium) profile contains data about the expected correlation between SNPs given the genetic distance between them. This could be generated using a simulated chromosome where the genetic distances are known, after which the statistics can be calculated. The columns are:
+The LD profile contains data about the expected correlation between SNPs given the genetic distance between them. The columns in the example are:
 
-* bin: this is the lower bound of the bin. In this example, row 1 would include any SNPs greater than or equal to 0 but less than 0.0001 centimorgans apart (or whatever measure of genetic distance applicable for the user).
+* __bin__ This is the lower bound of the bin. In this example, row 1 would include any SNPs greater than or equal to 0 but less than 0.0001 centimorgans apart.
 
-* rsq: the expected r^2^ value for SNPs whose genetic distance between them falls within the bin.
+* __rsq__ The expected r^2^ value for pairs of SNPs whose genetic distance between them falls within the bin.
 
-* sd: the standard deviation of r^2^ for the bin.
+* __sd__ The standard deviation of r^2^ for the bin.
 
-* Beta_a: the first shape of the Beta distribution fitted to this bin. The R function fitdist can be used to estimate the Beta parameters.
+* __Beta_a__ The first shape of the Beta distribution fitted to this bin.
 
-* Beta_b: the second shape of the Beta distribution.
+* __Beta_b__ The second shape of the Beta distribution.
 
-For example, if we assume the bins are in centimorgans, and we know two SNPs are 0.00015 cM apart, the LDprofile tells us that we expect the r^2^ value to be 0.093, with a standard deviation of 0.22 and fits the distribution Beta(0.27,2.03).
+If we know two SNPs are 0.00017 cM apart, this LDprofile tells us that we expect the r^2^ value to be 0.093, with a standard deviation of 0.22, and that the expected distribution of r^2^ values for SNPs this far apart is Beta(0.27,2.03).
 
-For real world data, Jacobs et al. (2016) recommend using distances up to 2 cM assigned to 20,000 bins.
+The package contains a function for creating an LD profile. This is explained lower down this vignette. The vignette continues by using the example LDprofile dataset supplied.
 
 ## Zalpha_expected
 
-The expected $Z_{\alpha}$ value (denoted $Z_{\alpha}^{E[r^2]}$) can be calculated for a chromosome given an LD profile and the genetic distances between each SNP in the chromosome. Instead of calculating the r^2^ values between SNPs, the function works out the genetic distance between them, finds the bin in the LD profile that the genetic distance falls into, and reads out the expected r^2^ value. The function then calculates $Z_{\alpha}$ as normal.
+The expected $Z_{\alpha}$ value (denoted $Z_{\alpha}^{E[r^2]}$) can be calculated for a chromosome given an LD profile and the genetic distances between each SNP in the chromosome. Instead of calculating the r^2^ values between SNPs, the function uses the expected correlations. It does this by working out the genetic distance between each pair of SNPs, and uses the r^2^ values given in the LD profile for SNPs that far apart.
 
 ```{r}
-Zalpha_expected(snps$positions, 3000, snps$distances, LDprofile$bin, LDprofile$rsq)
+Zalpha_expected(snps$bp_positions, 3000, snps$cM_distances, LDprofile$bin, LDprofile$rsq)
 ```
-Once $Z_{\alpha}^{E[r^2]}$ has been calculated, it can be combined with the $Z_{\alpha}$ results to adjust for recombination, for example by computing $Z_{\alpha}$ - $Z_{\alpha}^{E[r^2]}$ or $Z_{\alpha}$/$Z_{\alpha}^{E[r^2]}$.
+Note that this statistic does not use the SNP value data. Once $Z_{\alpha}^{E[r^2]}$ has been calculated, it can be combined with the $Z_{\alpha}$ results to adjust for recombination, for example by computing $Z_{\alpha}$/$Z_{\alpha}^{E[r^2]}$. Outliers in this new combined statistic could be potential selection candidates.
 
-Other functions that take into account variable recombination rates are Zalpha_rsq_over_expected, Zalpha_log_rsq_over_expected, Zalpha_Zscore, and Zalpha_BetaCDF.
+Other functions that take into account variable recombination rates are Zalpha_rsq_over_expected, Zalpha_log_rsq_over_expected, Zalpha_Zscore, and Zalpha_BetaCDF. These statistics all use the actual r^2^ values from the data combined with the expected r^2^ values from the LD profile in various ways. 
 
+Examples of these statistics are here:
+```{r}
+Zalpha_rsq_over_expected(snps$bp_positions, 3000, as.matrix(snps[,3:12]), snps$cM_distances, LDprofile$bin, LDprofile$rsq)
+Zalpha_log_rsq_over_expected(snps$bp_positions, 3000, as.matrix(snps[,3:12]), snps$cM_distances, LDprofile$bin, LDprofile$rsq)
+Zalpha_Zscore(snps$bp_positions, 3000, as.matrix(snps[,3:12]), snps$cM_distances, LDprofile$bin, LDprofile$rsq, LDprofile$sd)
+Zalpha_BetaCDF(snps$bp_positions, 3000, as.matrix(snps[,3:12]), snps$cM_distances, LDprofile$bin, LDprofile$Beta_a, LDprofile$Beta_b)
+```
+
+Note that not all of the statistics need all of the columns from the LD profile.
 
 ## Zbeta
-The Zbeta function works in exactly the same way as the Zalpha function, but evaluates correlations between SNPs on either side of the target locus, rather than each side separately. It is useful to use the $Z_{\beta}$ statistic in conjunction with the $Z_{\alpha}$ statistic, as they behave differently depending on how close to fixation the sweep is. For example, while a sweep is in progress both $Z_{\alpha}$ and $Z_{\beta}$ would be higher than other areas of the chromosome without a sweep present. However, when a sweep reaches near-fixation, $Z_{\beta}$ would decrease whereas $Z_{\alpha}$ would remain high. Combining $Z_{\alpha}$ and $Z_{\beta}$ into new statistics such as $Z_{\alpha}$/$Z_{\beta}$ is one way of analysing this.
+
+The Zbeta function works in exactly the same way as the Zalpha function, but evaluates correlations between pairs of SNPs where one is to the left of the target locus and the other is to the right. It is useful to use the $Z_{\beta}$ statistic in conjunction with the $Z_{\alpha}$ statistic, as they behave differently depending on how close to fixation the sweep is. For example, while a sweep is in progress both $Z_{\alpha}$ and $Z_{\beta}$ would be higher than other areas of the chromosome without a sweep present. However, when a sweep reaches near-fixation, $Z_{\beta}$ would decrease whereas $Z_{\alpha}$ would remain high. Combining $Z_{\alpha}$ and $Z_{\beta}$ into new statistics such as $Z_{\alpha}$/$Z_{\beta}$ is one way of analysing this. 
+
+The Zbeta function requires the exact same inputs as the Zalpha function. Here is an example:
+
+```{r}
+results<-Zbeta(snps$bp_positions,3000,as.matrix(snps[,3:12]))
+results
+plot(results$position,results$Zbeta)
+```
+
+Comparing this to the $Z_{\alpha}$ graph in the earlier example, we can see that the value of $Z_{\beta}$ decreases where $Z_{\alpha}$ increases. This could indicate that, if there is a sweep at this locus, it is near-fixation.
+
+There is an equivalent Zbeta function for all of the Zalpha variations. Here is an example for each of them:
+```{r}
+Zbeta_expected(snps$bp_positions, 3000, snps$cM_distances,
+               LDprofile$bin, LDprofile$rsq)
+Zbeta_rsq_over_expected(snps$bp_positions, 3000, as.matrix(snps[,3:12]), snps$cM_distances, 
+                        LDprofile$bin, LDprofile$rsq)
+Zbeta_log_rsq_over_expected(snps$bp_positions, 3000, as.matrix(snps[,3:12]), snps$cM_distances, 
+                            LDprofile$bin, LDprofile$rsq)
+Zbeta_Zscore(snps$bp_positions, 3000, as.matrix(snps[,3:12]), snps$cM_distances, 
+             LDprofile$bin, LDprofile$rsq, LDprofile$sd)
+Zbeta_BetaCDF(snps$bp_positions, 3000, as.matrix(snps[,3:12]), snps$cM_distances, 
+              LDprofile$bin, LDprofile$Beta_a, LDprofile$Beta_b)
+```
+
+## Diversity statistics LR and L_plus_R
+
+These statistics show the diversity around the target locus. LR calculates the number of SNPs to the left of the target locus multiplied by the number of SNPs to the right. L_plus_R is the total number of pairs of SNPs on the left and the right of the target locus. The idea behind these statistics is that if the diversity is low, there might be a sweep in this region.
+
+Care should be taken when interpreting these statistics if diversity has been altered by filtering and, when using the Zalpha_all function below, the use of minLR and minLandR parameters. 
 
 ## Zalpha_all
-Zalpha_all is the recommended function for using this package. It will run all the statistics included in the package ($Z_{\alpha}$ and $Z_{\beta}$ variations), so the user does not have to run multiple functions to achieve all the statistics they want. The function will only calculate the statistics it has been given the appropriate inputs for, so it is flexible.
+
+__Zalpha_all is the recommended function for using this package.__ It will run all the statistics included in the package ($Z_{\alpha}$ and $Z_{\beta}$ variations), so the user does not have to run multiple functions to calculate all the statistics they want. The function will only calculate the statistics it has been given the appropriate inputs for, so it is flexible.
 
 For example, this code will only run Zalpha, Zbeta and the two diversity statistics LR and L_plus_R, as an LDprofile was not supplied:
 
 ```{r}
-Zalpha_all(snps$positions,3000,as.matrix(snps[,3:12]))
+Zalpha_all(snps$bp_positions,3000,as.matrix(snps[,3:12]))
 ```
-Supplying an LDprofile will result in more of the statistics being calculated.
+Supplying an LDprofile and genetic distances for each SNP will result in more of the statistics being calculated.
 
-There are many ways that the resulting statistics can be combined to give new insights into the data, see Jacobs et al. (2016).
+There are many ways that the resulting statistics can be combined to give new insights into the data, see Jacobs et al. (2016)[1].
 
 ## Identifying regions under selection
-To find candidate regions for selection, first calculate the statistics across the chromosome, including any combined statistics that may be of interest. It is then suggested to find the maximum value for windows of around 200 Kb for each statistic (minimum values for the diversity statistics). Any regions which are outliers compared to the rest of the chromosome could be considered candidates and can be investigated further.
+
+To find candidate regions for selection, first calculate the statistics across the chromosome, including any combined statistics that may be of interest. It is then suggested to find the maximum value for windows of around 200 Kb for each statistic (minimum values for the diversity statistics). Any regions that are outliers compared to the rest of the chromosome could be considered candidates and can be investigated further.
+
+## create_LDprofile
+
+An LD profile is required to adjust for expected correlations. It is a basic look-up table that tells the user what the expected correlation is between a pair of SNPs, given the genetic distance between them. To create a simple LD profile, the user just needs two things:
+
+* __dist__ a vector of genetic distances
+
+* __x__ a matrix of SNP values
+
+The user also needs to tell the function what bin_size to use, and optionally if they want to calculate Beta distribution parameters (this requires the fitdistrplus package to be installed). 
+
+The function considers all pairs of SNPs. It separates the pairs of SNPs into bins based on the genetic distance between them. The correlation between each pair of SNPs is calculated. In each bin, the average and the standard deviation of these correlations is calculated. If beta_params=TRUE, then a beta distribution will be fitted to the correlations in each bin too.
+
+We can use the snps dataset as an example of this:
+
+```{r}
+create_LDprofile(snps$cM_distances,as.matrix(snps[,3:12]),bin_size = 0.001,beta_params = TRUE)
+```
+This code has created an LD profile with 6 columns. These are:
+
+* __bin__ This is the lower bound of the bin, e.g. row one shows information for genetic distances that are between 0 and 0.001 cM.
+
+* __rsq__ This is the expected r^2^ for genetic distances who fall in the given bin. For example, in row one the expected r^2^ value for SNPs which are 0-0.001 cM apart is 0.1023.
+
+* __sd__ This is the standard deviation for the r^2^ values.
+
+* __Beta_a__ This is the first shape parameter for the Beta distribution fitted to this bin
+
+* __Beta_a__ This is the second shape parameter for the Beta distribution fitted to this bin
+
+* __n__ This is the number of pairs of SNPs with a genetic distance falling within this bin, whose correlations were used to calculate the statistics. 
+
+There is one more optional input parameter - max_dist - which sets the maximum distance SNPs can be apart for calculating for the LD profile. For real world data, Jacobs et al. (2016)[1] recommend using distances up to 2 cM assigned to bins of size 0.0001 cM.
+
+Ideally, we would want to generate an LD profile based on genetic data without selection but exactly matching the other population parameters for our data. This could be done using simulated data (using software such as msms[6] or SLiM[7]). We could use another genetic dataset containing a similar population. Alternatively, we could generate an LD profile using the same dataset that we are analysing for selection. Care should be taken that bins are big enough to have a lot of data in so expected r^2^ values are not overly affected by outliers. 
+
+Realistically, the user will not have just one chromosome of data for creating the LD profile, but will likely have a whole genome. So far we have used a vector of genetic distances and a SNP value matrix in our example. However, with multiple chromosomes there will be a vector of genetic distances and a SNP value matrix for each chromosome, and it would be good to use all of that information to create the LD profile. Therefore, the function has been written to accept multiple vectors of genetic distances and multiple SNP value matrices via lists.
+
+The __dist__ parameter will accept a vector or a list of vectors.
+
+The __x__ parameter will accept a matrix or a list of matrices.
+
+For example, if we use the snps dataset but this time pretend it is three different chromosomes.
+
+```{r}
+## Generate three chromosomes of data - cM distances and SNP values
+chrom1_cM_distances<-snps$cM_distances
+chrom1_snp_values<-as.matrix(snps[,3:12])
+
+chrom2_cM_distances<-snps$cM_distances
+chrom2_snp_values<-as.matrix(snps[,3:12])
+
+chrom3_cM_distances<-snps$cM_distances
+chrom3_snp_values<-as.matrix(snps[,3:12])
+
+## create a list of the cM distances
+cM_distances_list<-list(chrom1_cM_distances,chrom2_cM_distances,chrom3_cM_distances)
+
+## create a list of SNP value matrices
+snp_values_list<-list(chrom1_snp_values,chrom2_snp_values,chrom3_snp_values)
+
+## create the LD profile using the lists as the dist and x parameters
+create_LDprofile(cM_distances_list,snp_values_list,bin_size = 0.001,beta_params = TRUE)
+```
+
+Care should be taken that the chromosomes stay in the same order in each list. 
+
+Congratulations! You should now be able to create your own LD profile and use the Zalpha package.
 
 ## References
 
-Jacobs, G.S., T.J. Sluckin, and T. Kivisild, *Refining the Use of Linkage Disequilibrium as a Robust Signature of Selective Sweeps.* Genetics, 2016. **203**(4): p. 1807
+[1] Jacobs, G.S., Sluckin, T.J., and Kivisild, T. *Refining the Use of Linkage Disequilibrium as a Robust Signature of Selective Sweeps.* Genetics, 2016. **203**(4): p. 1807
+
+[2] McVean, G. A. T., Myers, S. R., Hunt, S., Deloukas, P., Bentley, D. R., and Donnelly, P. *The Fine-Scale Structure of Recombination Rate Variation in the Human Genome.* Science, 2004. **304**(5670): 581-584.
+
+[3] Spence, J.P. and Song, Y.S. *Inference and analysis of population-specific fine-scale recombination maps across 26 diverse human populations.* Science Advances, 2019. **5**(10): eaaw9206.
+
+[4] Gao, F., Ming, C., Hu, W. J., and Li, H. P. *New Software for the Fast Estimation of Population Recombination Rates (FastEPRR) in the Genomic Era.* G3-Genes Genomes Genetics, 2016. **6**(6): 1563-1571.
+
+[5] Hermann, P., Heissl, A., Tiemann-Boege, I., and Futschik, A. *LDJump: Estimating variable recombination rates from population genetic data.* Molecular Ecology Resources, 2019. **19**(3): 623-638.
+
+[6] Ewing, G. and Hermisson, J. *MSMS: a coalescent simulation program including recombination, demographic structure and selection at a single locus.* Bioinformatics, 2010. **26**(16):2064-2065.
+
+[7] Haller, B.C. and Messer, P.W. *SLiM 3: Forward Genetic Simulations Beyond the Wright–Fisher Model.* Molecular Biology and Evolution, 2019. **36**(3):632-637.
