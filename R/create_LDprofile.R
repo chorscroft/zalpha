@@ -4,15 +4,15 @@
 #' An LD (linkage disequilibrium) profile is a look-up table containing the expected correlation between SNPs given the genetic distance between them.
 #'
 #' The input for \code{dist} and \code{x} can be lists. This is to allow multiple datasets to be used in the creation of the LD profile. For example, using all 22 autosomes from the human genome would involve 22 different distance vectors and SNP matrices.
-#' Both lists should be the same length and should correspond exactly to eachother (i.e. the distances in each element of dist should go with the SNPs in the same element of x)
+#' Both lists should be the same length and should correspond exactly to each other (i.e. the distances in each element of \code{dist} should go with the SNPs in the same element of x)
 #'
 #' In the output, bins represent lower bounds. The first bin contains pairs where the genetic distance is greater than or equal to 0 and less than \code{bin_size}. The final bin contains pairs where the genetic distance is greater than or equal to \code{max_dist}-\code{bin_size} and less than \code{max_dist}.
-#' If the \code{max_dist} is not an increment of \code{bin_size}, it will be adjusted to the next highest increment.The maximum bin will be the bin that \code{max_dist} falls into. For example, if the \code{max_dist} is given as 4.5 and the \code{bin_size} is 1, the final bin will be 4.\cr
-#' By default, Beta parameters are not calculated. To calcualte Beta parameters, needed for the \code{\link{Zalpha_BetaCDF}} and \code{\link{Zbeta_BetaCDF}} statistics, \code{beta_params} should be set to TRUE and the package \code{fitdistrplus} must be installed.
+#' If the \code{max_dist} is not an increment of \code{bin_size}, it will be adjusted to the next highest increment. The maximum bin will be the bin that \code{max_dist} falls into. For example, if the \code{max_dist} is given as 4.5 and the \code{bin_size} is 1, the final bin will be 4.\cr
+#' By default, Beta parameters are not calculated. To calculate Beta parameters, needed for the \code{\link{Zalpha_BetaCDF}} and \code{\link{Zbeta_BetaCDF}} statistics, \code{beta_params} should be set to TRUE and the package \code{fitdistrplus} must be installed.
 #'
 #' @importFrom stats cor sd
 #'
-#' @param dist A numeric vector, or a list of numeric vectors, containing genetic distances.
+#' @param dist A numeric vector, or a list of numeric vectors, containing the genetic distance for each SNP.
 #' @param x A matrix of SNP values, or a list of matrices. Columns represent chromosomes; rows are SNP locations. Hence, the number of rows should equal the length of the \code{dist} vector. SNPs should all be biallelic.
 #' @param bin_size The size of each bin, in the same units as \code{dist}.
 #' @param max_dist Optional. The maximum genetic distance to be considered. If this is not supplied, it will default to the maximum distance in the \code{dist} vector.
@@ -150,14 +150,14 @@ create_LDprofile<-function(dist,x,bin_size,max_dist=NULL,beta_params=FALSE){
           temprsq<-(temprsq*(length(temprsq)-1)+0.5)/length(temprsq)
         }
         #Try to fit the data to a Beta distribution
-        betafit<-try(fitdistrplus::fitdist(temprsq,"beta"))
+        betafit<-try(fitdistrplus::fitdist(temprsq,"beta"),silent=TRUE)
         if (class(betafit) != "try-error"){
           LDprofile$Beta_a[i]<-betafit$estimate[1]
           LDprofile$Beta_b[i]<-betafit$estimate[2]
         } else {
           #If failed to fit, try again using estimated beta parameters to initialise
           startBetaParams<-est_Beta_Params(LDprofile$rsq[i], LDprofile$sd[i]^2)
-          betafit<-try(fitdistrplus::fitdist(temprsq,"beta",start=list(shape1=startBetaParams$alpha, shape2=startBetaParams$beta)))
+          betafit<-try(fitdistrplus::fitdist(temprsq,"beta",start=list(shape1=startBetaParams$alpha, shape2=startBetaParams$beta)),silent=TRUE)
           if (class(betafit) != "try-error"){
             LDprofile$Beta_a[i]<-betafit$estimate[1]
             LDprofile$Beta_b[i]<-betafit$estimate[2]
