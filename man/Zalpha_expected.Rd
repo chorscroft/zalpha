@@ -55,9 +55,9 @@ bound of the bin.
 data(snps)
 data(LDprofile)
 ## run Zalpha_expected over all the SNPs with a window size of 3000 bp
-Zalpha_expected(snps$positions,3000,snps$distances,LDprofile$bin,LDprofile$rsq)
+Zalpha_expected(snps$bp_positions,3000,snps$cM_distances,LDprofile$bin,LDprofile$rsq)
 ## only return results for SNPs between locations 600 and 1500 bp
-Zalpha_expected(snps$positions,3000,snps$distances,LDprofile$bin,LDprofile$rsq,X=c(600,1500))
+Zalpha_expected(snps$bp_positions,3000,snps$cM_distances,LDprofile$bin,LDprofile$rsq,X=c(600,1500))
 
 }
 \references{

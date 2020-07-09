@@ -36,10 +36,10 @@
 #' data(snps)
 #' data(LDprofile)
 #' ## run Zalpha_BetaCDF over all the SNPs with a window size of 3000 bp
-#' Zalpha_BetaCDF(snps$positions,3000,as.matrix(snps[,3:12]),snps$distances,
+#' Zalpha_BetaCDF(snps$bp_positions,3000,as.matrix(snps[,3:12]),snps$cM_distances,
 #'  LDprofile$bin,LDprofile$Beta_a,LDprofile$Beta_b)
 #' ## only return results for SNPs between locations 600 and 1500 bp
-#' Zalpha_BetaCDF(snps$positions,3000,as.matrix(snps[,3:12]),snps$distances,
+#' Zalpha_BetaCDF(snps$bp_positions,3000,as.matrix(snps[,3:12]),snps$cM_distances,
 #'  LDprofile$bin,LDprofile$Beta_a,LDprofile$Beta_b,X=c(600,1500))
 #'
 #' @export

@@ -4,10 +4,11 @@
 \name{snps}
 \alias{snps}
 \title{Dataset containing details on simulated SNPs}
-\format{A data frame with 20 rows and 12 variables:
+\format{
+A data frame with 20 rows and 12 variables:
 \describe{
-  \item{positions}{location of the SNP on the chromosome}
-  \item{distances}{genetic distance of the SNP from the start of the chromosome}
+  \item{bp_positions}{location of the SNP on the chromosome e.g. in base pairs}
+  \item{cM_distances}{genetic distance of the SNP from the start of the chromosome e.g. in centimorgans}
   \item{chrom_1}{allele of the SNP on the first example chromosome}
   \item{chrom_2}{allele of the SNP on the second example chromosome}
   \item{chrom_3}{allele of the SNP on the third example chromosome}
@@ -18,7 +19,8 @@
   \item{chrom_8}{allele of the SNP on the eighth example chromosome}
   \item{chrom_9}{allele of the SNP on the ninth example chromosome}
   \item{chrom_10}{allele of the SNP on the tenth example chromosome}
-}}
+}
+}
 \usage{
 snps
 }

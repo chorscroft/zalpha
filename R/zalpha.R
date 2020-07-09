@@ -22,9 +22,9 @@
 #' ## load the snps example dataset
 #' data(snps)
 #' ## run Zalpha over all the SNPs with a window size of 3000 bp
-#' Zalpha(snps$positions,3000,as.matrix(snps[,3:12]))
+#' Zalpha(snps$bp_positions,3000,as.matrix(snps[,3:12]))
 #' ## only return results for SNPs between locations 600 and 1500 bp
-#' Zalpha(snps$positions,3000,as.matrix(snps[,3:12]),X=c(600,1500))
+#' Zalpha(snps$bp_positions,3000,as.matrix(snps[,3:12]),X=c(600,1500))
 #'
 #' @export
 

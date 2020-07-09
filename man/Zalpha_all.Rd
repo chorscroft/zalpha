@@ -67,13 +67,13 @@ data(snps)
 data(LDprofile)
 ## run Zalpha_all over all the SNPs with a window size of 3000 bp
 ## will return all 15 statistics
-Zalpha_all(snps$positions,3000,as.matrix(snps[,3:12]),snps$distances,
+Zalpha_all(snps$bp_positions,3000,as.matrix(snps[,3:12]),snps$cM_distances,
  LDprofile$bin,LDprofile$rsq,LDprofile$sd,LDprofile$Beta_a,LDprofile$Beta_b)
 ## only return results for SNPs between locations 600 and 1500 bp
-Zalpha_all(snps$positions,3000,as.matrix(snps[,3:12]),snps$distances,
+Zalpha_all(snps$bp_positions,3000,as.matrix(snps[,3:12]),snps$cM_distances,
  LDprofile$bin,LDprofile$rsq,LDprofile$sd,LDprofile$Beta_a,LDprofile$Beta_b,X=c(600,1500))
 ## will only return statistics not requiring an LD profile
-Zalpha_all(snps$positions,3000,as.matrix(snps[,3:12]))
+Zalpha_all(snps$bp_positions,3000,as.matrix(snps[,3:12]))
 
 }
 \references{

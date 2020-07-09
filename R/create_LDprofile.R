@@ -24,10 +24,10 @@
 #' ## load the snps example dataset
 #' data(snps)
 #' ## Create an LD profile using this data
-#' create_LDprofile(snps$distances,as.matrix(snps[,3:12]),0.001)
+#' create_LDprofile(snps$cM_distances,as.matrix(snps[,3:12]),0.001)
 #' ## To get the Beta distribution parameter estimates, the fitdistrplus package is required
 #' if (requireNamespace("fitdistrplus", quietly = TRUE)==TRUE) {
-#'   create_LDprofile(snps$distances,as.matrix(snps[,3:12]),0.001,beta_params=TRUE)
+#'   create_LDprofile(snps$cM_distances,as.matrix(snps[,3:12]),0.001,beta_params=TRUE)
 #' }
 #'
 #'

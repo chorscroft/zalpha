@@ -34,10 +34,10 @@
 #' data(snps)
 #' data(LDprofile)
 #' ## run Zbeta_rsq_over_expected over all the SNPs with a window size of 3000 bp
-#' Zbeta_rsq_over_expected(snps$positions,3000,as.matrix(snps[,3:12]),snps$distances,
+#' Zbeta_rsq_over_expected(snps$bp_positions,3000,as.matrix(snps[,3:12]),snps$cM_distances,
 #'  LDprofile$bin,LDprofile$rsq)
 #' ## only return results for SNPs between locations 600 and 1500 bp
-#' Zbeta_rsq_over_expected(snps$positions,3000,as.matrix(snps[,3:12]),snps$distances,
+#' Zbeta_rsq_over_expected(snps$bp_positions,3000,as.matrix(snps[,3:12]),snps$cM_distances,
 #'  LDprofile$bin,LDprofile$rsq,X=c(600,1500))
 #'
 #' @export

@@ -24,9 +24,9 @@ For more information about the \code{L_plus_R} diversity statistic, please see J
 ## load the snps example dataset
 data(snps)
 ## run L_plus_R over all the SNPs with a window size of 3000 bp
-L_plus_R(snps$positions,3000)
+L_plus_R(snps$bp_positions,3000)
 ## only return results for SNPs between locations 600 and 1500 bp
-L_plus_R(snps$positions,3000,X=c(600,1500))
+L_plus_R(snps$bp_positions,3000,X=c(600,1500))
 
 }
 \references{

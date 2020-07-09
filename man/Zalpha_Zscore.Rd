@@ -61,10 +61,10 @@ bound of the bin.
 data(snps)
 data(LDprofile)
 ## run Zalpha_Zscore over all the SNPs with a window size of 3000 bp
-Zalpha_Zscore(snps$positions,3000,as.matrix(snps[,3:12]),snps$distances,
+Zalpha_Zscore(snps$bp_positions,3000,as.matrix(snps[,3:12]),snps$cM_distances,
  LDprofile$bin,LDprofile$rsq,LDprofile$sd)
 ## only return results for SNPs between locations 600 and 1500 bp
-Zalpha_Zscore(snps$positions,3000,as.matrix(snps[,3:12]),snps$distances,
+Zalpha_Zscore(snps$bp_positions,3000,as.matrix(snps[,3:12]),snps$cM_distances,
  LDprofile$bin,LDprofile$rsq,LDprofile$sd,X=c(600,1500))
 
 }

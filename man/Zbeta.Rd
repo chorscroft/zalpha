@@ -33,9 +33,9 @@ where \code{|L|} and \code{|R|} are the number of SNPs to the left and right of 
 ## load the snps example dataset
 data(snps)
 ## run Zbeta over all the SNPs with a window size of 3000 bp
-Zbeta(snps$positions,3000,as.matrix(snps[,3:12]))
+Zbeta(snps$bp_positions,3000,as.matrix(snps[,3:12]))
 ## only return results for SNPs between locations 600 and 1500 bp
-Zbeta(snps$positions,3000,as.matrix(snps[,3:12]),X=c(600,1500))
+Zbeta(snps$bp_positions,3000,as.matrix(snps[,3:12]),X=c(600,1500))
 
 }
 \references{

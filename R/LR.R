@@ -14,9 +14,9 @@
 #' ## load the snps example dataset
 #' data(snps)
 #' ## run LR over all the SNPs with a window size of 3000 bp
-#' LR(snps$positions,3000)
+#' LR(snps$bp_positions,3000)
 #' ## only return results for SNPs between locations 600 and 1500 bp
-#' LR(snps$positions,3000,X=c(600,1500))
+#' LR(snps$bp_positions,3000,X=c(600,1500))
 #'
 #' @export
 
