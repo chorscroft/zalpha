@@ -264,8 +264,8 @@ test_that("create_LDprofile calculates the LD profile correctly when beta calcul
                  bin=c(0),
                  rsq=c(0.0754751721676325),
                  sd=c(0.0928525038706074),
-                 Beta_a=c(0.21155096488681),
-                 Beta_b=c(2.8704915799235),
+                 Beta_a=c(0.795140679587351),
+                 Beta_b=c(9.0658860153924),
                  n=c(105)
                ),tolerance=0.0001)
 })
