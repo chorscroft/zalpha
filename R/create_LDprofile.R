@@ -88,6 +88,10 @@ create_LDprofile<-function(dist,x,bin_size,max_dist=NULL,beta_params=FALSE){
   } else {
     #Set max_dist to the maximum distance in the data if it was not supplied
     max_dist<-max(sapply(dist,function(x){x[length(x)]-x[1]}),na.rm = TRUE)
+    #If max_dist is now zero then set it equal to bin_size
+    if(isTRUE(all.equal(max_dist,0))){
+      max_dist<-bin_size
+    }
   }
   #Adjusts the max_dist value so it is equal to an increment of bin_size if it isn't already
   if(!isTRUE(all.equal(max_dist,assign_bins(bin_size,max_dist)))){
