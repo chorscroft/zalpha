@@ -189,7 +189,7 @@ Zbeta_BetaCDF(snps$bp_positions, 3000, as.matrix(snps[,3:12]), snps$cM_distances
 
 These statistics show the diversity around the target locus. LR calculates the number of SNPs to the left of the target locus multiplied by the number of SNPs to the right. L_plus_R is the total number of pairs of SNPs on the left and the right of the target locus. The idea behind these statistics is that if the diversity is low, there might be a sweep in this region.
 
-Care should be taken when interpreting these statistics if diversity has been altered by filtering and, when using the Zalpha_all function below, the use of minLR and minLandR parameters. 
+Care should be taken when interpreting these statistics if diversity has been altered by filtering and, when using the Zalpha_all function below, the use of minRL and minRandL parameters. 
 
 ## Zalpha_all
 
@@ -241,7 +241,7 @@ This code has created an LD profile with 6 columns. These are:
 
 There is one more optional input parameter - max_dist - which sets the maximum distance SNPs can be apart for calculating for the LD profile. For real world data, Jacobs et al. (2016)[1] recommend using distances up to 2 cM assigned to bins of size 0.0001 cM.
 
-Ideally, we would want to generate an LD profile based on genetic data without selection but exactly matching the other population parameters for our data. This could be done using simulated data (using software such as msms[6] or SLiM[7]). We could use another genetic dataset containing a similar population. Alternatively, we could generate an LD profile using the same dataset that we are analysing for selection. Care should be taken that bins are big enough to have a lot of data in so expected r^2^ values are not overly affected by outliers. 
+Ideally, we would want to generate an LD profile based on genetic data without selection but exactly matching the other population parameters for our data. This could be done using simulated data (using software such as MSMS[6] or SLiM[7]). We could use another genetic dataset containing a similar population. Alternatively, we could generate an LD profile using the same dataset that we are analysing for selection. Care should be taken that bins are big enough to have a lot of data in so expected r^2^ values are not overly affected by outliers. 
 
 Realistically, the user will not have just one chromosome of data for creating the LD profile, but will likely have a whole genome. So far, we have used a vector of genetic distances and a SNP value matrix in our example. However, with multiple chromosomes there will be a vector of genetic distances and a SNP value matrix for each chromosome, and it would be good to use all that information to create the LD profile. Therefore, the function has been written to accept multiple vectors of genetic distances and multiple SNP value matrices via lists.
 
