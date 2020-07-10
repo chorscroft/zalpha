@@ -89,7 +89,7 @@ create_LDprofile<-function(dist,x,bin_size,max_dist=NULL,beta_params=FALSE){
     #Set max_dist to the maximum distance in the data if it was not supplied
     max_dist<-max(sapply(dist,function(x){x[length(x)]-x[1]}),na.rm = TRUE)
   }
-  #Adjusts the Max_dist value so it is equal to an increment of bin_size if it isn't already
+  #Adjusts the max_dist value so it is equal to an increment of bin_size if it isn't already
   if(!isTRUE(all.equal(max_dist,assign_bins(bin_size,max_dist)))){
     max_dist<-assign_bins(bin_size,max_dist)+bin_size
   }
@@ -132,11 +132,11 @@ create_LDprofile<-function(dist,x,bin_size,max_dist=NULL,beta_params=FALSE){
 
   #Loop for each bin (i)
   for (i in 1:nrow(LDprofile)){
-    LDprofile$n[i]<-sum(bins==LDprofile$bin[i])
+    LDprofile$n[i]<-sum(equal_vector(bins,LDprofile$bin[i]))
     #If there is at least one pair whose genetic distance falls within the bin, calculate stats
     if (LDprofile$n[i]>0){
       #Get the rsquared values for all pairs in this bin
-      temprsq<-rsq[bins==LDprofile$bin[i]]
+      temprsq<-rsq[equal_vector(bins,LDprofile$bin[i])]
       #Calculate the mean
       LDprofile$rsq[i]<-mean(temprsq)
       #Calculate the standard deviation
@@ -145,7 +145,7 @@ create_LDprofile<-function(dist,x,bin_size,max_dist=NULL,beta_params=FALSE){
       #Calculate Beta distribution parameters if required
       #Do not calculate for bins containing less than two pairs or the standatd deviation is zero
       if (beta_params==TRUE & LDprofile$n[i]>1 & LDprofile$sd[i]>0){
-        if (sum(temprsq==1 | temprsq==0)>0){
+        if (sum(equal_vector(temprsq,1) | equal_vector(temprsq,0))>0){
           #If there are any 0s or 1s adjust the data
           temprsq<-(temprsq*(length(temprsq)-1)+0.5)/length(temprsq)
         }
