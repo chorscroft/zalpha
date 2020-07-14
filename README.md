@@ -37,6 +37,8 @@ install_github("chorscroft/zalpha")
 For a full explanation of how to use the zalpha package, please see the "zalpha" vignette.
 
 ```
+browseVignettes("zalpha")
+# or
 vignette("zalpha")
 ```
 If this does not work and you installed the packages directly from Github, try installing using the following code:
