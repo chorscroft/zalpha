@@ -59,6 +59,11 @@ This includes the statistics: \code{\link{Zalpha_expected}}, \code{\link{Zalpha_
   \item For \code{\link{Zalpha_Zscore}} and \code{\link{Zbeta_Zscore}} to be calculated, the parameter \code{LDprofile_sd} must also be supplied.
   \item For \code{\link{Zalpha_BetaCDF}} and \code{\link{Zbeta_BetaCDF}} to be calculated, the parameters \code{LDprofile_Beta_a} and \code{LDprofile_Beta_b} must also be supplied.
 }
+The LD profile describes the expected correlation between SNPs at a given genetic distance, generated using simulations or
+real data. Care should be taken to utilise an LD profile that is representative of the population in question. The LD
+profile should consist of evenly sized bins of distances (for example 0.0001 cM per bin), where the value given is the (inclusive) lower
+bound of the bin. Ideally, an LD profile would be generated using data from a null population with no selection, however one can be generated
+using this data. See the \code{\link{create_LDprofile}} function for more information on how to create an LD profile.
 For more information about the statistics, please see Jacobs (2016).
 }
 \examples{
@@ -80,5 +85,5 @@ Zalpha_all(snps$bp_positions,3000,as.matrix(snps[,3:12]))
 Jacobs, G.S., T.J. Sluckin, and T. Kivisild, \emph{Refining the Use of Linkage Disequilibrium as a Robust Signature of Selective Sweeps.} Genetics, 2016. \strong{203}(4): p. 1807
 }
 \seealso{
-\code{\link{Zalpha}} \code{\link{Zalpha_expected}} \code{\link{Zalpha_rsq_over_expected}} \code{\link{Zalpha_log_rsq_over_expected}} \code{\link{Zalpha_Zscore}} \code{\link{Zalpha_BetaCDF}} \code{\link{Zbeta}} \code{\link{Zbeta_expected}} \code{\link{Zbeta_rsq_over_expected}} \code{\link{Zbeta_log_rsq_over_expected}} \code{\link{Zbeta_Zscore}} \code{\link{Zbeta_BetaCDF}} \code{\link{LR}} \code{\link{L_plus_R}}
+\code{\link{Zalpha}}, \code{\link{Zalpha_expected}}, \code{\link{Zalpha_rsq_over_expected}}, \code{\link{Zalpha_log_rsq_over_expected}}, \code{\link{Zalpha_Zscore}}, \code{\link{Zalpha_BetaCDF}}, \code{\link{Zbeta}}, \code{\link{Zbeta_expected}}, \code{\link{Zbeta_rsq_over_expected}}, \code{\link{Zbeta_log_rsq_over_expected}}, \code{\link{Zbeta_Zscore}}, \code{\link{Zbeta_BetaCDF}}, \code{\link{LR}}, \code{\link{L_plus_R}}, \code{\link{create_LDprofile}}.
 }

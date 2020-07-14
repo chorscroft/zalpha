@@ -55,7 +55,8 @@ the estimated a and b parameters from the LD profile.
 The LD profile describes the expected correlation between SNPs at a given genetic distance, generated using simulations or
 real data. Care should be taken to utilise an LD profile that is representative of the population in question. The LD
 profile should consist of evenly sized bins of distances (for example 0.0001 cM per bin), where the value given is the (inclusive) lower
-bound of the bin.
+bound of the bin. Ideally, an LD profile would be generated using data from a null population with no selection, however one can be generated
+using this data. See the \code{\link{create_LDprofile}} function for more information on how to create an LD profile.
 }
 \examples{
 ## load the snps and LDprofile example datasets
@@ -71,4 +72,7 @@ Zalpha_BetaCDF(snps$bp_positions,3000,as.matrix(snps[,3:12]),snps$cM_distances,
 }
 \references{
 Jacobs, G.S., T.J. Sluckin, and T. Kivisild, \emph{Refining the Use of Linkage Disequilibrium as a Robust Signature of Selective Sweeps.} Genetics, 2016. \strong{203}(4): p. 1807
+}
+\seealso{
+\code{\link{create_LDprofile}}
 }

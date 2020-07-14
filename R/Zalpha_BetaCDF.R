@@ -14,7 +14,8 @@
 #' The LD profile describes the expected correlation between SNPs at a given genetic distance, generated using simulations or
 #' real data. Care should be taken to utilise an LD profile that is representative of the population in question. The LD
 #' profile should consist of evenly sized bins of distances (for example 0.0001 cM per bin), where the value given is the (inclusive) lower
-#' bound of the bin.
+#' bound of the bin. Ideally, an LD profile would be generated using data from a null population with no selection, however one can be generated
+#' using this data. See the \code{\link{create_LDprofile}} function for more information on how to create an LD profile.
 #'
 #' @importFrom stats cor pbeta na.omit
 #'
@@ -43,6 +44,7 @@
 #'  LDprofile$bin,LDprofile$Beta_a,LDprofile$Beta_b,X=c(600,1500))
 #'
 #' @export
+#' @seealso \code{\link{create_LDprofile}}
 Zalpha_BetaCDF<-function(pos, ws, x, dist, LDprofile_bins, LDprofile_Beta_a, LDprofile_Beta_b, minRandL = 4, minRL = 25, X = NULL){
 
   #Check things are in the correct format
