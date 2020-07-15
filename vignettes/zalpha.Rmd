@@ -38,7 +38,7 @@ For this simple example all that is needed is:
 
 * The vector of SNP locations
 
-* The matrix of SNP values. This could be in ACGT format as above, or in 0 and 1 notation, or any other notation as long as SNPs are biallelic. Data extracted from a .tped file is in the ideal format for this analysis.
+* The matrix of SNP values. This could be in ACGT format as above, or in 0 and 1 notation, or any other notation as long as SNPs are biallelic. Data extracted from a PLINK .tped file is in the ideal format for this analysis.
 
 ### The snps dataset
 
@@ -58,7 +58,7 @@ This data set contains information about each of the SNPs. The first column give
 
 The next column is the genetic distance of the SNP from the start of the chromosome. Ignore this column for now.
 
-The final columns are the SNP alleles for each of the chromosomes in the population. Each SNP must be biallelic, but can contain any value, for example 0s and 1s, or ACGTs. The data can contain missing values, however it is recommended that the cut off is 10% missing at most. It is also recommended to use a minor allele frequency of 5% or higher.
+The final columns are the SNP alleles for each of the chromosomes in the population. Each SNP must be biallelic, but can contain any value, for example 0s and 1s, or ACGTs. The data can contain missing values, however it is recommended that the cut off is 10% missing at most. Missing values should be coded as NA. It is also recommended to use a minor allele frequency of 5% or higher.
 
 __Note:__ There is no requirement to put data into a data frame - all that is required is a vector of SNP positions and a matrix of SNP values.
 
@@ -68,7 +68,7 @@ To test for selection, the user can use the Zalpha function. This function assig
 
 * __pos__ A vector of the physical locations of each of the SNPs. For this example, we will use the first column from the snps dataset: snps$bp_positions.
 
-* __ws__ The window size. This is set to 3000 for this small example but realistically a window size of around 200 Kb is appropriate. The window is centred on the target locus and considers SNPs that are within ws/2 to the left and ws/2 to the right of the target SNP.
+* __ws__ The window size. This is set to 3000 bp for this small example but for human analysis realistically a window size of around 200 Kb is appropriate. The window is centred on the target locus and considers SNPs that are within ws/2 to the left and ws/2 to the right of the target SNP. ws should always use the same units as pos i.e. if pos is in bp, ws should be in bp.
 
 * __x__ A matrix of the SNP alleles across each chromosome in the sample. The number of rows should be equal to the number of SNPs, and the columns are each of the chromosomes. For this example we extract the SNP values from the snps dataset found in columns 3 to 12, and convert into a matrix: as.matrix(snps[,3:12]).
 
@@ -95,7 +95,7 @@ It is recommended that the user uses the Zalpha_all function, as this function w
 
 ## Adjusting for expected correlations between SNPs
 
-There are many reasons that SNPs could be correlated apart from selection, including recombination. This package allows the user to correct for expected correlations between SNPs. There are multiple functions included in this package that adjust for expected correlations, all of which have an example below. First however, the new inputs will be described. The extra inputs required are:
+There are many reasons apart from selection that pairs of SNPs could be more correlated than the rest of the genome, including regions of low recombination and genetic drift. This package allows the user to correct for expected correlations between SNPs. There are multiple functions included in this package that adjust for expected correlations, all of which have an example below. First however, the new inputs will be described. The extra inputs required are:
 
 * __dist__ A vector containing the genetic distances between SNPs
 
