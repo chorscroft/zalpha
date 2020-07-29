@@ -6,12 +6,7 @@
 ##
 ## @return A vector of TRUE and FALSE values
 ##
+
 equal_vector <- function(vector, value){
-  tempFunction<-function(x,value){
-    isTRUE(all.equal(x,value))
-  }
-  return(sapply(vector,tempFunction,value))
+  return(abs(vector-value)<.Machine$double.eps^0.5)
 }
-
-
-
