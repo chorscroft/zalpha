@@ -38,7 +38,7 @@ For this simple example all that is needed is:
 
 * The vector of SNP locations
 
-* The matrix of SNP values. This could be in ACGT format as above, or in 0 and 1 notation, or any other notation as long as SNPs are biallelic. Data extracted from a PLINK .tped file is in the ideal format for this analysis.
+* The matrix of SNP values. This could be in ACGT format as above, or in 0 and 1 notation, or any other notation as long as SNPs are biallelic. Data extracted from a PLINK .tped file is in the ideal format for this analysis. Note the genetic data is phased.
 
 ### The snps dataset
 
