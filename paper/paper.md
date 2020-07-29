@@ -13,6 +13,7 @@ output:
   pdf_document: default
   html_document:
     df_print: paged
+  word_document: default
 authors:
 - name: Clare Horscroft
   orcid: 0000-0001-5679-5912
@@ -46,9 +47,11 @@ The package also allows users to utilise a linkage disequilibrium (LD) profile, 
 
 The purpose of the `zalpha` package is to:
 
-* Allow users to accurately apply the $Z_{\alpha}$ suite of statistics to find candidate regions of the genome for a selective sweep
+* Allow users to accurately apply the $Z_{\alpha}$ statistic to find candidate regions of the genome for a selective sweep
+* Refine $Z_{\alpha}$ results by adjusting for expected correlations between genetic variants
+* Further characterise sweeps using the $Z_{\beta}$ statistic
 * Generate results that are reproducible
-* Be user-friendly and accessible
+* Be user-friendly and accessible by using R
 	
 # Software and Methodology
 
@@ -60,7 +63,7 @@ Correlation, in the context of genetics, is the ability to predict the value of 
 
 When a selective sweep occurs, the locus under selection becomes more frequent in the population, as individuals possessing the beneficial allele are more likely to survive and reproduce. When this happens, variants nearby the selected locus will also sweep, a phenomenon known as “hitchhiking” [@Maynard:1974]. This creates a region of the genome that is highly correlated. Eventually recombination will erode away these correlations. 
 
-`zalpha` allows the user to apply a range of statistics to genetic data. \autoref{fig:Figure1}B shows a target locus with a window, the size of which is set by the user, centred on the locus. Any SNPs either side that fall within the window to the left and right of the target locus are contained within sets L and R respectively. The statistic $Z_{\alpha}$, after which the package is named, is defined as:
+`zalpha` allows the user to apply a range of statistics to phased genetic data. \autoref{fig:Figure1}B shows a target locus with a window, the size of which is set by the user, centred on the locus. Any SNPs either side that fall within the window to the left and right of the target locus are contained within sets L and R respectively. The statistic $Z_{\alpha}$, after which the package is named, is defined as:
 \begin{equation}\label{eq:Zalpha}
 {Z_{\alpha}=\frac{{|L| \choose 2}^{-1}\sum_{i,j \in L}r^2_{i,j} + {|R| \choose 2}^{-1}\sum_{i,j \in L}r^2_{i,j}}{2}}
 \end{equation}
@@ -84,9 +87,9 @@ One of the benefits of this package is the ability to calculate multiple statist
 
 Recombination is a process that has the effect of breaking down the relationship between alleles. However, it is known that recombination does not occur uniformly across the genome. It is therefore imperative to consider recombination when calculating statistics based on LD measures. This package allows the user to supply a population LD profile, providing information on the expected relationships between alleles given the genetic distances between them. Supplying this data increases the power of the statistics and creates more opportunities for combinations and comparisons between statistics. Users can specify whatever units they wish for genetic distance (for example centimorgans (cM)), derived from an appropriate data source. The software contains a function for creating an LD profile from the data. Ideally, an LD profile would be created from a neutral data source without selection, for example from a simulation with relevant population parameters. However, this is not always possible, so creating an LD profile from the same data being analysed is sufficient.
 
-There are many statistics included in the package for adjusting for expected r^2^ using the LDprofile and genetic distances between SNPs. For more details of how they are derived see the paper by @Jacobs:2016. It is recommended the user runs all the statistics using the `Zalpha_all()` function and then picks and chooses the ones they are interested in, perhaps even creating their own. For example, $Z_{\alpha}$/${Z_{\alpha}^{E[r^2]}}$ performs well as a simple way to adjust for expected r^2^. if it is known that the r^2^ values for each genetic distance are normally distributed, ${Z_{\alpha}^{Zscore}}$ is appropriate, otherwise ${Z_{\alpha}^{BetaCDF}}$ may be useful.
+There are many statistics included in the package for adjusting for expected r^2^ using the LDprofile and genetic distances between SNPs.  It is recommended the user runs all the statistics using the `Zalpha_all()` function and then picks and chooses the ones they are interested in, perhaps even creating their own. For example, $Z_{\alpha}$/${Z_{\alpha}^{E[r^2]}}$ performs well as a simple way to adjust for expected r^2^. if it is known that the r^2^ values for each genetic distance are normally distributed, ${Z_{\alpha}^{Zscore}}$ is appropriate, otherwise ${Z_{\alpha}^{BetaCDF}}$ may be useful.For more details of how they are derived see the paper by @Jacobs:2016. This paper also shows how the different statistics perform under a range of demographic scenarios.
 
-The output of the functions is in list format. The SNP positions and the values of the statistic(s) are stored in vectors of equal length in the list. 
+The output of the functions is in list format. The SNP positions and the values of the statistic(s) are stored in vectors of equal length in the list. Users can then identify outlying SNPs in their data that are candidate regions for selection.
 
 # Conclusion
 
