@@ -1,6 +1,5 @@
 ---
-title: 'zalpha: an R package for the identification of regions of the genome under
-  selection'
+title: 'zalpha: an R package for the identification of regions of the genome under selection'
 tags:
 - R
 - genomics
@@ -22,14 +21,14 @@ authors:
   orcid: 0000-0001-7022-645X
   affiliation: 1, 3
 - name: Timothy J Sluckin
+  orcid: 0000-0002-9163-0061
   affiliation: 2
 - name: Andrew Collins
   orcid: 0000-0001-7108-0771
   affiliation: 1, 3
 bibliography: paper.bib
 affiliations:
-- name: Genetic Epidemiology and Bioinformatics, Faculty of Medicine, University of
-    Southampton
+- name: Genetic Epidemiology and Bioinformatics, Faculty of Medicine, University of Southampton
   index: 1
 - name: Mathematical Sciences, University of Southampton
   index: 2
@@ -65,7 +64,7 @@ Correlation, in the context of genetics, is the ability to predict the value of 
 
 When a selective sweep occurs, the locus under selection becomes more frequent in the population, as individuals possessing the beneficial allele are more likely to survive and reproduce. When this happens, variants nearby the selected locus will also sweep, a phenomenon known as “hitchhiking” [@Maynard:1974]. This creates a region of the genome that is highly correlated. Eventually recombination will erode away these correlations. 
 
-`zalpha` allows the user to apply a range of statistics to phased genetic data. \autoref{fig:Figure1}B shows a target locus with a window, the size of which is set by the user, centred on the locus. Any SNPs either side that fall within the window to the left and right of the target locus are contained within sets L and R respectively. The statistic $Z_{\alpha}$, after which the package is named, is defined as:
+`zalpha` allows the user to apply a range of statistics to genetic data. \autoref{fig:Figure1}B shows a target locus with a window, the size of which is set by the user, centred on the locus. Any SNPs either side that fall within the window to the left and right of the target locus are contained within sets L and R respectively. The statistic $Z_{\alpha}$, after which the package is named, is defined as:
 \begin{equation}\label{eq:Zalpha}
 {Z_{\alpha}=\frac{{|L| \choose 2}^{-1}\sum_{i,j \in L}r^2_{i,j} + {|R| \choose 2}^{-1}\sum_{i,j \in L}r^2_{i,j}}{2}}
 \end{equation}
