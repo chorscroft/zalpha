@@ -9,10 +9,10 @@ tags:
 - selection
 date: "31 July 2020"
 output:
-  pdf_document: default
+  word_document: default
   html_document:
     df_print: paged
-  word_document: default
+  pdf_document: default
 authors:
 - name: Clare Horscroft
   orcid: 0000-0001-5679-5912
@@ -50,7 +50,7 @@ The purpose of the `zalpha` package is to:
 
 * Allow users to accurately apply the $Z_{\alpha}$ statistic to find candidate regions of the genome for a selective sweep
 * Refine $Z_{\alpha}$ results by adjusting for expected correlations between genetic variants
-* Further characterise sweeps using the $Z_{\beta}$ statistic
+* Further characterise sweeps as ongoing or near fixation using the $Z_{\beta}$ statistic
 * Generate results that are reproducible
 * Be user-friendly and accessible by using R
 	
@@ -58,7 +58,7 @@ The purpose of the `zalpha` package is to:
 
 The `zalpha` package examines correlations between single nucleotide polymorphisms (SNPs) along a chromosome. If SNPs are highly correlated in a region of a chromosome in relation to the rest of the genome, this could indicate the presence of a selective sweep [@Vitti:2013].
 
-Correlation, in the context of genetics, is the ability to predict the value of one SNP, given the value of another. An example is given in \autoref{fig:Figure1}A. The metric used by these statistics to measure correlation is r^2^ [@Cutter:2019].
+Correlation, in the context of genetics, is the ability to predict the value of one SNP, given the value of another. An example is given in \autoref{fig:Figure1}A. The metric used by these statistics to measure correlation is $r^2$ [@Cutter:2019].
 
 ![(A) This figure shows a population of seven chromosomes with 10 biallelic SNPs highlighted in orange and yellow to indicate the two alleles of the SNP. The cluster of five SNPs on the left are perfectly correlated. The second cluster on the right are poorly correlated: SNPs cannot be used to predict each other. (B) This figure shows a chromosome with SNPs highlighted. A statistic is being calculated for the target locus in green. The window is defined, and all SNPs falling within the window to the left and right of the target locus are assigned to sets L and R respectively. The correlations between pairs of SNPs are evaluated and represented by the black circles for SNPs within sets L and R, and as purple squares for pairs between the sets. \label{fig:Figure1}](Figure1.png)
 
@@ -68,19 +68,19 @@ When a selective sweep occurs, the locus under selection becomes more frequent i
 \begin{equation}\label{eq:Zalpha}
 {Z_{\alpha}=\frac{{|L| \choose 2}^{-1}\sum_{i,j \in L}r^2_{i,j} + {|R| \choose 2}^{-1}\sum_{i,j \in L}r^2_{i,j}}{2}}
 \end{equation}
-|L| and |R| are the number of SNPs win each set, and $r^2_{i,j}$ is the correlation between two SNPs i and j. \autoref{fig:Figure1}B shows these r^2^ values as black circles. 
+|L| and |R| are the number of SNPs in each set, and $r^2_{i,j}$ is the correlation between two SNPs i and j. \autoref{fig:Figure1}B shows these $r^2$ values as black circles. 
 
 The other base statistic supplied in the `zalpha` package is $Z_{\beta}$, as defined as follows:
 \begin{equation}\label{eq:Zbeta}
 {Z_{\beta}=\frac{\sum_{i \in L,j \in R}r^2_{i,j}}{|L||R|}}
 \end{equation}
-In \autoref{fig:Figure1}B the r^2^ values for $Z_{\beta}$ are represented as purple squares.
+In \autoref{fig:Figure1}B the $r^2$ values for $Z_{\beta}$ are represented as purple squares.
 
 Typically, a user will want to find the maximum $Z_{\alpha}$ statistic in a region of a chromosome, and compare this to other regions, to find possible evidence of selection for that region.
 
 The package is designed to be as user-friendly as possible and is reflected in the flexibility of the input requirements. The basic statistics only require three elements:
 
-* vector of physical locations,
+* vector of physical locations of each SNP,
 * a window size, and 
 * a matrix of SNP values where the rows are SNPs and the columns are haplotypes. This matrix could be binary, where the 0s represent ancestral alleles and the 1s derived, or it could be nucleotides (i.e. As, Cs, Gs, and Ts), or any other biallelic labelling system.
 
@@ -88,13 +88,13 @@ One of the benefits of this package is the ability to calculate multiple statist
 
 Recombination is a process that has the effect of breaking down the relationship between alleles. However, it is known that recombination does not occur uniformly across the genome. It is therefore imperative to consider recombination when calculating statistics based on LD measures. This package allows the user to supply a population LD profile, providing information on the expected relationships between alleles given the genetic distances between them. Supplying these data increases the power of the statistics and creates more opportunities for combinations and comparisons between statistics. Users can specify whatever units they wish for genetic distance (for example centimorgans (cM)), derived from an appropriate data source. The software contains a function for creating an LD profile from the data. Ideally, an LD profile would be created from a neutral data source without selection, for example from a simulation with relevant population parameters. However, this is not always possible, so creating an LD profile from the same data being analysed is sufficient.
 
-There are many statistics included in the package for adjusting for expected r^2^ using the LDprofile and genetic distances between SNPs.  It is recommended the user runs all the statistics using the `Zalpha_all()` function and then chooses the ones they are interested in, perhaps even creating their own. For example, $Z_{\alpha}$/${Z_{\alpha}^{E[r^2]}}$ performs well as a simple way to adjust for expected r^2^. if it is known that the r^2^ values for each genetic distance are normally distributed, ${Z_{\alpha}^{Zscore}}$ is appropriate, otherwise ${Z_{\alpha}^{BetaCDF}}$ may be useful. For more details of how they are derived see the paper by @Jacobs:2016. This paper also shows how the different statistics perform under a range of demographic scenarios.
+There are many statistics included in the package for adjusting for expected $r^2$ using the LDprofile and genetic distances between SNPs.  It is recommended the user runs all the statistics using the `Zalpha_all()` function and then chooses the ones they are interested in, perhaps even creating their own. For example, $Z_{\alpha}$/${Z_{\alpha}^{E[r^2]}}$ performs well as a simple way to adjust for expected $r^2$. If it is known that the $r^2$ values for each genetic distance are normally distributed, ${Z_{\alpha}^{Zscore}}$ is appropriate, otherwise ${Z_{\alpha}^{BetaCDF}}$ may be useful. For more details of how they are derived see the paper by @Jacobs:2016. This paper also shows how the different statistics perform under a range of demographic scenarios.
 
 The output of the functions is in list format. The SNP positions and the values of the statistic(s) are stored in vectors of equal length in the list. Users can then identify outlying SNPs in their data that are candidate regions for selection.
 
 # Conclusion
 
-This new package allows researchers to calculate the $Z_{\alpha}$ suite of selection statistics efficiently using the free, open source R platform. These statistics had previously not been publicly available in software. The package also allows the user to adjust the statistics for the expected r^2^ value via an LD profile in a variety of ways and allows the flexibility to adjust the base statistics to create new and novel methods.
+This new package allows researchers to calculate the $Z_{\alpha}$ suite of selection statistics efficiently using the free, open source R platform. These statistics had previously not been publicly available in software. The package's flexibility allows the user to adjust the statistics for the expected $r^2$ value via an LD profile in a variety of ways, and enables the adjustment of the base statistics to create new and novel methods.
 
 # Acknowledgements
 
