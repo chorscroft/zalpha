@@ -7,12 +7,12 @@ tags:
 - population genetics
 - evolution
 - selection
-date: "31 July 2020"
+date: "8 August 2020"
 output:
-  word_document: default
+  pdf_document: default
   html_document:
     df_print: paged
-  pdf_document: default
+  word_document: default
 authors:
 - name: Clare Horscroft
   orcid: 0000-0001-5679-5912
