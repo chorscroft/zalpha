@@ -12,7 +12,7 @@ test_that("L_plus_R calculates L_plus_R statistic correctly", {
   expect_equal(L_plus_R(pos = df$POS, ws  = 3000, X = NULL),
                list(
                  position=c(100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500),
-                 L_plus_R=c(NA,NA,67,58,51,46,43,42,43,46,51,58,67,NA,NA)
+                 L_plus_R=c(91,78,67,58,51,46,43,42,43,46,51,58,67,78,91)
                ))
 })
 
@@ -23,7 +23,7 @@ test_that("L_plus_R calculates L_plus_R statistic correctly with a different win
   expect_equal(L_plus_R(pos = df$POS, ws  = 1100, X = NULL),
                list(
                  position=c(100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500),
-                 L_plus_R=c(NA,NA,11,13,16,20,20,20,20,20,16,13,11,NA,NA)
+                 L_plus_R=c(10,10,11,13,16,20,20,20,20,20,16,13,11,10,10)
                ))
 })
 

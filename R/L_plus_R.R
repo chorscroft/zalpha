@@ -66,11 +66,8 @@ L_plus_R <- function(pos, ws, X = NULL) {
     ## get L, R and L_plus_R
     noL <- length(pos[pos>=currentPos-ws/2 & pos < currentPos]) ## Number of SNPs to the left of the current SNP
     noR <- length(pos[pos<=currentPos+ws/2 & pos > currentPos]) ## Number of SNPs to the right of the current SNP
-    if(noL < 2 || noR < 2){  #Must be at least 2 to calculate n choose 2
-      outputList$L_plus_R[i]<-NA
-    } else {
-      outputList$L_plus_R[i]<-choose(noL,2)+choose(noR,2)
-    }
+    ## if n < 2 then choose function will return 0
+    outputList$L_plus_R[i]<-choose(noL,2)+choose(noR,2)
   }
   return(outputList)
 }
