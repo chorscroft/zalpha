@@ -38,7 +38,7 @@ Zalpha_all(
 
 \item{LDprofile_Beta_b}{Optional. A numeric vector containing the second estimated Beta parameter for the corresponding bin in the LD profile.}
 
-\item{minRandL}{Minimum number of SNPs in each set R and L for the statistics to be calculated. Default is 4.}
+\item{minRandL}{Minimum number of SNPs in each set R and L for the statistics to be calculated. L is the set of SNPs to the left of the target SNP and R to the right, within the given window size \code{ws}. Default is 4.}
 
 \item{minRL}{Minimum value for the product of the set sizes for R and L. Default is 25.}
 
