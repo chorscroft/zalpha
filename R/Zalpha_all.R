@@ -29,7 +29,7 @@
 #' @param LDprofile_sd Optional. A numeric vector containing the standard deviation of the \eqn{r^2}{r^2} values for the corresponding bin in the LD profile.
 #' @param LDprofile_Beta_a Optional. A numeric vector containing the first estimated Beta parameter for the corresponding bin in the LD profile.
 #' @param LDprofile_Beta_b Optional. A numeric vector containing the second estimated Beta parameter for the corresponding bin in the LD profile.
-#' @param minRandL Minimum number of SNPs in each set R and L for the statistics to be calculated. Default is 4.
+#' @param minRandL Minimum number of SNPs in each set R and L for the statistics to be calculated. L is the set of SNPs to the left of the target SNP and R to the right, within the given window size \code{ws}. Default is 4.
 #' @param minRL Minimum value for the product of the set sizes for R and L. Default is 25.
 #' @param X Optional. Specify a region of the chromosome to calculate the statistics for in the format \code{c(startposition, endposition)}. The start position and the end position should be within the extremes of the positions given in the \code{pos} vector. If not supplied, the function will calculate the statistics for every SNP in the \code{pos} vector.
 #'
@@ -213,11 +213,11 @@ Zalpha_all <- function(pos, ws, x=NULL, dist=NULL, LDprofile_bins=NULL, LDprofil
     ## check L, R and LR
     noL <- length(pos[pos>=currentPos-ws/2 & pos < currentPos]) ## Number of SNPs to the left of the current SNP
     noR <- length(pos[pos<=currentPos+ws/2 & pos > currentPos]) ## Number of SNPs to the right of the current SNP
+    outputList$LR[i]<-noL*noR
+    outputList$L_plus_R[i]<-choose(noL,2)+choose(noR,2)
     if  (noL < minRandL || noR < minRandL || noL*noR < minRL){
       #NA for everything - leave as is
     } else {
-      outputList$LR[i]<-noL*noR
-      outputList$L_plus_R[i]<-choose(noL,2)+choose(noR,2)
       if (is.null(x)==FALSE){
         ##Left
         Lrsq <- lower_triangle(cor(t(x[pos>=currentPos-ws/2 & pos < currentPos,]),use="pairwise.complete.obs")^2)
@@ -276,8 +276,10 @@ Zalpha_all <- function(pos, ws, x=NULL, dist=NULL, LDprofile_bins=NULL, LDprofil
       }
     }
   }
-  if (sum(is.na(outputList$LR))==outputLength){
-    warning("No statistics were calculated, try reducing minRandL and minRL or increasing the window size")
+  if (length(outputList)>3){
+    if (sum(sapply(outputList[-c(1:3)],function(x) sum(is.na(x))==outputLength))==length(outputList)-3){
+      warning("No statistics were calculated, try reducing minRandL and minRL or increasing the window size")
+    }
   }
   return(outputList)
 }
