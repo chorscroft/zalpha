@@ -325,3 +325,24 @@ test_that("Zbeta_log_rsq_over_expected calculates Zbeta_log_rsq_over_expected st
                                                NA,NA,NA,NA)
                ),tolerance=0.0001)
 })
+
+## test what happens when the biggest bin is bigger than the max_dist in the LDprofile
+
+df1<-df
+df1$dist[10:15]<-df1$dist[10:15]+0.1
+test_that("Zbeta_log_rsq_over_expected calculates Zbeta_log_rsq_over_expected statistic correctly when biggest bin is bigger than LDprofile", {
+
+  expect_equal(Zbeta_log_rsq_over_expected(pos = df1$POS, ws  = 3000, x = as.matrix(df1[,3:7]), dist = df1$dist, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, minRandL = 4, minRL = 25, X = NULL),
+               list(
+                 position=c(100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500),
+                 Zbeta_log_rsq_over_expected=c(NA,NA,NA,NA,
+                                               -0.253507645357523,
+                                               -0.252472151393989,
+                                               -0.264919235707824,
+                                               -0.237790197768511,
+                                               -0.231067956739982,
+                                               -0.186686780456914,
+                                               -0.194302291843375,
+                                               NA,NA,NA,NA)
+               ),tolerance=0.0001)
+})

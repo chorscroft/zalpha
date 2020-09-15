@@ -247,3 +247,24 @@ test_that("Zalpha_expected fails when LDprofile_bins and LDprofile_rsq are diffe
   expect_error(Zalpha_expected(pos = df$POS, ws  = 3000, dist = df$dist, LDprofile_bins = LDprofile$bin, LDprofile_rsq = c(LDprofile$rsq,1), minRandL = 4, minRL = 25, X = NULL),
                "LDprofile_rsq must contain the same number of values as there are bins given in LDprofile_bins")
 })
+
+## test what happens when the biggest bin is bigger than the max_dist in the LDprofile
+
+df1<-df
+df1$dist[10:15]<-df1$dist[10:15]+0.1
+test_that("Zalpha_expected calculates Zalpha_expected statistic correctly when biggest bin is bigger than LDprofile", {
+
+  expect_equal(Zalpha_expected(pos = df1$POS, ws  = 3000, dist = df1$dist, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, minRandL = 4, minRL = 25, X = NULL),
+               list(
+                 position=c(100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500),
+                 Zalpha_expected=c(NA,NA,NA,NA,
+                                   0.35775270849344,
+                                   0.360194100145564,
+                                   0.36882454832507,
+                                   0.379040922949242,
+                                   0.400715520018796,
+                                   0.401718327864356,
+                                   0.388093039845692,
+                                   NA,NA,NA,NA)
+               ),tolerance=0.0001)
+})

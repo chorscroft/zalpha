@@ -351,3 +351,25 @@ test_that("Zalpha_Zscore calculates Zalpha_Zscore statistic correctly with missi
                                  NA,NA,NA,NA)
                ),tolerance=0.0001)
 })
+
+## test what happens when the biggest bin is bigger than the max_dist in the LDprofile
+
+df1<-df
+df1$dist[10:15]<-df1$dist[10:15]+0.1
+test_that("Zalpha_Zscore calculates Zalpha_Zscore statistic correctly when biggest bin is bigger than LDprofile", {
+
+  expect_equal(Zalpha_Zscore(pos = df1$POS, ws  = 3000, x = as.matrix(df1[,3:7]), dist = df1$dist, LDprofile_bins = LDprofile$bin, LDprofile_rsq = LDprofile$rsq, LDprofile_sd = LDprofile$sd, minRandL = 4, minRL = 25, X = NULL),
+               list(
+                 position=c(100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500),
+                 Zalpha_Zscore=c(NA,NA,NA,NA,
+                                 0.171551248775495,
+                                 0.250751380960093,
+                                 0.0418726269555867,
+                                 -0.192722802223301,
+                                 -0.316679396412605,
+                                 -0.285401890619276,
+                                 -0.244931914193891,
+                                 NA,NA,NA,NA)
+               ),tolerance=0.0001)
+})
+

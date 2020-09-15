@@ -332,3 +332,24 @@ test_that("Zalpha_BetaCDF calculates Zalpha_BetaCDF statistic correctly with mis
                                   NA,NA,NA,NA)
                ),tolerance=0.0001)
 })
+
+## test what happens when the biggest bin is bigger than the max_dist in the LDprofile
+
+df1<-df
+df1$dist[10:15]<-df1$dist[10:15]+0.1
+test_that("Zalpha_BetaCDF calculates Zalpha_BetaCDF statistic correctly when biggest bin is bigger than LDprofile", {
+
+  expect_equal(Zalpha_BetaCDF(pos = df1$POS, ws  = 3000, x = as.matrix(df1[,3:7]), dist = df1$dist, LDprofile_bins = LDprofile$bin, LDprofile_Beta_a = LDprofile$Beta_a, LDprofile_Beta_b = LDprofile$Beta_b, minRandL = 4, minRL = 25, X = NULL),
+               list(
+                 position=c(100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500),
+                 Zalpha_BetaCDF=c(NA,NA,NA,NA,
+                                  0.528754272440162,
+                                  0.554657151730784,
+                                  0.490365350771199,
+                                  0.429958093556324,
+                                  0.388665184297966,
+                                  0.396797658473664,
+                                  0.40379809759356,
+                                  NA,NA,NA,NA)
+               ),tolerance=0.0001)
+})
