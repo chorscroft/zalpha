@@ -7,7 +7,9 @@
 #' Both lists should be the same length and should correspond exactly to each other (i.e. the distances in each element of \code{dist} should go with the SNPs in the same element of x)
 #'
 #' In the output, bins represent lower bounds. The first bin contains pairs where the genetic distance is greater than or equal to 0 and less than \code{bin_size}. The final bin contains pairs where the genetic distance is greater than or equal to \code{max_dist}-\code{bin_size} and less than \code{max_dist}.
-#' If the \code{max_dist} is not an increment of \code{bin_size}, it will be adjusted to the next highest increment. The final bin will be the bin that \code{max_dist} falls into. For example, if the \code{max_dist} is given as 4.5 and the \code{bin_size} is 1, the final bin will be 4.\cr
+#' If the \code{max_dist} is not an increment of \code{bin_size}, it will be adjusted to the next highest increment. The final bin will be the bin that \code{max_dist} falls into. For example, if the \code{max_dist} is given as 4.5 and the \code{bin_size} is 1, the final bin will be 4.
+#' \code{max_dist} should be big enough to cover the genetic distances between pairs of SNPs within the window size given when the \eqn{Z_{\alpha}}{Zalpha} statistics are run. Any pairs with genetic distances bigger than \code{max_dist} will be assigned the values in the maximum bin of the LD profile.\cr
+#'
 #' By default, Beta parameters are not calculated. To fit a Beta distribution to the expected correlations, needed for the \code{\link{Zalpha_BetaCDF}} and \code{\link{Zbeta_BetaCDF}} statistics, \code{beta_params} should be set to TRUE and the package 'fitdistrplus' must be installed.
 #'
 #' Ideally, an LD profile would be generated using data from a null population with no selection, For example by using a simulation if the other population parameters are known. However, often these are unknown or complex, so generating an LD profile using the same data as is being analysed is acceptable, as long as the bins are large enough.

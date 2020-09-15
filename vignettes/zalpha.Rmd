@@ -239,7 +239,7 @@ This code has created an LD profile with 6 columns. These are:
 
 * __n__ This is the number of pairs of SNPs with a genetic distance falling within this bin, whose correlations were used to calculate the statistics. 
 
-There is one more optional input parameter - max_dist - which sets the maximum distance SNPs can be apart for calculating for the LD profile. For real world data, Jacobs et al. (2016)[1] recommend using distances up to 2 cM assigned to bins of size 0.0001 cM.
+There is one more optional input parameter - max_dist - which sets the maximum distance SNPs can be apart for calculating for the LD profile. For real world data, Jacobs et al. (2016)[1] recommend using distances up to 2 cM assigned to bins of size 0.0001 cM. Without this parameter, the code will generate bins up to the maximum distance between pairs of SNPs, which is likely to be inefficient as most distances will not be used. max_dist should be big enough to cover the genetic distances between pairs of SNPs within the window size given when the $Z_{\alpha}$ statistics are run. Any pairs with genetic distances bigger than max_dist will be assigned the values in the maximum bin of the LD profile.
 
 Ideally, we would want to generate an LD profile based on genetic data without selection but exactly matching the other population parameters for our data. This could be done using simulated data (using software such as MSMS[6] or SLiM[7]). We could use another genetic dataset containing a similar population. Alternatively, we could generate an LD profile using the same dataset that we are analysing for selection. Care should be taken that bins are big enough to have a lot of data in so expected r^2^ values are not overly affected by outliers. 
 
