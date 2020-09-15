@@ -235,12 +235,15 @@ Zalpha_all <- function(pos, ws, x=NULL, dist=NULL, LDprofile_bins=NULL, LDprofil
       if (is.null(dist)==FALSE & is.null(LDprofile_bins)==FALSE & is.null(LDprofile_rsq)==FALSE){
         #Left
         bins<-sapply(lower_triangle(outer(dist[pos>=currentPos-ws/2 & pos < currentPos],dist[pos>=currentPos-ws/2 & pos < currentPos],"-")),assign_bins,bin_size=bin_size)
+        bins[bins>max(LDprofile_bins)]<-max(LDprofile_bins)
         LrsqExp<-merge(data.frame(bins=as.character(bins),Lrsq),data.frame(LDprofile_bins=as.character(LDprofile_bins),LDprofile_rsq),by.x="bins",by.y="LDprofile_bins",all.x=TRUE,sort=FALSE)
         #Right
         bins<-sapply(lower_triangle(outer(dist[pos<=currentPos+ws/2 & pos > currentPos],dist[pos<=currentPos+ws/2 & pos > currentPos],"-")),assign_bins,bin_size=bin_size)
+        bins[bins>max(LDprofile_bins)]<-max(LDprofile_bins)
         RrsqExp<-merge(data.frame(bins=as.character(bins),Rrsq),data.frame(LDprofile_bins=as.character(LDprofile_bins),LDprofile_rsq),by.x="bins",by.y="LDprofile_bins",all.x=TRUE,sort=FALSE)
         #Over
         bins<-sapply(outer(dist[pos<=currentPos+ws/2 & pos > currentPos],dist[pos>=currentPos-ws/2 & pos < currentPos],"-"),assign_bins,bin_size=bin_size)
+        bins[bins>max(LDprofile_bins)]<-max(LDprofile_bins)
         rsqExp<-merge(data.frame(bins=as.character(bins),rsq),data.frame(LDprofile_bins=as.character(LDprofile_bins),LDprofile_rsq),by.x="bins",by.y="LDprofile_bins",all.x=TRUE,sort=FALSE)
 
         outputList$Zalpha_expected[i]<-(sum(LrsqExp$LDprofile_rsq)/choose(noL,2)+sum(RrsqExp$LDprofile_rsq)/choose(noR,2))/2

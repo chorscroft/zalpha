@@ -161,11 +161,13 @@ Zalpha_BetaCDF<-function(pos, ws, x, dist, LDprofile_bins, LDprofile_Beta_a, LDp
       ##Left
       # Find distances between each SNP in L and round to bin size
       bins<-sapply(lower_triangle(outer(dist[pos>=currentPos-ws/2 & pos < currentPos],dist[pos>=currentPos-ws/2 & pos < currentPos],"-")),assign_bins,bin_size=bin_size)
+      bins[bins>max(LDprofile_bins)]<-max(LDprofile_bins)
       Lrsq<- lower_triangle(cor(t(x[pos>=currentPos-ws/2 & pos < currentPos,]),use="pairwise.complete.obs")^2)
       LrsqExp<-merge(data.frame(bins=as.character(bins),Lrsq),data.frame(LDprofile_bins=as.character(LDprofile_bins),LDprofile_Beta_a,LDprofile_Beta_b),by.x="bins",by.y="LDprofile_bins",all.x=TRUE,sort=FALSE)
       LrsqSum<-sum(pbeta(LrsqExp$Lrsq,LrsqExp$LDprofile_Beta_a,LrsqExp$LDprofile_Beta_b))
       ##Right
       bins<-sapply(lower_triangle(outer(dist[pos<=currentPos+ws/2 & pos > currentPos],dist[pos<=currentPos+ws/2 & pos > currentPos],"-")),assign_bins,bin_size=bin_size)
+      bins[bins>max(LDprofile_bins)]<-max(LDprofile_bins)
       Rrsq<-lower_triangle(cor(t(x[pos<=currentPos+ws/2 & pos > currentPos,]),use="pairwise.complete.obs")^2)
       RrsqExp<-merge(data.frame(bins=as.character(bins),Rrsq),data.frame(LDprofile_bins=as.character(LDprofile_bins),LDprofile_Beta_a,LDprofile_Beta_b),by.x="bins",by.y="LDprofile_bins",all.x=TRUE,sort=FALSE)
       RrsqSum<-sum(pbeta(RrsqExp$Rrsq,RrsqExp$LDprofile_Beta_a,RrsqExp$LDprofile_Beta_b))

@@ -132,9 +132,11 @@ Zalpha_expected<-function(pos, ws, dist, LDprofile_bins, LDprofile_rsq, minRandL
       ##Left
       # Find distances between each SNP in L and round to bin size
       bins<-sapply(lower_triangle(outer(dist[pos>=currentPos-ws/2 & pos < currentPos],dist[pos>=currentPos-ws/2 & pos < currentPos],"-")),assign_bins,bin_size=bin_size)
+      bins[bins>max(LDprofile_bins)]<-max(LDprofile_bins)
       LrsqSum<-sum(merge(data.frame(bins=as.character(bins)),data.frame(LDprofile_bins=as.character(LDprofile_bins),LDprofile_rsq),by.x="bins",by.y="LDprofile_bins",all.x=TRUE)[,2])
       ##Right
       bins<-sapply(lower_triangle(outer(dist[pos<=currentPos+ws/2 & pos > currentPos],dist[pos<=currentPos+ws/2 & pos > currentPos],"-")),assign_bins,bin_size=bin_size)
+      bins[bins>max(LDprofile_bins)]<-max(LDprofile_bins)
       RrsqSum<-sum(merge(data.frame(bins=as.character(bins)),data.frame(LDprofile_bins=as.character(LDprofile_bins),LDprofile_rsq),by.x="bins",by.y="LDprofile_bins",all.x=TRUE)[,2])
 
       outputList$Zalpha_expected[i]<-(LrsqSum/choose(noL,2)+RrsqSum/choose(noR,2))/2
