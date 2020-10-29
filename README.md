@@ -53,3 +53,13 @@ install_github("chorscroft/zalpha", build_vignettes=TRUE)  # might also have to 
 ## Acknowledgments
 
 Guy Jacobs for the original development of the Zalpha statistics
+
+## Community Guidelines
+
+I am very open to feedback, bug reports and requests!
+
+* If you have a bug to report or a new feature request, please create a new [issue](https://github.com/chorscroft/zalpha/issues) on GitHub.
+
+* If you would like to contribute, please feel free to fork the project and create a [pull request](https://github.com/chorscroft/zalpha/pulls) on GitHub. A guide to how this works can be found [here](https://guides.github.com/activities/forking/).
+
+* If you have any other feedback or need support, please email the author.
