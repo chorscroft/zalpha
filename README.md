@@ -46,6 +46,15 @@ If this does not work and you installed the packages directly from Github, try i
 ```
 install_github("chorscroft/zalpha", build_vignettes=TRUE)  # might also have to include the option force=TRUE if the package is already installed
 ```
+
+## Dependencies
+
+This package requires R version 2.10 or higher.
+
+Optional packages:
+
+* fitdistrplus
+
 ## Authors
 
 * **Clare Horscroft**
