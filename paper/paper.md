@@ -92,6 +92,8 @@ There are many statistics included in the package for adjusting for expected $r^
 
 The output of the functions is in list format. The SNP positions and the values of the statistic(s) are stored in vectors of equal length in the list. Users can then identify outlying SNPs in their data that are candidate regions for selection.
 
+There are a few other R packages that can be used for selection scans, although none utilise the $Z_{\alpha}$ statistics described here. These include `PopGenome` [@Pfeifer:2014], which calcualtes Kelly's $Z_{nS}$ among other methods, and `rehh` [@Gautier:2017], which implements extended haplotype homozygosity (EHH) and related statistics.
+
 # Conclusion
 
 This new package allows researchers to calculate the $Z_{\alpha}$ suite of selection statistics efficiently using the free, open source R platform. These statistics had previously not been publicly available in software. The package's flexibility allows the user to adjust the statistics for the expected $r^2$ value via an LD profile in a variety of ways, and enables the adjustment of the base statistics to create new and novel methods.
