@@ -1,7 +1,7 @@
 # zalpha
   <!-- badges: start -->
   [![Codecov test coverage](https://codecov.io/gh/chorscroft/zalpha/branch/master/graph/badge.svg)](https://codecov.io/gh/chorscroft/zalpha?branch=master)
-
+  [![Travis build status](https://travis-ci.org/chorscroft/zalpha.svg?branch=master)](https://travis-ci.org/chorscroft/zalpha)
   <!-- badges: end -->
 R package for the zalpha suite of selection statistics. This package allows the user to run a suite of selection statistics over genomic data. The aim is to identify regions of the genome which have experienced a selective sweep.
 
