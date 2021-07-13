@@ -41,5 +41,5 @@ dev.off()
 # Create the sticker
 imgurl <- "inst/figures/zalpha_image.png"
 sticker(imgurl, package="zalpha", p_size=30, s_x=1, s_y=1.4, s_width=.9, p_y=0.6,
-        h_fill="red",h_color = "black",spotlight=TRUE,l_x=1,l_y=1,#l_w=4,l_h=4,l_alpha=0.5,
+        h_fill="red",h_color = "blue",spotlight=TRUE,l_x=1,l_y=1,#l_w=4,l_h=4,l_alpha=0.5,
         filename="inst/figures/sticker.png")
