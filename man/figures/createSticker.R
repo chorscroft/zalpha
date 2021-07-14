@@ -1,11 +1,11 @@
 ## Code for creating the zalpha package sticker
 
 # Use the hexSticker package
-install.packages("hexSticker")
+#install.packages("hexSticker")
 library(hexSticker)
 
 # Create the DNA graph
-png("inst/figures/zalpha_image.png",res=100,bg="transparent",width=15,height=10,units = "cm")
+png("man/figures/zalpha_image.png",res=100,bg="transparent",width=15,height=10,units = "cm")
 par(mar=c(1,1,1,1))
 plot_x<-seq(0,15,0.01)
 plot_norm<-seq(-4,4,length.out=length(plot_x))
@@ -39,7 +39,7 @@ axis(side=2,at=seq(-1,3,1),lwd=2)
 dev.off()
 
 # Create the sticker
-imgurl <- "inst/figures/zalpha_image.png"
+imgurl <- "man/figures/zalpha_image.png"
 sticker(imgurl, package="zalpha", p_size=30, s_x=1, s_y=1.4, s_width=.9, p_y=0.6,
         h_fill="red",h_color = "blue",spotlight=TRUE,l_x=1,l_y=1,#l_w=4,l_h=4,l_alpha=0.5,
-        filename="inst/figures/sticker.png")
+        filename="man/figures/sticker.png")
