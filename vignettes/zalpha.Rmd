@@ -274,7 +274,7 @@ create_LDprofile(cM_distances_list,snp_values_list,bin_size = 0.001,beta_params 
 
 Care should be taken that the chromosomes stay in the same order in each list. 
 
-Congratulations! You should now be able to create your own LD profile and use the Zalpha package.
+Congratulations! You should now be able to create your own LD profile and use the zalpha package.
 
 ## References
 
