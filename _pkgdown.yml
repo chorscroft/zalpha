@@ -1,0 +1,47 @@
+template:
+  params:
+    bootswatch: sandstone
+
+reference:
+- title: "Running the Zalpha functions"
+  desc: >
+    Use this function to run all the statistics automatically
+- contents:
+  - Zalpha_all
+- title: "Create an LD profile"
+  desc: >
+    Use this function to create an LD profile. An LD profile is required if you want to adjust for expected LD.
+- contents:
+  - create_LDprofile
+- title: "Zalpha functions"
+  desc: >
+    These are all the Zalpha functions.
+- contents:
+  - Zalpha
+  - Zalpha_expected
+  - Zalpha_rsq_over_expected
+  - Zalpha_log_rsq_over_expected
+  - Zalpha_Zscore
+  - Zalpha_BetaCDF
+- title: "Zbeta functions"
+  desc: >
+    These are all the Zbeta functions.
+- contents:
+  - Zbeta
+  - Zbeta_expected
+  - Zbeta_rsq_over_expected
+  - Zbeta_log_rsq_over_expected
+  - Zbeta_Zscore
+  - Zbeta_BetaCDF
+- title: "Diversity functions"
+  desc: >
+    These are the diversity functions.
+- contents:
+  - LR
+  - L_plus_R
+- title: "Example datasets"
+  desc: >
+    Two example datasets that come with the package.
+- contents:
+  - snps
+  - LDprofile
