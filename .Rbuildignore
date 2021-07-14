@@ -8,3 +8,6 @@
 ^CRAN-RELEASE$
 ^paper$
 ^\.travis\.yml$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
