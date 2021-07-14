@@ -1,4 +1,4 @@
-# zalpha <img src="inst/figures/sticker.png" width = "175" height = "200" align="right" />
+# zalpha <img src="man/figures/sticker.png" width = "175" height = "200" align="right" />
 
   <!-- badges: start -->
   [![Codecov test coverage](https://codecov.io/gh/chorscroft/zalpha/branch/master/graph/badge.svg)](https://codecov.io/gh/chorscroft/zalpha?branch=master)
