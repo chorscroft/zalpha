@@ -80,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -178,7 +178,61 @@ If the <code>max_dist</code> is not an increment of <code>bin_size</code>, it wi
 <span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"fitdistrplus"</span>, quietly <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>==</span><span class='cn'>TRUE</span><span class='op'>)</span> <span class='op'>{</span>
   <span class='fu'>create_LDprofile</span><span class='op'>(</span><span class='va'>snps</span><span class='op'>$</span><span class='va'>cM_distances</span>,<span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>as.matrix</a></span><span class='op'>(</span><span class='va'>snps</span><span class='op'>[</span>,<span class='fl'>3</span><span class='op'>:</span><span class='fl'>12</span><span class='op'>]</span><span class='op'>)</span>,<span class='fl'>0.001</span>,beta_params<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
 <span class='op'>}</span>
-</div><div class='output co'>#&gt;     bin        rsq        sd    Beta_a   Beta_b  n
+</div><div class='output co'>#&gt; $start.arg
+#&gt; $start.arg$shape1
+#&gt; [1] 0.5319322
+#&gt; 
+#&gt; $start.arg$shape2
+#&gt; [1] 4.347826
+#&gt; 
+#&gt; 
+#&gt; $fix.arg
+#&gt; NULL
+#&gt; 
+#&gt; $start.arg
+#&gt; $start.arg$shape1
+#&gt; [1] 0.5237006
+#&gt; 
+#&gt; $start.arg$shape2
+#&gt; [1] 2.942187
+#&gt; 
+#&gt; 
+#&gt; $fix.arg
+#&gt; NULL
+#&gt; 
+#&gt; $start.arg
+#&gt; $start.arg$shape1
+#&gt; [1] 0.7421819
+#&gt; 
+#&gt; $start.arg$shape2
+#&gt; [1] 6.309295
+#&gt; 
+#&gt; 
+#&gt; $fix.arg
+#&gt; NULL
+#&gt; 
+#&gt; $start.arg
+#&gt; $start.arg$shape1
+#&gt; [1] 0.7818732
+#&gt; 
+#&gt; $start.arg$shape2
+#&gt; [1] 5.433496
+#&gt; 
+#&gt; 
+#&gt; $fix.arg
+#&gt; NULL
+#&gt; 
+#&gt; $start.arg
+#&gt; $start.arg$shape1
+#&gt; [1] 1.098982
+#&gt; 
+#&gt; $start.arg$shape2
+#&gt; [1] 3.856677
+#&gt; 
+#&gt; 
+#&gt; $fix.arg
+#&gt; NULL
+#&gt; </div><div class='output co'>#&gt;     bin        rsq        sd    Beta_a   Beta_b  n
 #&gt; 1 0.000 0.10226664 0.1318628 0.8232427 6.435184 59
 #&gt; 2 0.001 0.14412346 0.1745857 0.7323277 3.960080 51
 #&gt; 3 0.002 0.09538328 0.1122312 0.9962786 8.322913 41
