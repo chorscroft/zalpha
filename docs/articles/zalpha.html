@@ -39,7 +39,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -63,7 +63,7 @@
 
       
 
-      </header><script src="zalpha_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="zalpha_files/header-attrs-2.9/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>zalpha</h1>
@@ -506,6 +506,60 @@
 <p>We can use the snps dataset as an example of this:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/create_LDprofile.html">create_LDprofile</a></span><span class="op">(</span><span class="va">snps</span><span class="op">$</span><span class="va">cM_distances</span>,<span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">snps</span><span class="op">[</span>,<span class="fl">3</span><span class="op">:</span><span class="fl">12</span><span class="op">]</span><span class="op">)</span>,bin_size <span class="op">=</span> <span class="fl">0.001</span>,beta_params <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="co">#&gt; $start.arg</span>
+<span class="co">#&gt; $start.arg$shape1</span>
+<span class="co">#&gt; [1] 0.5319322</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $start.arg$shape2</span>
+<span class="co">#&gt; [1] 4.347826</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $fix.arg</span>
+<span class="co">#&gt; NULL</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $start.arg</span>
+<span class="co">#&gt; $start.arg$shape1</span>
+<span class="co">#&gt; [1] 0.5237006</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $start.arg$shape2</span>
+<span class="co">#&gt; [1] 2.942187</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $fix.arg</span>
+<span class="co">#&gt; NULL</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $start.arg</span>
+<span class="co">#&gt; $start.arg$shape1</span>
+<span class="co">#&gt; [1] 0.7421819</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $start.arg$shape2</span>
+<span class="co">#&gt; [1] 6.309295</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $fix.arg</span>
+<span class="co">#&gt; NULL</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $start.arg</span>
+<span class="co">#&gt; $start.arg$shape1</span>
+<span class="co">#&gt; [1] 0.7818732</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $start.arg$shape2</span>
+<span class="co">#&gt; [1] 5.433496</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $fix.arg</span>
+<span class="co">#&gt; NULL</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $start.arg</span>
+<span class="co">#&gt; $start.arg$shape1</span>
+<span class="co">#&gt; [1] 1.098982</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $start.arg$shape2</span>
+<span class="co">#&gt; [1] 3.856677</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $fix.arg</span>
+<span class="co">#&gt; NULL</span>
 <span class="co">#&gt;     bin        rsq        sd    Beta_a   Beta_b  n</span>
 <span class="co">#&gt; 1 0.000 0.10226664 0.1318628 0.8232427 6.435184 59</span>
 <span class="co">#&gt; 2 0.001 0.14412346 0.1745857 0.7323277 3.960080 51</span>
@@ -546,6 +600,60 @@
 
 <span class="co">## create the LD profile using the lists as the dist and x parameters</span>
 <span class="fu"><a href="../reference/create_LDprofile.html">create_LDprofile</a></span><span class="op">(</span><span class="va">cM_distances_list</span>,<span class="va">snp_values_list</span>,bin_size <span class="op">=</span> <span class="fl">0.001</span>,beta_params <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="co">#&gt; $start.arg</span>
+<span class="co">#&gt; $start.arg$shape1</span>
+<span class="co">#&gt; [1] 0.4742569</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $start.arg$shape2</span>
+<span class="co">#&gt; [1] 4.06349</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $fix.arg</span>
+<span class="co">#&gt; NULL</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $start.arg</span>
+<span class="co">#&gt; $start.arg$shape1</span>
+<span class="co">#&gt; [1] 0.4742531</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $start.arg$shape2</span>
+<span class="co">#&gt; [1] 2.764086</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $fix.arg</span>
+<span class="co">#&gt; NULL</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $start.arg</span>
+<span class="co">#&gt; $start.arg$shape1</span>
+<span class="co">#&gt; [1] 0.6272077</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $start.arg$shape2</span>
+<span class="co">#&gt; [1] 5.729229</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $fix.arg</span>
+<span class="co">#&gt; NULL</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $start.arg</span>
+<span class="co">#&gt; $start.arg$shape1</span>
+<span class="co">#&gt; [1] 0.6334181</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $start.arg$shape2</span>
+<span class="co">#&gt; [1] 4.800981</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $fix.arg</span>
+<span class="co">#&gt; NULL</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $start.arg</span>
+<span class="co">#&gt; $start.arg$shape1</span>
+<span class="co">#&gt; [1] 0.7947621</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $start.arg$shape2</span>
+<span class="co">#&gt; [1] 3.1162</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $fix.arg</span>
+<span class="co">#&gt; NULL</span>
 <span class="co">#&gt;     bin        rsq        sd    Beta_a   Beta_b   n</span>
 <span class="co">#&gt; 1 0.000 0.10226664 0.1311114 0.6691595 5.517397 177</span>
 <span class="co">#&gt; 2 0.001 0.14412346 0.1734333 0.5921975 3.371973 153</span>
