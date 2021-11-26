@@ -71,6 +71,12 @@ Optional packages:
 
 Guy Jacobs for the original development of the Zalpha statistics
 
+## Citation
+
+If you use the zalpha package in your work, please cite the following paper:
+
+Horscroft et al., (2020). zalpha: an R package for the identification of regions of the genome under selection. Journal of Open Source Software, 5(56), 2638, https://doi.org/10.21105/joss.02638
+
 ## Community Guidelines
 
 I am very open to feedback, bug reports and requests!
