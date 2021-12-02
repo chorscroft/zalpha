@@ -1,7 +1,7 @@
 Package: zalpha
 Type: Package
 Title: Run a Suite of Selection Statistics
-Version: 0.2.0.9999
+Version: 0.3.0
 Author: Clare Horscroft
 Maintainer: Clare Horscroft <chorscroft@aol.co.uk>
 Description: A suite of statistics for identifying areas of the genome under selective pressure. See Jacobs, Sluckin and Kivisild (2016) <doi:10.1534/genetics.115.185900>.

@@ -1,4 +1,4 @@
-# zalpha 0.2.0.9999 (Development version)
+# zalpha 0.3.0
 
 * Improved the speed by editing the equal_vector function
 * L_plus_R now returns 0 instead of NA when n<2 for choose(n,2) 

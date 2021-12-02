@@ -12,7 +12,7 @@ R package for the zalpha suite of selection statistics. This package allows the 
 
 ## Installing
 
-Version 0.2.0 is on CRAN.
+Version 0.3.0 is on CRAN.
 
 **To install this package from CRAN:**
 
