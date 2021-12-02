@@ -1,3 +1,5 @@
+# zalpha 0.3.0.9999 (Development version)
+
 # zalpha 0.3.0
 
 * Improved the speed by editing the equal_vector function
